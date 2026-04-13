@@ -1,3 +1,4 @@
+import SmoothScroll from "@/components/SmoothScroll";
 import HeroSection from "@/components/portfolio/HeroSection";
 import IntroSection from "@/components/portfolio/IntroSection";
 import SkillsSection from "@/components/portfolio/SkillsSection";
@@ -7,14 +8,16 @@ import ContactSection from "@/components/portfolio/ContactSection";
 
 const Index = () => {
   return (
-    <main className="bg-background">
-      <HeroSection />
-      <IntroSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <ContactSection />
-    </main>
+    <SmoothScroll>
+      <main className="bg-background">
+        <HeroSection />
+        <IntroSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ExperienceSection />
+        <ContactSection />
+      </main>
+    </SmoothScroll>
   );
 };
 

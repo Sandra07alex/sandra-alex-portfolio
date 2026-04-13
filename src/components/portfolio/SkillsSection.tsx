@@ -1,4 +1,4 @@
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealSection from "./RevealSection";
 
 const categories = [
   {
@@ -16,28 +16,18 @@ const categories = [
 ];
 
 const SkillsSection = () => {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
     <section className="px-6 py-32 md:py-40">
-      <div ref={ref} className="mx-auto max-w-4xl">
-        <h2
-          className={`text-sm tracking-widest uppercase text-muted-foreground font-medium mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          Skills
-        </h2>
+      <div className="mx-auto max-w-4xl">
+        <RevealSection>
+          <h2 className="text-sm tracking-widest uppercase text-muted-foreground font-medium mb-16">
+            Skills
+          </h2>
+        </RevealSection>
 
         <div className="grid gap-12 md:grid-cols-3">
           {categories.map((cat, i) => (
-            <div
-              key={cat.title}
-              className={`transition-all duration-700 ease-out ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: isVisible ? `${i * 150}ms` : "0ms" }}
-            >
+            <RevealSection key={cat.title} delay={i * 0.15}>
               <h3 className="text-lg font-semibold text-foreground mb-4">{cat.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
@@ -49,7 +39,7 @@ const SkillsSection = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </RevealSection>
           ))}
         </div>
       </div>
