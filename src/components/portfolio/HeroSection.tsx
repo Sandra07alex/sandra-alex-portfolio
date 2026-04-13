@@ -1,9 +1,23 @@
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const HeroSection = () => {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.6], [0, -50]);
+
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center px-6">
+    <motion.section
+      ref={ref}
+      style={{ opacity, y }}
+      className="relative flex min-h-screen flex-col items-center justify-center px-6"
+    >
       <div className="max-w-5xl text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -42,7 +56,7 @@ const HeroSection = () => {
         <span className="text-xs tracking-widest uppercase font-medium">Scroll</span>
         <ChevronDown className="h-4 w-4 animate-scroll-hint" />
       </motion.a>
-    </section>
+    </motion.section>
   );
 };
 
