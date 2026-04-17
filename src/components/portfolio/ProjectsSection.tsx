@@ -112,9 +112,9 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground mb-20"
+          className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-accent-blue mb-20"
         >
-          SELECTED WORK
+          PROJECTS
         </motion.h2>
 
         <div className="flex flex-col gap-5">
