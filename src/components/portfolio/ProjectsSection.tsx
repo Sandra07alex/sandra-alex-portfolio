@@ -115,63 +115,107 @@ const ProjectsSection = () => {
                 className="relative"
                 style={{
                   transformStyle: "preserve-3d",
-                  transform: "rotateX(15deg) rotateY(-25deg) rotateZ(0deg)",
+                  transform: "rotateX(8deg) rotateY(-18deg)",
                 }}
               >
                 {cardTones.map((tone, i) => {
-                  const offset = (i - CARD_COUNT / 2) * 14;
+                  // Books standing in a row — narrow spines side by side
+                  const spineWidth = 26;
+                  const gap = 4;
+                  const offset = (i - CARD_COUNT / 2) * (spineWidth + gap);
+                  // Slight height variation so the row feels organic
+                  const heightVariation = [0, 6, -4, 2, 8, -2, 4, 0, -6, 2, 6, -4, 0, 4, -2, 6][i] ?? 0;
+                  const bookHeight = 230 + heightVariation;
+                  // Very gentle lean for a couple of books
+                  const lean = i % 5 === 0 ? -1.5 : i % 7 === 0 ? 1.5 : 0;
+
                   return (
                     <motion.div
                       key={i}
-                      className="absolute rounded-[14px]"
+                      className="absolute rounded-[3px]"
                       style={{
-                        width: 120,
-                        height: 180,
-                        left: -60,
-                        top: -90,
-                        background: `linear-gradient(135deg, ${tone}, hsl(0 0% 10%))`,
+                        width: spineWidth,
+                        height: bookHeight,
+                        left: offset - spineWidth / 2,
+                        top: -bookHeight / 2,
+                        background: `linear-gradient(90deg, hsl(0 0% 0% / 0.35) 0%, ${tone} 12%, ${tone} 88%, hsl(0 0% 0% / 0.35) 100%)`,
                         boxShadow:
-                          "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 8px 20px hsl(0 0% 0% / 0.35)",
+                          "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 10px 22px hsl(0 0% 0% / 0.4)",
                         transformStyle: "preserve-3d",
+                        transformOrigin: "bottom center",
                       }}
                       animate={{
-                        x: offset,
-                        y: 0,
-                        z: [0, 12, 0, -12, 0],
-                        rotateY: [0, 4, 0, -4, 0],
+                        rotateZ: [lean, lean + 0.4, lean],
+                        y: [0, -1.5, 0],
                       }}
                       transition={{
-                        duration: 4,
+                        duration: 6,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: i * 0.12,
+                        delay: i * 0.25,
                       }}
                     >
-                      {/* Card detail strip */}
+                      {/* Top cap — page edges */}
                       <div
-                        className="absolute left-0 right-0 h-5"
+                        className="absolute left-0 right-0 top-0 h-[3px]"
                         style={{
-                          top: "38%",
                           background:
-                            "linear-gradient(90deg, hsl(0 0% 0% / 0.55), hsl(0 0% 0% / 0.25))",
+                            "linear-gradient(90deg, hsl(0 0% 92%), hsl(0 0% 78%))",
                         }}
                       />
-                      {/* Chip */}
+                      {/* Bottom cap */}
                       <div
-                        className="absolute rounded-sm"
+                        className="absolute left-0 right-0 bottom-0 h-[2px]"
                         style={{
-                          top: 16,
-                          right: 16,
-                          width: 18,
-                          height: 14,
+                          background: "hsl(0 0% 5%)",
+                        }}
+                      />
+                      {/* Title band */}
+                      <div
+                        className="absolute left-0 right-0"
+                        style={{
+                          top: "32%",
+                          height: 1,
+                          background: "hsl(0 0% 0% / 0.5)",
+                        }}
+                      />
+                      <div
+                        className="absolute left-0 right-0"
+                        style={{
+                          top: "62%",
+                          height: 1,
+                          background: "hsl(0 0% 0% / 0.5)",
+                        }}
+                      />
+                      {/* Tiny title mark */}
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 rounded-[1px]"
+                        style={{
+                          top: "44%",
+                          width: 8,
+                          height: 10,
                           background:
-                            "linear-gradient(135deg, hsl(0 0% 90%), hsl(0 0% 55%))",
-                          opacity: 0.7,
+                            "linear-gradient(135deg, hsl(0 0% 95% / 0.7), hsl(0 0% 70% / 0.5))",
                         }}
                       />
                     </motion.div>
                   );
                 })}
+
+                {/* Shelf surface */}
+                <div
+                  aria-hidden
+                  className="absolute left-1/2 -translate-x-1/2"
+                  style={{
+                    top: 120,
+                    width: (26 + 4) * CARD_COUNT + 40,
+                    height: 6,
+                    background:
+                      "linear-gradient(180deg, hsl(0 0% 12%), hsl(0 0% 4%))",
+                    boxShadow: "0 8px 20px hsl(0 0% 0% / 0.5)",
+                    borderRadius: 2,
+                  }}
+                />
               </div>
             </div>
 
