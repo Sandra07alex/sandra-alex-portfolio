@@ -132,7 +132,7 @@ const ProjectsSection = () => {
                   return (
                     <motion.div
                       key={i}
-                      className="absolute rounded-[3px]"
+                      className="absolute rounded-[3px] cursor-pointer"
                       style={{
                         width: spineWidth,
                         height: bookHeight,
@@ -146,13 +146,27 @@ const ProjectsSection = () => {
                       }}
                       animate={{
                         rotateZ: [lean, lean + 0.4, lean],
-                        y: [0, -1.5, 0],
+                        // Wave ripple — each book lifts gently in sequence
+                        y: [0, -6, 0, 0, 0],
                       }}
                       transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: i * 0.25,
+                        rotateZ: {
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: i * 0.25,
+                        },
+                        y: {
+                          duration: CARD_COUNT * 0.45,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: i * 0.18,
+                          times: [0, 0.06, 0.12, 0.5, 1],
+                        },
+                      }}
+                      whileHover={{
+                        y: -14,
+                        transition: { duration: 0.4, ease: "easeOut" },
                       }}
                     >
                       {/* Top cap — page edges */}
