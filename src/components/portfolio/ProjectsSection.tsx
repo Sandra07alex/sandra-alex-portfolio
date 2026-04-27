@@ -115,7 +115,7 @@ const ProjectsSection = () => {
                 className="relative"
                 style={{
                   transformStyle: "preserve-3d",
-                  transform: "rotateX(55deg) rotateZ(-35deg)",
+                  transform: "rotateX(15deg) rotateY(-25deg) rotateZ(0deg)",
                 }}
               >
                 {cardTones.map((tone, i) => {
