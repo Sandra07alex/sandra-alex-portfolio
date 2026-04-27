@@ -2,22 +2,24 @@ import RevealSection from "./RevealSection";
 
 const experiences = [
   {
-    role: "IEEE Student Branch — Technical Lead",
-    period: "2023 — Present",
-    description:
-      "Leading technical workshops and mentoring peers in AI/ML concepts and web development practices.",
+    role: "Full Stack Web Developer Intern",
+    company: "CourtClick, Kochi",
+    period: "Jun 2025 — Present",
+    points: [
+      "Developed real-world web applications using Next.js and MongoDB",
+      "Improved responsive UI and deployment workflows",
+      "Worked in agile development environments",
+    ],
   },
   {
-    role: "HackathonX — Finalist",
-    period: "2024",
-    description:
-      "Built an AI-powered accessibility tool in 36 hours, earning a spot in the top 5 teams out of 200+.",
-  },
-  {
-    role: "CS Department — Teaching Assistant",
-    period: "2023 — 2024",
-    description:
-      "Assisted in Data Structures and Algorithms courses, helping 100+ students with coursework and labs.",
+    role: "Interest Group Management Intern",
+    company: "GTech MuLearn",
+    period: "Jun 2024 — Apr 2025",
+    points: [
+      "Led the Artificial Intelligence Interest Group across 100+ campuses",
+      "Conducted AI Think Tank sessions and office hours",
+      "Managed community learning and task validation",
+    ],
   },
 ];
 
@@ -35,12 +37,24 @@ const ExperienceSection = () => {
           {experiences.map((exp, i) => (
             <RevealSection key={exp.role} delay={i * 0.15}>
               <div className="flex flex-col md:flex-row md:gap-12">
-                <span className="text-sm text-muted-foreground font-medium md:w-40 shrink-0 mb-1 md:mb-0">
+                <span className="text-sm text-muted-foreground font-medium md:w-40 shrink-0 mb-2 md:mb-0">
                   {exp.period}
                 </span>
-                <div>
-                  <h3 className="text-base font-semibold text-foreground mb-1">{exp.role}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{exp.description}</p>
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-foreground mb-1">
+                    {exp.role}
+                  </h3>
+                  <p className="text-sm text-accent-blue mb-3">{exp.company}</p>
+                  <ul className="space-y-2">
+                    {exp.points.map((point) => (
+                      <li
+                        key={point}
+                        className="text-sm text-muted-foreground leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-px before:bg-muted-foreground/50"
+                      >
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </RevealSection>
