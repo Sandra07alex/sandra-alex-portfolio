@@ -3,6 +3,28 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
+// Subtle muted palette — stays within minimal/premium aesthetic
+const cardTones = [
+  "hsl(0 0% 88%)",
+  "hsl(0 0% 75%)",
+  "hsl(0 0% 60%)",
+  "hsl(220 15% 55%)",
+  "hsl(220 25% 45%)",
+  "hsl(220 30% 35%)",
+  "hsl(0 0% 30%)",
+  "hsl(0 0% 22%)",
+  "hsl(0 0% 18%)",
+  "hsl(220 20% 40%)",
+  "hsl(0 0% 50%)",
+  "hsl(0 0% 70%)",
+  "hsl(0 0% 85%)",
+  "hsl(220 15% 60%)",
+  "hsl(0 0% 40%)",
+  "hsl(0 0% 28%)",
+];
+
+const CARD_COUNT = cardTones.length;
+
 const ProjectsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -10,14 +32,8 @@ const ProjectsSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // Parallax movement for the visual side
-  const visualY = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const textY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
-  // Orbiting / floating shapes parallax depths
-  const ring1Rotate = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const ring2Rotate = useTransform(scrollYProgress, [0, 1], [0, -240]);
-  const ring3Rotate = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const visualY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const textY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
     <section
@@ -25,7 +41,7 @@ const ProjectsSection = () => {
       className="relative px-6 py-32 md:py-40 overflow-hidden"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* LEFT — Narrative */}
           <motion.div style={{ y: textY }} className="relative">
             <motion.span
@@ -45,11 +61,9 @@ const ProjectsSection = () => {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]"
             >
-              Four years.
+              Many builds.
               <br />
-              <span className="text-accent-blue">Many ideas</span>
-              <br />
-              shipped.
+              <span className="text-accent-blue">Many lessons.</span>
             </motion.h2>
 
             <motion.div
@@ -60,14 +74,14 @@ const ProjectsSection = () => {
               className="mt-8 space-y-5 text-base sm:text-lg text-muted-foreground font-light leading-relaxed max-w-md"
             >
               <p>
-                From deep-learning models that read retinal scans to event platforms
-                serving thousands of students — every project taught me how to build
-                things that work in the real world.
+                Across my four years of college, I’ve been part of all kinds of
+                projects — big launches, quiet experiments, late-night hacks.
+                Each one gave me a skill that helped me stand out in a room full
+                of people.
               </p>
               <p>
-                I’ve led teams, shipped under deadlines, and learned that great
-                software is rarely solo work. It’s collaboration, iteration, and a
-                stubborn obsession with the details.
+                Many are still half-broken, half-finished. But every one of
+                them taught me something I couldn’t have learned from a book.
               </p>
             </motion.div>
 
@@ -88,83 +102,88 @@ const ProjectsSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — Animated visual */}
+          {/* RIGHT — Stacked cards animation (isometric domino flow) */}
           <motion.div
             style={{ y: visualY }}
-            className="relative h-[420px] sm:h-[520px] flex items-center justify-center"
+            className="relative h-[420px] sm:h-[500px] flex items-center justify-center"
           >
-            {/* Orbit rings */}
-            <motion.div
-              style={{ rotate: ring1Rotate }}
-              className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] rounded-full border border-foreground/10"
+            <div
+              className="relative w-full h-full flex items-center justify-center"
+              style={{ perspective: "1400px" }}
             >
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-blue" />
-            </motion.div>
-
-            <motion.div
-              style={{ rotate: ring2Rotate }}
-              className="absolute w-[230px] h-[230px] sm:w-[310px] sm:h-[310px] rounded-full border border-foreground/15"
-            >
-              <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-foreground/60" />
-            </motion.div>
-
-            <motion.div
-              style={{ rotate: ring3Rotate }}
-              className="absolute w-[140px] h-[140px] sm:w-[200px] sm:h-[200px] rounded-full border border-foreground/20"
-            >
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-accent-blue/80" />
-            </motion.div>
-
-            {/* Pulsing core */}
-            <motion.div
-              animate={{
-                scale: [1, 1.08, 1],
-                opacity: [0.9, 1, 0.9],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-foreground flex items-center justify-center"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }}
-                className="absolute inset-0 rounded-full bg-accent-blue/40"
-              />
-              <span className="relative text-background text-xs font-bold tracking-widest">
-                BUILD
-              </span>
-            </motion.div>
-
-            {/* Floating tags */}
-            {[
-              { label: "AI / ML", x: "-58%", y: "-38%", delay: 0 },
-              { label: "Full-stack", x: "62%", y: "-30%", delay: 0.6 },
-              { label: "IEEE", x: "-65%", y: "32%", delay: 1.2 },
-              { label: "Research", x: "60%", y: "40%", delay: 1.8 },
-            ].map((tag) => (
-              <motion.div
-                key={tag.label}
-                style={{ left: "50%", top: "50%" }}
-                animate={{ y: ["0%", "-8%", "0%"] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: tag.delay,
+              <div
+                className="relative"
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: "rotateX(55deg) rotateZ(-35deg)",
                 }}
-                className="absolute"
               >
-                <div
-                  style={{ transform: `translate(${tag.x}, ${tag.y})` }}
-                  className="px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/60 text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium whitespace-nowrap"
-                >
-                  {tag.label}
-                </div>
-              </motion.div>
-            ))}
+                {cardTones.map((tone, i) => {
+                  const offset = (i - CARD_COUNT / 2) * 14;
+                  return (
+                    <motion.div
+                      key={i}
+                      className="absolute rounded-[14px]"
+                      style={{
+                        width: 120,
+                        height: 180,
+                        left: -60,
+                        top: -90,
+                        background: `linear-gradient(135deg, ${tone}, hsl(0 0% 10%))`,
+                        boxShadow:
+                          "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 8px 20px hsl(0 0% 0% / 0.35)",
+                        transformStyle: "preserve-3d",
+                      }}
+                      animate={{
+                        x: offset,
+                        y: 0,
+                        z: [0, 12, 0, -12, 0],
+                        rotateY: [0, 4, 0, -4, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: i * 0.12,
+                      }}
+                    >
+                      {/* Card detail strip */}
+                      <div
+                        className="absolute left-0 right-0 h-5"
+                        style={{
+                          top: "38%",
+                          background:
+                            "linear-gradient(90deg, hsl(0 0% 0% / 0.55), hsl(0 0% 0% / 0.25))",
+                        }}
+                      />
+                      {/* Chip */}
+                      <div
+                        className="absolute rounded-sm"
+                        style={{
+                          top: 16,
+                          right: 16,
+                          width: 18,
+                          height: 14,
+                          background:
+                            "linear-gradient(135deg, hsl(0 0% 90%), hsl(0 0% 55%))",
+                          opacity: 0.7,
+                        }}
+                      />
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Soft floor glow */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-10 bottom-8 h-24 rounded-full blur-3xl opacity-40"
+              style={{
+                background:
+                  "radial-gradient(ellipse at center, hsl(var(--accent-blue) / 0.25), transparent 70%)",
+              }}
+            />
           </motion.div>
         </div>
       </div>
