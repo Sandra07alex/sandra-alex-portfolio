@@ -2,22 +2,24 @@ import RevealSection from "./RevealSection";
 
 const experiences = [
   {
-    role: "IEEE Student Branch — Technical Lead",
-    period: "2023 — Present",
-    description:
-      "Leading technical workshops and mentoring peers in AI/ML concepts and web development practices.",
+    role: "Full Stack Web Developer Intern",
+    company: "CourtClick, Kochi",
+    period: "Jun 2025 — Present",
+    points: [
+      "Developed real-world web applications using Next.js and MongoDB",
+      "Improved responsive UI and deployment workflows",
+      "Worked in agile development environments",
+    ],
   },
   {
-    role: "HackathonX — Finalist",
-    period: "2024",
-    description:
-      "Built an AI-powered accessibility tool in 36 hours, earning a spot in the top 5 teams out of 200+.",
-  },
-  {
-    role: "CS Department — Teaching Assistant",
-    period: "2023 — 2024",
-    description:
-      "Assisted in Data Structures and Algorithms courses, helping 100+ students with coursework and labs.",
+    role: "Interest Group Management Intern",
+    company: "GTech MuLearn",
+    period: "Jun 2024 — Apr 2025",
+    points: [
+      "Led the Artificial Intelligence Interest Group across 100+ campuses",
+      "Conducted AI Think Tank sessions and office hours",
+      "Managed community learning and task validation",
+    ],
   },
 ];
 
