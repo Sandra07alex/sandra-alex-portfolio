@@ -1,268 +1,388 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const projects = [
   {
-    title: "IEEE Techsortium Website",
+    title: "Techsortium",
+    subtitle: "IEEE Kerala — Flagship Event Platform",
     description:
-      "Flagship event platform for IEEE Kerala — registrations, live dashboards, and schedules used by thousands of attendees.",
+      "Registrations, live dashboards, and schedules for thousands of attendees across the IEEE Kerala flagship.",
     stack: "MERN Stack",
-    year: "2025",
     role: "Full Stack",
+    year: "2025",
     link: "https://techsortium25.ieee-link.org/",
   },
   {
-    title: "Glaucoma Detection",
+    title: "Glaucoma",
+    subtitle: "Deep Learning Research",
+    italic: "Detection",
     description:
-      "ResNet-50 CNN trained on retinal fundus images using RNFL and PPA biomarkers, achieving 90%+ diagnostic accuracy.",
+      "ResNet-50 CNN trained on retinal fundus images using RNFL and PPA biomarkers — 90%+ diagnostic accuracy.",
     stack: "Python · PyTorch",
-    year: "2025",
     role: "Research",
+    year: "2025",
     link: "#",
   },
   {
-    title: "IEEE YESS Website",
+    title: "YESS",
+    subtitle: "Yearly Engineering Students Summit",
     description:
-      "Ticketing and registration platform for the Yearly Engineering Students Summit, scaled to 5,000+ participants.",
+      "Ticketing and registration platform scaled to 5,000+ participants across India.",
     stack: "MERN Stack",
-    year: "2024",
     role: "Full Stack",
+    year: "2024",
     link: "https://yess.ieee-link.org",
   },
   {
     title: "CourtClick",
+    subtitle: "Legal Case Registration",
     description:
-      "Legal case registration system with a guided onboarding workflow and real-world API integrations.",
+      "Guided onboarding workflow with real-world API integrations for legal case management.",
     stack: "React.js",
-    year: "2025",
     role: "Frontend",
+    year: "2025",
     link: "https://court-click-web.vercel.app",
   },
   {
-    title: "Stride Designathon",
+    title: "Stride",
+    subtitle: "Designathon — Government of Kerala",
+    italic: "Designathon",
     description:
-      "Government initiative built with KDISC Kerala, IEEE Kerala, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
-    stack: "Government · KDISC",
-    year: "2024",
+      "Initiative built with KDISC Kerala, IEEE Kerala, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
+    stack: "MERN Stack",
     role: "Platform",
+    year: "2024",
     link: "https://stridedesignathon.ieee-link.org",
   },
   {
-    title: "Is It a Bird",
+    title: "Avian",
+    subtitle: "Image Classifier",
+    italic: "Classifier",
     description:
-      "CNN trained on Kaggle datasets to classify bird species, exploring transfer learning and data augmentation.",
+      "CNN trained on Kaggle datasets to classify bird species — exploring transfer learning and augmentation.",
     stack: "Python · CNN",
-    year: "2024",
     role: "ML",
+    year: "2024",
     link: "https://github.com/sandra07alex/is-it-a-bird",
   },
 ];
 
-const Projects = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
+const ease = [0.25, 0.1, 0.25, 1] as const;
 
+const Projects = () => {
   return (
     <SmoothScroll>
-      <main className="bg-background min-h-screen">
+      <main className="relative min-h-screen bg-background text-foreground">
+        {/* Drafting grid background */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 opacity-[0.5]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, hsl(var(--foreground) / 0.035) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--foreground) / 0.035) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 40%, transparent 90%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 40%, transparent 90%)",
+          }}
+        />
+
+        {/* Top nav */}
+        <div className="relative z-10 px-8 md:px-12 pt-10 flex items-center justify-between">
+          <Link
+            to="/"
+            className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent-blue transition-colors duration-300"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+            Back
+          </Link>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+            INDEX_ARCHIVE / 2024–25
+          </span>
+        </div>
+
         {/* Header */}
-        <section className="px-6 pt-32 pb-16 md:pt-40 md:pb-24">
-          <div className="mx-auto max-w-6xl">
-            <Link
-              to="/"
-              className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent-blue transition-colors duration-300"
-            >
-              <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-              Back
-            </Link>
-
-            <div className="mt-14 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-              <div className="md:col-span-8">
-                <motion.span
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="block text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium"
-                >
-                  ( Selected Work — {projects.length} )
-                </motion.span>
-
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="mt-5 text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] text-foreground"
-                >
-                  Things I’ve
-                  <br />
-                  <span className="italic font-light text-accent-blue">built.</span>
-                </motion.h1>
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
+        <header className="relative z-10 px-8 md:px-12 pt-24 md:pt-32 pb-32">
+          <div className="grid grid-cols-12 gap-6 max-w-[1400px] mx-auto">
+            <div className="col-span-12 md:col-span-7">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                className="md:col-span-4 text-sm sm:text-base text-muted-foreground font-light leading-relaxed"
+                transition={{ duration: 0.6, ease }}
+                className="block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6"
               >
-                A quiet archive of research models, production platforms, and
-                experiments — each one a chapter in learning to build things
-                that think.
-              </motion.p>
+                ( 06 / Selected Works )
+              </motion.span>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1, ease }}
+                className="text-6xl sm:text-7xl md:text-[8vw] font-light tracking-tighter leading-[0.88]"
+              >
+                Things <br />
+                I’ve <span className="italic font-serif text-accent-blue">built.</span>
+              </motion.h1>
             </div>
-          </div>
-        </section>
-
-        {/* Editorial list */}
-        <section className="px-6 pb-32 md:pb-40">
-          <div className="mx-auto max-w-6xl">
-            {/* Column header */}
-            <div className="hidden md:grid grid-cols-12 gap-6 pb-5 border-b border-border/60 text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 font-medium">
-              <div className="col-span-1">Index</div>
-              <div className="col-span-5">Project</div>
-              <div className="col-span-3">Stack</div>
-              <div className="col-span-2">Role</div>
-              <div className="col-span-1 text-right">Year</div>
-            </div>
-
-            <ul>
-              {projects.map((project, i) => {
-                const isExternal = project.link.startsWith("http");
-                const isHovered = hovered === i;
-                const isDimmed = hovered !== null && !isHovered;
-
-                return (
-                  <motion.li
-                    key={project.title}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{
-                      duration: 0.7,
-                      delay: 0.06 * i,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                    onMouseEnter={() => setHovered(i)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="relative border-b border-border/60"
-                  >
-                    <a
-                      href={project.link}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="group relative block py-8 md:py-10"
-                    >
-                      {/* Hover sweep */}
-                      <motion.span
-                        aria-hidden
-                        className="absolute inset-0 -mx-6 bg-secondary/50 origin-left"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: isHovered ? 1 : 0 }}
-                        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                      />
-
-                      <div
-                        className={`relative grid grid-cols-12 gap-4 md:gap-6 items-baseline transition-opacity duration-500 ${
-                          isDimmed ? "opacity-35" : "opacity-100"
-                        }`}
-                      >
-                        {/* Index */}
-                        <div className="col-span-2 md:col-span-1 text-xs font-mono text-muted-foreground/80 tabular-nums">
-                          {String(i + 1).padStart(2, "0")}
-                        </div>
-
-                        {/* Title + arrow */}
-                        <div className="col-span-10 md:col-span-5 flex items-baseline gap-3">
-                          <motion.h2
-                            animate={{ x: isHovered ? 8 : 0 }}
-                            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                            className={`text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight transition-colors duration-500 ${
-                              isHovered ? "text-accent-blue" : "text-foreground"
-                            }`}
-                          >
-                            {project.title}
-                          </motion.h2>
-                          <motion.span
-                            animate={{
-                              opacity: isHovered ? 1 : 0,
-                              x: isHovered ? 0 : -6,
-                              y: isHovered ? 0 : 6,
-                            }}
-                            transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                            className="text-accent-blue"
-                          >
-                            <ArrowUpRight className="h-5 w-5" />
-                          </motion.span>
-                        </div>
-
-                        {/* Stack */}
-                        <div className="col-span-6 md:col-span-3 text-xs sm:text-sm text-muted-foreground font-light">
-                          {project.stack}
-                        </div>
-
-                        {/* Role */}
-                        <div className="hidden md:block md:col-span-2 text-xs sm:text-sm text-muted-foreground font-light">
-                          {project.role}
-                        </div>
-
-                        {/* Year */}
-                        <div className="col-span-6 md:col-span-1 text-xs sm:text-sm text-muted-foreground/80 font-mono tabular-nums text-right">
-                          {project.year}
-                        </div>
-                      </div>
-
-                      {/* Description — reveals on hover (desktop) */}
-                      <motion.div
-                        initial={false}
-                        animate={{
-                          height: isHovered ? "auto" : 0,
-                          opacity: isHovered ? 1 : 0,
-                        }}
-                        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="relative overflow-hidden hidden md:block"
-                      >
-                        <p className="pt-5 pl-[8.33%] max-w-2xl text-sm text-muted-foreground font-light leading-relaxed">
-                          {project.description}
-                        </p>
-                      </motion.div>
-
-                      {/* Mobile description — always visible */}
-                      <p className="relative mt-3 md:hidden text-sm text-muted-foreground font-light leading-relaxed">
-                        {project.description}
-                      </p>
-                    </a>
-                  </motion.li>
-                );
-              })}
-            </ul>
-
-            {/* Footer note */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mt-20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 pt-10 border-t border-border/60"
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.25, ease }}
+              className="col-span-12 md:col-start-9 md:col-span-4 self-end"
             >
-              <p className="text-sm text-muted-foreground font-light max-w-md leading-relaxed">
-                More work in progress. Currently building at{" "}
-                <span className="text-foreground">CourtClick</span> & exploring
-                applied ML.
+              <p className="text-base text-muted-foreground leading-relaxed">
+                A technical archive of research models, production platforms,
+                and experiments — each one a chapter in learning to build things
+                that think.
               </p>
-              <Link
-                to="/"
-                className="group inline-flex items-center gap-2 text-sm text-foreground hover:text-accent-blue transition-colors duration-300"
-              >
-                <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-                Back to home
-              </Link>
             </motion.div>
           </div>
+        </header>
+
+        {/* Projects */}
+        <section className="relative z-10 px-8 md:px-12 pb-40">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-12 gap-y-40 md:gap-y-56">
+            {projects.map((p, i) => {
+              const isExternal = p.link.startsWith("http");
+              const layout = i % 3; // 0: image right, 1: image left small, 2: image right with ghost number
+
+              return (
+                <motion.article
+                  key={p.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.9, ease }}
+                  className="col-span-12 grid grid-cols-12 gap-6 relative"
+                >
+                  {/* Index marker */}
+                  <div className="col-span-12 md:col-span-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground pt-2">
+                    {String(i + 1).padStart(2, "0")} // {String(projects.length).padStart(2, "0")}
+                  </div>
+
+                  {layout === 0 && (
+                    <>
+                      <div className="col-span-12 md:col-span-6">
+                        <h2 className="text-5xl md:text-7xl font-light tracking-tighter leading-[0.9] mb-8">
+                          {p.title}
+                          {p.italic && (
+                            <>
+                              <br />
+                              <span className="italic font-serif text-accent-blue">
+                                {p.italic}
+                              </span>
+                            </>
+                          )}
+                        </h2>
+                        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-6">
+                          {p.subtitle}
+                        </p>
+                        <p className="max-w-[42ch] text-base text-muted-foreground leading-relaxed mb-12">
+                          {p.description}
+                        </p>
+                        <div className="flex gap-12">
+                          <Meta label="Role" value={p.role} />
+                          <Meta label="Year" value={p.year} />
+                        </div>
+                      </div>
+                      <div className="col-span-12 md:col-span-5 relative">
+                        <div className="relative border border-border/60 bg-secondary/40 p-3">
+                          <div className="aspect-[4/5] w-full bg-muted/60 flex items-center justify-center overflow-hidden">
+                            <span className="font-serif italic text-[8vw] md:text-[6vw] text-muted-foreground/30 leading-none">
+                              {p.title.charAt(0)}
+                            </span>
+                          </div>
+                          <CornerTicks />
+                        </div>
+                        <div className="mt-6 border-l border-border pl-5">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-2">
+                            Stack_Data
+                          </p>
+                          <p className="text-sm font-medium uppercase tracking-wide">
+                            {p.stack}
+                          </p>
+                          <ProjectLink link={p.link} external={isExternal} />
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {layout === 1 && (
+                    <>
+                      <div className="col-span-12 md:col-span-3 md:pr-4">
+                        <div className="relative border border-border/60 bg-secondary/40 p-3">
+                          <div className="aspect-square w-full bg-accent-blue/5 flex items-center justify-center overflow-hidden">
+                            <span className="font-serif italic text-[10vw] md:text-[5vw] text-accent-blue/40 leading-none">
+                              {p.title.charAt(0)}
+                            </span>
+                          </div>
+                          <CornerTicks />
+                        </div>
+                      </div>
+                      <div className="col-span-12 md:col-span-5">
+                        <h2 className="text-5xl md:text-7xl font-light tracking-tighter leading-[0.9] mb-6">
+                          {p.title}
+                        </h2>
+                        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-6">
+                          {p.subtitle}
+                        </p>
+                        <p className="max-w-[45ch] text-base text-muted-foreground leading-relaxed mb-8">
+                          {p.description}
+                        </p>
+                        <div className="grid grid-cols-2 gap-6 border-t border-border pt-6 max-w-md">
+                          <Meta label="Stack" value={p.stack} />
+                          <Meta label="Role" value={p.role} />
+                        </div>
+                      </div>
+                      <div className="col-span-12 md:col-span-3 flex flex-col items-end justify-end relative">
+                        <span
+                          aria-hidden
+                          className="font-serif italic text-[18vw] md:text-[10vw] leading-[0.8] text-foreground/[0.04] -mb-4 select-none pointer-events-none"
+                        >
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <ProjectLink link={p.link} external={isExternal} variant="boxed" year={p.year} />
+                      </div>
+                    </>
+                  )}
+
+                  {layout === 2 && (
+                    <div className="col-span-12 md:col-span-11">
+                      <div className="relative max-w-5xl">
+                        <div className="absolute -left-8 top-0 hidden md:block font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground origin-top-left -rotate-90 translate-y-32">
+                          Structural Detail · {p.year}
+                        </div>
+                        <div className="grid grid-cols-12 border border-border/70">
+                          <div className="col-span-12 md:col-span-8 p-8 md:p-12 md:border-r border-border/70">
+                            <h2 className="text-5xl md:text-6xl font-light tracking-tighter mb-4">
+                              {p.title}
+                            </h2>
+                            <p className="font-serif italic text-xl md:text-2xl text-accent-blue mb-8">
+                              {p.subtitle}
+                            </p>
+                            <div className="flex flex-wrap gap-12 text-[11px] uppercase tracking-[0.2em] font-mono">
+                              <Meta label="Year" value={p.year} />
+                              <Meta label="Stack" value={p.stack} />
+                              <Meta label="Role" value={p.role} />
+                            </div>
+                          </div>
+                          <div className="col-span-12 md:col-span-4 bg-foreground/95 text-background p-8 flex items-center justify-center min-h-[200px]">
+                            <span className="font-serif italic text-7xl text-background/40">
+                              {p.title.charAt(0)}
+                            </span>
+                          </div>
+                          <div className="col-span-12 p-6 md:p-8 border-t border-border/70 flex flex-col md:flex-row gap-4 md:items-center justify-between">
+                            <p className="text-sm text-muted-foreground max-w-2xl">
+                              {p.description}
+                            </p>
+                            <ProjectLink link={p.link} external={isExternal} variant="dot" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </motion.article>
+              );
+            })}
+          </div>
         </section>
+
+        {/* Footer */}
+        <footer className="relative z-10 border-t border-border/60 px-8 md:px-12 py-20">
+          <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row gap-8 md:items-end justify-between">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4">
+                End of Archive
+              </p>
+              <p className="text-2xl md:text-3xl font-light tracking-tight max-w-md">
+                More work in progress. Currently building at{" "}
+                <span className="text-accent-blue">CourtClick</span> & exploring
+                applied ML.
+              </p>
+            </div>
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-2 text-sm text-foreground hover:text-accent-blue transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              Back to home
+            </Link>
+          </div>
+        </footer>
       </main>
     </SmoothScroll>
+  );
+};
+
+const Meta = ({ label, value }: { label: string; value: string }) => (
+  <div className="font-mono text-[11px] uppercase tracking-[0.18em]">
+    <p className="text-muted-foreground/70 mb-1.5">{label}</p>
+    <p className="text-foreground tracking-tight">{value}</p>
+  </div>
+);
+
+const CornerTicks = () => (
+  <>
+    <span className="absolute top-0 left-0 w-3 h-px bg-accent-blue" />
+    <span className="absolute top-0 left-0 w-px h-3 bg-accent-blue" />
+    <span className="absolute top-0 right-0 w-3 h-px bg-accent-blue" />
+    <span className="absolute top-0 right-0 w-px h-3 bg-accent-blue" />
+    <span className="absolute bottom-0 left-0 w-3 h-px bg-accent-blue" />
+    <span className="absolute bottom-0 left-0 w-px h-3 bg-accent-blue" />
+    <span className="absolute bottom-0 right-0 w-3 h-px bg-accent-blue" />
+    <span className="absolute bottom-0 right-0 w-px h-3 bg-accent-blue" />
+  </>
+);
+
+const ProjectLink = ({
+  link,
+  external,
+  variant = "default",
+  year,
+}: {
+  link: string;
+  external: boolean;
+  variant?: "default" | "boxed" | "dot";
+  year?: string;
+}) => {
+  const props = external
+    ? { href: link, target: "_blank", rel: "noopener noreferrer" }
+    : { href: link };
+
+  if (variant === "boxed") {
+    return (
+      <a
+        {...props}
+        className="mt-8 inline-flex items-center gap-3 text-accent-blue text-[10px] font-bold tracking-[0.25em] uppercase border border-accent-blue/30 px-5 py-3.5 hover:bg-accent-blue hover:text-accent-blue-foreground transition-all duration-500"
+      >
+        ARCHIVE_{year ?? "0"}
+        <ArrowUpRight className="h-3.5 w-3.5" />
+      </a>
+    );
+  }
+
+  if (variant === "dot") {
+    return (
+      <a
+        {...props}
+        className="group inline-flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-foreground hover:text-accent-blue transition-colors"
+      >
+        Explore Layer
+        <span className="size-2 rounded-full bg-accent-blue group-hover:scale-150 transition-transform duration-500" />
+      </a>
+    );
+  }
+
+  return (
+    <a
+      {...props}
+      className="mt-8 inline-flex items-center gap-2 border-b border-accent-blue text-accent-blue text-xs font-semibold tracking-widest uppercase pb-1 hover:gap-4 transition-all duration-500"
+    >
+      View Component
+      <ArrowUpRight className="h-3.5 w-3.5" />
+    </a>
   );
 };
 
