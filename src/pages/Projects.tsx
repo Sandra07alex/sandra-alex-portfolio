@@ -7,8 +7,9 @@ const projects = [
   {
     title: "Techsortium",
     subtitle: "IEEE Kerala — Flagship Event Platform",
+    italic: "Website",
     description:
-      "Registrations, live dashboards, and schedules for thousands of attendees across the IEEE Kerala flagship.",
+      "Developed the official event management website for IEEE Techsortium, the flagship technical consortium organized by IEEE Kerala Section in association with IEEE LINK. Built a complete event registration system, implemented a dashboard to track registrations and manage participant data, and designed responsive pages for event schedules, speakers, and program details.",
     stack: "MERN Stack",
     role: "Full Stack",
     year: "2025",
@@ -19,8 +20,8 @@ const projects = [
     subtitle: "Deep Learning Research",
     italic: "Detection",
     description:
-      "ResNet-50 CNN trained on retinal fundus images using RNFL and PPA biomarkers — 90%+ diagnostic accuracy.",
-    stack: "Python · PyTorch",
+      "Developed a ResNet-50 based convolutional neural network model to detect glaucoma from retinal fundus images. Utilized RNFL (Retinal Nerve Fiber Layer) and PPA (Peripapillary Atrophy) biomarkers for improved detection. Applied deep learning techniques for medical image analysis and classification. Achieved over 90% classification accuracy during model evaluation.",
+    stack: "Python · PyTorch · CNN · ResNet-50",
     role: "Research",
     year: "2025",
     link: "#",
@@ -29,7 +30,7 @@ const projects = [
     title: "YESS",
     subtitle: "Yearly Engineering Students Summit",
     description:
-      "Ticketing and registration platform scaled to 5,000+ participants across India.",
+      "Official website for IEEE Yearly Engineering Students Summit. Handled 5,000+ participants with a robust ticket booking and event registration system scaled across India.",
     stack: "MERN Stack",
     role: "Full Stack",
     year: "2024",
@@ -37,9 +38,9 @@ const projects = [
   },
   {
     title: "CourtClick",
-    subtitle: "Legal Case Registration",
+    subtitle: "Legal Case Registration System",
     description:
-      "Guided onboarding workflow with real-world API integrations for legal case management.",
+      "Built a legal case registration system with a guided user onboarding workflow. Integrated APIs for real-world usage, enabling streamlined legal case management.",
     stack: "React.js",
     role: "Frontend",
     year: "2025",
@@ -47,28 +48,27 @@ const projects = [
   },
   {
     title: "Stride",
-    subtitle: "Designathon — Government of Kerala",
+    subtitle: "Designathon — Government of Kerala (KDISC)",
     italic: "Designathon",
     description:
-      "Initiative built with KDISC Kerala, IEEE Kerala, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
+      "Government project developed for KDISC Kerala. Official website for Stride Designathon built in collaboration with IEEE Kerala Section, IEEE LINK, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
     stack: "MERN Stack",
     role: "Platform",
     year: "2024",
     link: "https://stridedesignathon.ieee-link.org",
   },
   {
-    title: "Avian",
-    subtitle: "Image Classifier",
+    title: "Is It a Bird",
+    subtitle: "ML Image Classifier",
     italic: "Classifier",
     description:
-      "CNN trained on Kaggle datasets to classify bird species — exploring transfer learning and augmentation.",
-    stack: "Python · CNN",
+      "Created a CNN model for bird species classification trained using Kaggle datasets. Exploring transfer learning and data augmentation techniques for image recognition.",
+    stack: "Python · CNN · Jupyter",
     role: "ML",
     year: "2024",
     link: "https://github.com/sandra07alex/is-it-a-bird",
   },
 ];
-
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
 const Projects = () => {
