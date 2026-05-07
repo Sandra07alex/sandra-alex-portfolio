@@ -323,16 +323,34 @@ const Projects = () => {
                         {p.description}
                       </p>
 
-                      {/* Stack pills */}
-                      <div className="flex flex-wrap gap-2 mb-8">
-                        {p.stack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="font-mono text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 bg-foreground/5 border border-border/50 text-foreground/70"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                      {/* Stack pills — mini book spines */}
+                      <div className="flex items-end gap-1.5 mb-8">
+                        {p.stack.map((tech, ti) => {
+                          const tone = spineTones[(i * 3 + ti) % spineTones.length];
+                          const h = 36 + (ti % 3) * 4;
+                          return (
+                            <div
+                              key={tech}
+                              className="relative group cursor-default"
+                              style={{ height: h, width: 22 }}
+                            >
+                              <div
+                                className="w-full h-full rounded-[2px]"
+                                style={{
+                                  background: `linear-gradient(90deg, hsl(0 0% 0% / 0.3) 0%, ${tone} 14%, ${tone} 86%, hsl(0 0% 0% / 0.3) 100%)`,
+                                  boxShadow: "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 4px 8px hsl(0 0% 0% / 0.3)",
+                                }}
+                              >
+                                <div className="absolute left-0 right-0 top-0 h-[2px]" style={{ background: "linear-gradient(90deg, hsl(0 0% 92%), hsl(0 0% 78%))" }} />
+                                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-[1px]" style={{ background: "hsl(0 0% 95% / 0.5)" }} />
+                              </div>
+                              {/* Tooltip label */}
+                              <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.15em] text-foreground/80 bg-background/90 border border-border/50 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                {tech}
+                              </span>
+                            </div>
+                          );
+                        })}
                       </div>
 
                       {/* Link */}
