@@ -96,7 +96,7 @@ const CertificationsSection = () => {
 
           {/* RIGHT — Detail panel */}
           <RevealSection className="lg:col-span-7" delay={0.15}>
-            <div className="lg:sticky lg:top-32">
+            <div className="lg:sticky lg:top-32 rounded-3xl border border-border/60 bg-secondary/20 p-6 md:p-8 shadow-[0_1px_0_rgba(255,255,255,0.02)]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}

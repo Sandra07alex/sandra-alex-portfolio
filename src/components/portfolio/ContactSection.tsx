@@ -35,9 +35,11 @@ const ContactSection = () => {
         </RevealSection>
 
         <RevealSection delay={0.3}>
-          <p className="mt-20 text-xs text-muted-foreground">
-            © 2026 Sandra Alex. Crafted with care.
-          </p>
+          <footer className="group mt-20 border-t border-border/50 pt-8 sm:pt-10 text-center">
+            <p className="translate-y-2 opacity-0 text-sm font-serif italic tracking-wide text-muted-foreground/75 leading-relaxed transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+              Looking for footer? It’s 2026.
+            </p>
+          </footer>
         </RevealSection>
       </div>
     </section>

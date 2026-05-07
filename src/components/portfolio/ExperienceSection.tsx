@@ -7,8 +7,8 @@ const experiences = [
     role: "Full Stack Web Developer Intern",
     company: "CourtClick",
     location: "Kochi",
-    period: "Jun 2025 — Present",
-    status: "Current",
+    period: "Jun 2025",
+    status: null,
     points: [
       "Developed real-world web applications using Next.js and MongoDB",
       "Improved responsive UI and deployment workflows",
