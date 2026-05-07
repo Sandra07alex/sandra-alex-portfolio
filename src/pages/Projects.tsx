@@ -1,92 +1,107 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const projects = [
   {
-    title: "Techsortium",
-    subtitle: "IEEE Kerala — Flagship Event Platform",
-    italic: "Website",
+    title: "IEEE Techsortium Website",
     description:
       "Developed the official event management website for IEEE Techsortium, the flagship technical consortium organized by IEEE Kerala Section in association with IEEE LINK. Built a complete event registration system, implemented a dashboard to track registrations and manage participant data, and designed responsive pages for event schedules, speakers, and program details.",
-    stack: "MERN Stack",
+    stack: ["MERN Stack"],
     role: "Full Stack",
     year: "2025",
     link: "https://techsortium25.ieee-link.org/",
+    linkLabel: "Live Website",
   },
   {
-    title: "Glaucoma",
-    subtitle: "Deep Learning Research",
-    italic: "Detection",
+    title: "Glaucoma Detection using Deep Learning",
     description:
-      "Developed a ResNet-50 based convolutional neural network model to detect glaucoma from retinal fundus images. Utilized RNFL (Retinal Nerve Fiber Layer) and PPA (Peripapillary Atrophy) biomarkers for improved detection. Applied deep learning techniques for medical image analysis and classification. Achieved over 90% classification accuracy during model evaluation.",
-    stack: "Python · PyTorch · CNN · ResNet-50",
+      "Developed a ResNet-50 based convolutional neural network model to detect glaucoma from retinal fundus images. Utilized RNFL and PPA biomarkers for improved detection. Applied deep learning techniques for medical image analysis. Achieved over 90% classification accuracy.",
+    stack: ["Python", "PyTorch", "CNN", "ResNet-50"],
     role: "Research",
     year: "2025",
     link: "#",
+    linkLabel: "Research Paper",
   },
   {
-    title: "YESS",
-    subtitle: "Yearly Engineering Students Summit",
+    title: "IEEE YESS Website",
     description:
       "Official website for IEEE Yearly Engineering Students Summit. Handled 5,000+ participants with a robust ticket booking and event registration system scaled across India.",
-    stack: "MERN Stack",
+    stack: ["MERN Stack"],
     role: "Full Stack",
     year: "2024",
     link: "https://yess.ieee-link.org",
+    linkLabel: "Live Website",
   },
   {
-    title: "CourtClick",
-    subtitle: "Legal Case Registration System",
+    title: "CourtClick Website",
     description:
       "Built a legal case registration system with a guided user onboarding workflow. Integrated APIs for real-world usage, enabling streamlined legal case management.",
-    stack: "React.js",
+    stack: ["React.js"],
     role: "Frontend",
     year: "2025",
     link: "https://court-click-web.vercel.app",
+    linkLabel: "Live Website",
   },
   {
-    title: "Stride",
-    subtitle: "Designathon — Government of Kerala (KDISC)",
-    italic: "Designathon",
+    title: "Stride Designathon Website",
     description:
-      "Government project developed for KDISC Kerala. Official website for Stride Designathon built in collaboration with IEEE Kerala Section, IEEE LINK, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
-    stack: "MERN Stack",
+      "Government project (KDISC Kerala). Official website for Stride Designathon built in collaboration with IEEE Kerala Section, IEEE LINK, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
+    stack: ["MERN Stack"],
     role: "Platform",
     year: "2024",
     link: "https://stridedesignathon.ieee-link.org",
+    linkLabel: "Live Website",
   },
   {
-    title: "Is It a Bird",
-    subtitle: "ML Image Classifier",
-    italic: "Classifier",
+    title: "Is It a Bird — ML Image Classifier",
     description:
       "Created a CNN model for bird species classification trained using Kaggle datasets. Exploring transfer learning and data augmentation techniques for image recognition.",
-    stack: "Python · CNN · Jupyter",
+    stack: ["Python", "CNN", "Jupyter Notebook"],
     role: "ML",
     year: "2024",
     link: "https://github.com/sandra07alex/is-it-a-bird",
+    linkLabel: "GitHub",
   },
 ];
+
+// Muted palette for book spines
+const spineTones = [
+  "hsl(0 0% 88%)",
+  "hsl(0 0% 75%)",
+  "hsl(0 0% 60%)",
+  "hsl(220 15% 55%)",
+  "hsl(220 25% 45%)",
+  "hsl(220 30% 35%)",
+  "hsl(0 0% 30%)",
+  "hsl(0 0% 22%)",
+  "hsl(0 0% 18%)",
+  "hsl(220 20% 40%)",
+  "hsl(0 0% 50%)",
+  "hsl(0 0% 70%)",
+  "hsl(0 0% 85%)",
+  "hsl(220 15% 60%)",
+  "hsl(0 0% 40%)",
+  "hsl(0 0% 28%)",
+];
+
+const BOOK_COUNT = spineTones.length;
+
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
 const Projects = () => {
   return (
     <SmoothScroll>
-      <main className="relative min-h-screen bg-background text-foreground">
-        {/* Drafting grid background */}
+      <main className="relative min-h-screen bg-background text-foreground overflow-hidden">
+        {/* Dotted background */}
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 opacity-[0.5]"
+          className="pointer-events-none fixed inset-0 opacity-[0.35]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, hsl(var(--foreground) / 0.035) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--foreground) / 0.035) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-            maskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 90%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 90%)",
+              "radial-gradient(circle, hsl(var(--foreground) / 0.12) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
           }}
         />
 
@@ -100,190 +115,244 @@ const Projects = () => {
             Back
           </Link>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            INDEX_ARCHIVE / 2024–25
+            {String(projects.length).padStart(2, "0")} Projects · {projects.length}+ Technologies
           </span>
         </div>
 
-        {/* Header */}
-        <header className="relative z-10 px-8 md:px-12 pt-24 md:pt-32 pb-32">
-          <div className="grid grid-cols-12 gap-6 max-w-[1400px] mx-auto">
-            <div className="col-span-12 md:col-span-7">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease }}
-                className="block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6"
-              >
-                ( 06 / Selected Works )
-              </motion.span>
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.1, ease }}
-                className="text-6xl sm:text-7xl md:text-[8vw] font-light tracking-tighter leading-[0.88]"
-              >
-                Things <br />
-                I’ve <span className="italic font-serif text-accent-blue">built.</span>
-              </motion.h1>
-            </div>
+        {/* Bookshelf section */}
+        <section className="relative z-10 pt-20 md:pt-28 pb-16">
+          <div className="max-w-4xl mx-auto px-8">
+            {/* Stats row */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.25, ease }}
-              className="col-span-12 md:col-start-9 md:col-span-4 self-end"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, ease }}
+              className="flex items-center justify-center gap-12 mb-12 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground"
             >
-              <p className="text-base text-muted-foreground leading-relaxed">
-                A technical archive of research models, production platforms,
-                and experiments — each one a chapter in learning to build things
-                that think.
-              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-foreground font-bold">{String(projects.length).padStart(2, "0")}</span>
+                <span>Projects</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-foreground font-bold">6+</span>
+                <span>Technologies</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-foreground font-bold">4</span>
+                <span>Years</span>
+              </div>
+            </motion.div>
+
+            {/* 3D Bookshelf */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease }}
+              className="flex items-center justify-center"
+            >
+              <div
+                className="relative h-[280px] sm:h-[320px] w-full flex items-center justify-center"
+                style={{ perspective: "1400px" }}
+              >
+                <div
+                  className="relative"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transform: "rotateX(6deg) rotateY(-14deg)",
+                  }}
+                >
+                  {spineTones.map((tone, i) => {
+                    const spineWidth = 24;
+                    const gap = 3;
+                    const offset = (i - BOOK_COUNT / 2) * (spineWidth + gap);
+                    const heightVariation = [0, 6, -4, 2, 8, -2, 4, 0, -6, 2, 6, -4, 0, 4, -2, 6][i] ?? 0;
+                    const bookHeight = 200 + heightVariation;
+                    const lean = i % 5 === 0 ? -1.2 : i % 7 === 0 ? 1.2 : 0;
+
+                    return (
+                      <motion.div
+                        key={i}
+                        className="absolute rounded-[2px]"
+                        style={{
+                          width: spineWidth,
+                          height: bookHeight,
+                          left: offset - spineWidth / 2,
+                          top: -bookHeight / 2,
+                          background: `linear-gradient(90deg, hsl(0 0% 0% / 0.35) 0%, ${tone} 12%, ${tone} 88%, hsl(0 0% 0% / 0.35) 100%)`,
+                          boxShadow:
+                            "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 8px 18px hsl(0 0% 0% / 0.4)",
+                          transformStyle: "preserve-3d",
+                          transformOrigin: "bottom center",
+                        }}
+                        animate={{
+                          rotateZ: [lean, lean + 0.3, lean],
+                          y: [0, -4, 0, 0, 0],
+                        }}
+                        transition={{
+                          rotateZ: {
+                            duration: 6,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: i * 0.25,
+                          },
+                          y: {
+                            duration: BOOK_COUNT * 0.45,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: i * 0.18,
+                            times: [0, 0.06, 0.12, 0.5, 1],
+                          },
+                        }}
+                      >
+                        <div
+                          className="absolute left-0 right-0 top-0 h-[3px]"
+                          style={{
+                            background: "linear-gradient(90deg, hsl(0 0% 92%), hsl(0 0% 78%))",
+                          }}
+                        />
+                        <div
+                          className="absolute left-0 right-0 bottom-0 h-[2px]"
+                          style={{ background: "hsl(0 0% 5%)" }}
+                        />
+                        <div
+                          className="absolute left-0 right-0"
+                          style={{ top: "32%", height: 1, background: "hsl(0 0% 0% / 0.5)" }}
+                        />
+                        <div
+                          className="absolute left-0 right-0"
+                          style={{ top: "62%", height: 1, background: "hsl(0 0% 0% / 0.5)" }}
+                        />
+                        <div
+                          className="absolute left-1/2 -translate-x-1/2 rounded-[1px]"
+                          style={{
+                            top: "44%",
+                            width: 7,
+                            height: 8,
+                            background: "linear-gradient(135deg, hsl(0 0% 95% / 0.7), hsl(0 0% 70% / 0.5))",
+                          }}
+                        />
+                      </motion.div>
+                    );
+                  })}
+
+                  {/* Shelf surface */}
+                  <div
+                    aria-hidden
+                    className="absolute left-1/2 -translate-x-1/2"
+                    style={{
+                      top: 105,
+                      width: (24 + 3) * BOOK_COUNT + 40,
+                      height: 5,
+                      background: "linear-gradient(180deg, hsl(0 0% 12%), hsl(0 0% 4%))",
+                      boxShadow: "0 6px 16px hsl(0 0% 0% / 0.5)",
+                      borderRadius: 2,
+                    }}
+                  />
+                </div>
+              </div>
             </motion.div>
           </div>
-        </header>
+        </section>
 
-        {/* Projects */}
-        <section className="relative z-10 px-8 md:px-12 pb-40">
-          <div className="max-w-[1400px] mx-auto grid grid-cols-12 gap-y-40 md:gap-y-56">
+        {/* Project details — open book style */}
+        <section className="relative z-10 px-6 md:px-12 pb-40">
+          <div className="max-w-5xl mx-auto space-y-20 md:space-y-28">
             {projects.map((p, i) => {
               const isExternal = p.link.startsWith("http");
-              const layout = i % 3; // 0: image right, 1: image left small, 2: image right with ghost number
+              const isGithub = p.link.includes("github.com");
+              const isEven = i % 2 === 0;
 
               return (
-                <motion.article
+                <motion.div
                   key={p.title}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 60 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.9, ease }}
-                  className="col-span-12 grid grid-cols-12 gap-6 relative"
+                  className={`grid grid-cols-1 md:grid-cols-12 gap-0 items-stretch ${
+                    isEven ? "" : "md:direction-rtl"
+                  }`}
                 >
-                  {/* Index marker */}
-                  <div className="col-span-12 md:col-span-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground pt-2">
-                    {String(i + 1).padStart(2, "0")} // {String(projects.length).padStart(2, "0")}
+                  {/* Book spine / visual side */}
+                  <div
+                    className={`hidden md:flex col-span-1 items-stretch ${
+                      isEven ? "order-1" : "order-2"
+                    }`}
+                  >
+                    <div
+                      className="w-full min-h-full"
+                      style={{
+                        background: `linear-gradient(180deg, ${spineTones[i * 2] || "hsl(220 25% 45%)"} 0%, ${spineTones[i * 2 + 1] || "hsl(220 30% 35%)"} 100%)`,
+                        boxShadow: isEven
+                          ? "4px 0 12px hsl(0 0% 0% / 0.3)"
+                          : "-4px 0 12px hsl(0 0% 0% / 0.3)",
+                      }}
+                    />
                   </div>
 
-                  {layout === 0 && (
-                    <>
-                      <div className="col-span-12 md:col-span-6">
-                        <h2 className="text-5xl md:text-7xl font-light tracking-tighter leading-[0.9] mb-8">
-                          {p.title}
-                          {p.italic && (
-                            <>
-                              <br />
-                              <span className="italic font-serif text-accent-blue">
-                                {p.italic}
-                              </span>
-                            </>
-                          )}
-                        </h2>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-6">
-                          {p.subtitle}
-                        </p>
-                        <p className="max-w-[42ch] text-base text-muted-foreground leading-relaxed mb-12">
-                          {p.description}
-                        </p>
-                        <div className="flex gap-12">
-                          <Meta label="Role" value={p.role} />
-                          <Meta label="Year" value={p.year} />
-                        </div>
-                      </div>
-                      <div className="col-span-12 md:col-span-5 relative">
-                        <div className="relative border border-border/60 bg-secondary/40 p-3">
-                          <div className="aspect-[4/5] w-full bg-muted/60 flex items-center justify-center overflow-hidden">
-                            <span className="font-serif italic text-[8vw] md:text-[6vw] text-muted-foreground/30 leading-none">
-                              {p.title.charAt(0)}
-                            </span>
-                          </div>
-                          <CornerTicks />
-                        </div>
-                        <div className="mt-6 border-l border-border pl-5">
-                          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-2">
-                            Stack_Data
-                          </p>
-                          <p className="text-sm font-medium uppercase tracking-wide">
-                            {p.stack}
-                          </p>
-                          <ProjectLink link={p.link} external={isExternal} />
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {layout === 1 && (
-                    <>
-                      <div className="col-span-12 md:col-span-3 md:pr-4">
-                        <div className="relative border border-border/60 bg-secondary/40 p-3">
-                          <div className="aspect-square w-full bg-accent-blue/5 flex items-center justify-center overflow-hidden">
-                            <span className="font-serif italic text-[10vw] md:text-[5vw] text-accent-blue/40 leading-none">
-                              {p.title.charAt(0)}
-                            </span>
-                          </div>
-                          <CornerTicks />
-                        </div>
-                      </div>
-                      <div className="col-span-12 md:col-span-5">
-                        <h2 className="text-5xl md:text-7xl font-light tracking-tighter leading-[0.9] mb-6">
-                          {p.title}
-                        </h2>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-6">
-                          {p.subtitle}
-                        </p>
-                        <p className="max-w-[45ch] text-base text-muted-foreground leading-relaxed mb-8">
-                          {p.description}
-                        </p>
-                        <div className="grid grid-cols-2 gap-6 border-t border-border pt-6 max-w-md">
-                          <Meta label="Stack" value={p.stack} />
-                          <Meta label="Role" value={p.role} />
-                        </div>
-                      </div>
-                      <div className="col-span-12 md:col-span-3 flex flex-col items-end justify-end relative">
-                        <span
-                          aria-hidden
-                          className="font-serif italic text-[18vw] md:text-[10vw] leading-[0.8] text-foreground/[0.04] -mb-4 select-none pointer-events-none"
-                        >
-                          {String(i + 1).padStart(2, "0")}
+                  {/* Content — the "open page" */}
+                  <div
+                    className={`col-span-11 border border-border/40 bg-secondary/20 backdrop-blur-sm ${
+                      isEven ? "order-2" : "order-1"
+                    }`}
+                    style={{ direction: "ltr" }}
+                  >
+                    <div className="p-8 md:p-10 lg:p-12">
+                      {/* Top meta line */}
+                      <div className="flex items-center justify-between mb-8">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                          {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
                         </span>
-                        <ProjectLink link={p.link} external={isExternal} variant="boxed" year={p.year} />
+                        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                          {p.year}
+                        </span>
                       </div>
-                    </>
-                  )}
 
-                  {layout === 2 && (
-                    <div className="col-span-12 md:col-span-11">
-                      <div className="relative max-w-5xl">
-                        <div className="absolute -left-8 top-0 hidden md:block font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground origin-top-left -rotate-90 translate-y-32">
-                          Structural Detail · {p.year}
-                        </div>
-                        <div className="grid grid-cols-12 border border-border/70">
-                          <div className="col-span-12 md:col-span-8 p-8 md:p-12 md:border-r border-border/70">
-                            <h2 className="text-5xl md:text-6xl font-light tracking-tighter mb-4">
-                              {p.title}
-                            </h2>
-                            <p className="font-serif italic text-xl md:text-2xl text-accent-blue mb-8">
-                              {p.subtitle}
-                            </p>
-                            <div className="flex flex-wrap gap-12 text-[11px] uppercase tracking-[0.2em] font-mono">
-                              <Meta label="Year" value={p.year} />
-                              <Meta label="Stack" value={p.stack} />
-                              <Meta label="Role" value={p.role} />
-                            </div>
-                          </div>
-                          <div className="col-span-12 md:col-span-4 bg-foreground/95 text-background p-8 flex items-center justify-center min-h-[200px]">
-                            <span className="font-serif italic text-7xl text-background/40">
-                              {p.title.charAt(0)}
-                            </span>
-                          </div>
-                          <div className="col-span-12 p-6 md:p-8 border-t border-border/70 flex flex-col md:flex-row gap-4 md:items-center justify-between">
-                            <p className="text-sm text-muted-foreground max-w-2xl">
-                              {p.description}
-                            </p>
-                            <ProjectLink link={p.link} external={isExternal} variant="dot" />
-                          </div>
-                        </div>
+                      {/* Title */}
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-[1.1] mb-3">
+                        {p.title}
+                      </h2>
+
+                      {/* Role tag */}
+                      <span className="inline-block font-mono text-[10px] uppercase tracking-[0.25em] text-accent-blue border border-accent-blue/30 px-3 py-1 mb-6">
+                        {p.role}
+                      </span>
+
+                      {/* Description */}
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                        {p.description}
+                      </p>
+
+                      {/* Stack pills */}
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {p.stack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="font-mono text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 bg-foreground/5 border border-border/50 text-foreground/70"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
+
+                      {/* Link */}
+                      <a
+                        href={p.link}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        className="group inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-blue hover:text-foreground transition-colors duration-300"
+                      >
+                        {isGithub ? (
+                          <Github className="h-4 w-4" />
+                        ) : (
+                          <ExternalLink className="h-4 w-4" />
+                        )}
+                        {p.linkLabel}
+                        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </a>
                     </div>
-                  )}
-                </motion.article>
+                  </div>
+                </motion.div>
               );
             })}
           </div>
@@ -291,7 +360,7 @@ const Projects = () => {
 
         {/* Footer */}
         <footer className="relative z-10 border-t border-border/60 px-8 md:px-12 py-20">
-          <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row gap-8 md:items-end justify-between">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:items-end justify-between">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4">
                 End of Archive
@@ -313,76 +382,6 @@ const Projects = () => {
         </footer>
       </main>
     </SmoothScroll>
-  );
-};
-
-const Meta = ({ label, value }: { label: string; value: string }) => (
-  <div className="font-mono text-[11px] uppercase tracking-[0.18em]">
-    <p className="text-muted-foreground/70 mb-1.5">{label}</p>
-    <p className="text-foreground tracking-tight">{value}</p>
-  </div>
-);
-
-const CornerTicks = () => (
-  <>
-    <span className="absolute top-0 left-0 w-3 h-px bg-accent-blue" />
-    <span className="absolute top-0 left-0 w-px h-3 bg-accent-blue" />
-    <span className="absolute top-0 right-0 w-3 h-px bg-accent-blue" />
-    <span className="absolute top-0 right-0 w-px h-3 bg-accent-blue" />
-    <span className="absolute bottom-0 left-0 w-3 h-px bg-accent-blue" />
-    <span className="absolute bottom-0 left-0 w-px h-3 bg-accent-blue" />
-    <span className="absolute bottom-0 right-0 w-3 h-px bg-accent-blue" />
-    <span className="absolute bottom-0 right-0 w-px h-3 bg-accent-blue" />
-  </>
-);
-
-const ProjectLink = ({
-  link,
-  external,
-  variant = "default",
-  year,
-}: {
-  link: string;
-  external: boolean;
-  variant?: "default" | "boxed" | "dot";
-  year?: string;
-}) => {
-  const props = external
-    ? { href: link, target: "_blank", rel: "noopener noreferrer" }
-    : { href: link };
-
-  if (variant === "boxed") {
-    return (
-      <a
-        {...props}
-        className="mt-8 inline-flex items-center gap-3 text-accent-blue text-[10px] font-bold tracking-[0.25em] uppercase border border-accent-blue/30 px-5 py-3.5 hover:bg-accent-blue hover:text-accent-blue-foreground transition-all duration-500"
-      >
-        ARCHIVE_{year ?? "0"}
-        <ArrowUpRight className="h-3.5 w-3.5" />
-      </a>
-    );
-  }
-
-  if (variant === "dot") {
-    return (
-      <a
-        {...props}
-        className="group inline-flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase text-foreground hover:text-accent-blue transition-colors"
-      >
-        Explore Layer
-        <span className="size-2 rounded-full bg-accent-blue group-hover:scale-150 transition-transform duration-500" />
-      </a>
-    );
-  }
-
-  return (
-    <a
-      {...props}
-      className="mt-8 inline-flex items-center gap-2 border-b border-accent-blue text-accent-blue text-xs font-semibold tracking-widest uppercase pb-1 hover:gap-4 transition-all duration-500"
-    >
-      View Component
-      <ArrowUpRight className="h-3.5 w-3.5" />
-    </a>
   );
 };
 
