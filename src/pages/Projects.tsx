@@ -250,9 +250,12 @@ const SHELF_BOOKS = [
   { label: "IEEE YESS Website", sub: "MERN\nSTACK", num: "03" },
   { label: "CourtClick", sub: "LEGAL\nTECH", num: "04" },
   { label: "Stride Designathon", sub: "REACT /\nNODE", num: "05" },
-  { label: "Is It a Bird", sub: "LLM /\nPYTHON", num: "06" },
-  { label: "Portfolio Website", sub: "REACT /\nTAILWIND", num: "07" },
-  { label: "Mini Projects", sub: "EXPERI-\nMENTS", num: "08" },
+  { label: "Is It a Bird", sub: "ML /\nPYTHON", num: "06" },
+  { label: "AI Kerala Stories", sub: "REACT /\nTS", num: "07" },
+  { label: "IEEE LINK Redesign", sub: "HTML /\nCSS", num: "08" },
+  { label: "Online Kanniyan", sub: "JS /\nML", num: "09" },
+  { label: "Lunar Observatory", sub: "REACT /\nTAILWIND", num: "10" },
+  { label: "Ferok Bridge AI", sub: "PYTHON /\nCV", num: "11" },
 ];
 
 const Projects = () => {
