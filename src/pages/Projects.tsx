@@ -329,8 +329,8 @@ const Projects = () => {
                 className="flex items-center justify-end gap-10 mb-10"
               >
                 {[
-                  { icon: "📁", value: "08", label: "Projects" },
-                  { icon: "</>", value: "6+", label: "Technologies" },
+                  { icon: "📁", value: "11", label: "Projects" },
+                  { icon: "</>", value: "10+", label: "Technologies" },
                   { icon: "📅", value: "4", label: "Years of building" },
                 ].map((s) => (
                   <div key={s.label} className="flex items-center gap-2 text-xs">
