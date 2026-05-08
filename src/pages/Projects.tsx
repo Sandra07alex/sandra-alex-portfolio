@@ -1,383 +1,491 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const projects = [
   {
-    title: "IEEE Techsortium Website",
+    num: "01",
+    category: "MERN STACK",
+    title: "IEEE Techsortium",
     description:
-      "Developed the official event management website for IEEE Techsortium, the flagship technical consortium organized by IEEE Kerala Section in association with IEEE LINK. Built a complete event registration system, implemented a dashboard to track registrations and manage participant data, and designed responsive pages for event schedules, speakers, and program details.",
-    stack: ["MERN Stack"],
-    role: "Full Stack",
-    year: "2025",
+      "Developed the official event management website for IEEE Techsortium, the flagship technical consortium organized by IEEE Kerala Section in association with IEEE LINK. Built a complete event registration system allowing participants to register, track registrations, and manage event data.",
+    stack: ["React", "Node.js", "MongoDB", "Express.js"],
     link: "https://techsortium25.ieee-link.org/",
-    linkLabel: "Live Website",
+    github: "#",
+    icon: "⚖️",
+    spineLabel: "IEEE Techsortium",
+    spineSub: "MERN\nSTACK",
+    spineIcon: "👥",
   },
   {
-    title: "Glaucoma Detection using Deep Learning",
+    num: "02",
+    category: "AI RESEARCH",
+    title: "Glaucoma Detection",
     description:
-      "Developed a ResNet-50 based convolutional neural network model to detect glaucoma from retinal fundus images. Utilized RNFL and PPA biomarkers for improved detection. Applied deep learning techniques for medical image analysis. Achieved over 90% classification accuracy.",
-    stack: ["Python", "PyTorch", "CNN", "ResNet-50"],
-    role: "Research",
-    year: "2025",
+      "Deep learning model for early detection of glaucoma using retinal fundus images. Trained on diverse datasets with high accuracy and explainable AI outputs.",
+    stack: ["Python", "PyTorch", "OpenCV", "Scikit-learn"],
     link: "#",
-    linkLabel: "Research Paper",
+    github: "#",
+    icon: "🧠",
+    spineLabel: "Glaucoma Detection",
+    spineSub: "AI /\nPYTHON",
+    spineIcon: "🔬",
   },
   {
+    num: "03",
+    category: "FULL STACK",
     title: "IEEE YESS Website",
     description:
-      "Official website for IEEE Yearly Engineering Students Summit. Handled 5,000+ participants with a robust ticket booking and event registration system scaled across India.",
-    stack: ["MERN Stack"],
-    role: "Full Stack",
-    year: "2024",
+      "Official platform for IEEE YESS Summit for managing registrations, sessions, speakers, and event engagement for thousands of students.",
+    stack: ["React", "Node.js", "MongoDB", "Express.js"],
     link: "https://yess.ieee-link.org",
-    linkLabel: "Live Website",
+    github: "#",
+    icon: "🌐",
+    spineLabel: "IEEE YESS Website",
+    spineSub: "MERN\nSTACK",
+    spineIcon: "👥",
   },
   {
-    title: "CourtClick Website",
+    num: "04",
+    category: "LEGAL TECH",
+    title: "CourtClick",
     description:
-      "Built a legal case registration system with a guided user onboarding workflow. Integrated APIs for real-world usage, enabling streamlined legal case management.",
-    stack: ["React.js"],
-    role: "Frontend",
-    year: "2025",
+      "A legal case registration system that simplifies case intake, client management, hearing scheduling, and document tracking with role-based access and real-world workflow.",
+    stack: ["React", "Tailwind CSS", "Node.js", "MongoDB"],
     link: "https://court-click-web.vercel.app",
-    linkLabel: "Live Website",
+    github: "#",
+    icon: "⚖️",
+    spineLabel: "CourtClick",
+    spineSub: "LEGAL\nTECH",
+    spineIcon: "⚖️",
   },
   {
-    title: "Stride Designathon Website",
+    num: "05",
+    category: "GOVERNMENT",
+    title: "Stride Designathon",
     description:
-      "Government project (KDISC Kerala). Official website for Stride Designathon built in collaboration with IEEE Kerala Section, IEEE LINK, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
-    stack: ["MERN Stack"],
-    role: "Platform",
-    year: "2024",
+      "Official website for Stride Designathon — a government project with KDISC Kerala, built in collaboration with IEEE Kerala Section, IEEE LINK, APJAKTU, Kerala Startup Mission, and Kudumbashree.",
+    stack: ["React", "Node.js", "MongoDB", "Express.js"],
     link: "https://stridedesignathon.ieee-link.org",
-    linkLabel: "Live Website",
+    github: "#",
+    icon: "🏛",
+    spineLabel: "Stride Designathon",
+    spineSub: "REACT /\nNODE",
+    spineIcon: "📊",
   },
   {
-    title: "Is It a Bird — ML Image Classifier",
+    num: "06",
+    category: "ML PROJECT",
+    title: "Is It a Bird",
     description:
-      "Created a CNN model for bird species classification trained using Kaggle datasets. Exploring transfer learning and data augmentation techniques for image recognition.",
+      "CNN model for bird species classification trained using Kaggle datasets. Exploring transfer learning and data augmentation techniques for image recognition.",
     stack: ["Python", "CNN", "Jupyter Notebook"],
-    role: "ML",
-    year: "2024",
     link: "https://github.com/sandra07alex/is-it-a-bird",
-    linkLabel: "GitHub",
+    github: "https://github.com/sandra07alex/is-it-a-bird",
+    icon: "🐦",
+    spineLabel: "Is It a Bird",
+    spineSub: "LLM /\nPYTHON",
+    spineIcon: "🧪",
   },
 ];
 
-// Muted palette for book spines
-const spineTones = [
-  "hsl(0 0% 88%)",
-  "hsl(0 0% 75%)",
-  "hsl(0 0% 60%)",
-  "hsl(220 15% 55%)",
-  "hsl(220 25% 45%)",
-  "hsl(220 30% 35%)",
-  "hsl(0 0% 30%)",
-  "hsl(0 0% 22%)",
-  "hsl(0 0% 18%)",
-  "hsl(220 20% 40%)",
-  "hsl(0 0% 50%)",
-  "hsl(0 0% 70%)",
-  "hsl(0 0% 85%)",
-  "hsl(220 15% 60%)",
-  "hsl(0 0% 40%)",
-  "hsl(0 0% 28%)",
+// Book spine colors — muted, professional palette
+const spineColors = [
+  "hsl(0 0% 82%)",    // light gray
+  "hsl(0 0% 68%)",    // medium gray
+  "hsl(0 0% 75%)",    // gray
+  "hsl(220 30% 42%)", // navy blue
+  "hsl(0 0% 55%)",    // darker gray
+  "hsl(220 20% 35%)", // dark blue
+  "hsl(0 0% 30%)",    // charcoal
+  "hsl(0 0% 22%)",    // very dark
 ];
-
-const BOOK_COUNT = spineTones.length;
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
+
+// Small book spine component for project entries
+const BookSpine = ({
+  num,
+  label,
+  sub,
+  color,
+  height = 180,
+}: {
+  num: string;
+  label: string;
+  sub: string;
+  color: string;
+  height?: number;
+}) => (
+  <div
+    className="relative rounded-[3px] flex-shrink-0"
+    style={{
+      width: 64,
+      height,
+      background: `linear-gradient(90deg, hsl(0 0% 0% / 0.3) 0%, ${color} 10%, ${color} 90%, hsl(0 0% 0% / 0.2) 100%)`,
+      boxShadow:
+        "0 2px 0 hsl(0 0% 100% / 0.06) inset, 0 8px 24px hsl(0 0% 0% / 0.35)",
+    }}
+  >
+    {/* Top page edge */}
+    <div
+      className="absolute left-0 right-0 top-0 h-[3px] rounded-t-[3px]"
+      style={{ background: "linear-gradient(90deg, hsl(0 0% 88%), hsl(0 0% 75%))" }}
+    />
+    {/* Number */}
+    <div className="absolute top-3 left-1/2 -translate-x-1/2 font-mono text-[9px] font-bold text-white/80">
+      {num}
+    </div>
+    {/* Divider line */}
+    <div className="absolute left-2 right-2 top-8" style={{ height: 1, background: "hsl(0 0% 100% / 0.15)" }} />
+    {/* Vertical title */}
+    <div
+      className="absolute left-1/2 -translate-x-1/2 font-mono text-[8px] font-bold text-white/90 tracking-wider"
+      style={{
+        top: "20%",
+        bottom: "30%",
+        writingMode: "vertical-rl",
+        textOrientation: "mixed",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        lineHeight: 1.2,
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      }}
+    >
+      {label}
+    </div>
+    {/* Bottom section */}
+    <div className="absolute left-2 right-2 bottom-10" style={{ height: 1, background: "hsl(0 0% 100% / 0.15)" }} />
+    <div
+      className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[6px] text-white/60 text-center leading-tight uppercase tracking-wider whitespace-pre-line"
+    >
+      {sub}
+    </div>
+    {/* Bottom edge */}
+    <div
+      className="absolute left-0 right-0 bottom-0 h-[2px] rounded-b-[3px]"
+      style={{ background: "hsl(0 0% 5%)" }}
+    />
+  </div>
+);
+
+// Shelf bookshelf with all project spines
+const SHELF_BOOKS = [
+  { label: "IEEE Techsortium", sub: "MERN\nSTACK", num: "01" },
+  { label: "Glaucoma Detection", sub: "AI /\nPYTHON", num: "02" },
+  { label: "IEEE YESS Website", sub: "MERN\nSTACK", num: "03" },
+  { label: "CourtClick", sub: "LEGAL\nTECH", num: "04" },
+  { label: "Stride Designathon", sub: "REACT /\nNODE", num: "05" },
+  { label: "Is It a Bird", sub: "LLM /\nPYTHON", num: "06" },
+  { label: "Portfolio Website", sub: "REACT /\nTAILWIND", num: "07" },
+  { label: "Mini Projects", sub: "EXPERI-\nMENTS", num: "08" },
+];
 
 const Projects = () => {
   return (
     <SmoothScroll>
-      <main className="relative min-h-screen bg-background text-foreground overflow-hidden">
-        {/* Dotted background */}
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, hsl(var(--foreground) / 0.12) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-
-        {/* Top nav */}
-        <div className="relative z-10 px-8 md:px-12 pt-10 flex items-center justify-between">
-          <Link
-            to="/"
-            className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent-blue transition-colors duration-300"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back
-          </Link>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            {String(projects.length).padStart(2, "0")} Projects · {projects.length}+ Technologies
-          </span>
-        </div>
-
-        {/* Bookshelf section */}
-        <section className="relative z-10 pt-20 md:pt-28 pb-16">
-          <div className="max-w-4xl mx-auto px-8">
-            {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, ease }}
-              className="flex items-center justify-center gap-12 mb-12 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground"
+      <main className="relative min-h-screen bg-background text-foreground">
+        {/* ─── Hero Section ─── */}
+        <section className="relative px-6 md:px-12 lg:px-20 pt-10 pb-16">
+          {/* Top nav */}
+          <div className="flex items-center justify-between mb-16">
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent-blue transition-colors duration-300"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-foreground font-bold">{String(projects.length).padStart(2, "0")}</span>
-                <span>Projects</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-foreground font-bold">6+</span>
-                <span>Technologies</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-foreground font-bold">4</span>
-                <span>Years</span>
-              </div>
-            </motion.div>
+              <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+              Back
+            </Link>
+          </div>
 
-            {/* 3D Bookshelf */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease }}
-              className="flex items-center justify-center"
-            >
-              <div
-                className="relative h-[280px] sm:h-[320px] w-full flex items-center justify-center"
-                style={{ perspective: "1400px" }}
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-start">
+            {/* Left — Text */}
+            <div className="pt-4">
+              <motion.span
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease }}
+                className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium"
+              >
+                ( 01 — Project Archive )
+              </motion.span>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1, ease }}
+                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]"
+              >
+                Many builds.
+                <br />
+                <span className="text-accent-blue">Many lessons.</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.25, ease }}
+                className="mt-8 text-base text-muted-foreground font-light leading-relaxed max-w-sm"
+              >
+                A collection of projects, experiments, and systems I've built across the years.
+                Each one shaped the way I think, build and solve problems.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease }}
+                className="mt-10 flex items-center gap-2 text-xs text-muted-foreground"
+              >
+                <span className="inline-block w-4 h-4 border border-border rounded-sm flex items-center justify-center text-[8px]">↓</span>
+                Scroll to explore each project chapter.
+              </motion.div>
+            </div>
+
+            {/* Right — Stats + Bookshelf */}
+            <div>
+              {/* Stats */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2, ease }}
+                className="flex items-center justify-end gap-10 mb-10"
+              >
+                {[
+                  { icon: "📁", value: "08", label: "Projects" },
+                  { icon: "</>", value: "6+", label: "Technologies" },
+                  { icon: "📅", value: "4", label: "Years of building" },
+                ].map((s) => (
+                  <div key={s.label} className="flex items-center gap-2 text-xs">
+                    <span className="text-muted-foreground">{s.icon}</span>
+                    <span className="font-bold text-foreground">{s.value}</span>
+                    <span className="text-muted-foreground">{s.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* 3D Bookshelf */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease }}
+                className="flex justify-center"
               >
                 <div
-                  className="relative"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transform: "rotateX(6deg) rotateY(-14deg)",
-                  }}
+                  className="relative h-[300px] w-full flex items-center justify-center"
+                  style={{ perspective: "1200px" }}
                 >
-                  {spineTones.map((tone, i) => {
-                    const spineWidth = 24;
-                    const gap = 3;
-                    const offset = (i - BOOK_COUNT / 2) * (spineWidth + gap);
-                    const heightVariation = [0, 6, -4, 2, 8, -2, 4, 0, -6, 2, 6, -4, 0, 4, -2, 6][i] ?? 0;
-                    const bookHeight = 200 + heightVariation;
-                    const lean = i % 5 === 0 ? -1.2 : i % 7 === 0 ? 1.2 : 0;
-
-                    return (
-                      <motion.div
-                        key={i}
-                        className="absolute rounded-[2px]"
-                        style={{
-                          width: spineWidth,
-                          height: bookHeight,
-                          left: offset - spineWidth / 2,
-                          top: -bookHeight / 2,
-                          background: `linear-gradient(90deg, hsl(0 0% 0% / 0.35) 0%, ${tone} 12%, ${tone} 88%, hsl(0 0% 0% / 0.35) 100%)`,
-                          boxShadow:
-                            "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 8px 18px hsl(0 0% 0% / 0.4)",
-                          transformStyle: "preserve-3d",
-                          transformOrigin: "bottom center",
-                        }}
-                        animate={{
-                          rotateZ: [lean, lean + 0.3, lean],
-                          y: [0, -4, 0, 0, 0],
-                        }}
-                        transition={{
-                          rotateZ: {
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.25,
-                          },
-                          y: {
-                            duration: BOOK_COUNT * 0.45,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.18,
-                            times: [0, 0.06, 0.12, 0.5, 1],
-                          },
-                        }}
-                      >
-                        <div
-                          className="absolute left-0 right-0 top-0 h-[3px]"
-                          style={{
-                            background: "linear-gradient(90deg, hsl(0 0% 92%), hsl(0 0% 78%))",
-                          }}
-                        />
-                        <div
-                          className="absolute left-0 right-0 bottom-0 h-[2px]"
-                          style={{ background: "hsl(0 0% 5%)" }}
-                        />
-                        <div
-                          className="absolute left-0 right-0"
-                          style={{ top: "32%", height: 1, background: "hsl(0 0% 0% / 0.5)" }}
-                        />
-                        <div
-                          className="absolute left-0 right-0"
-                          style={{ top: "62%", height: 1, background: "hsl(0 0% 0% / 0.5)" }}
-                        />
-                        <div
-                          className="absolute left-1/2 -translate-x-1/2 rounded-[1px]"
-                          style={{
-                            top: "44%",
-                            width: 7,
-                            height: 8,
-                            background: "linear-gradient(135deg, hsl(0 0% 95% / 0.7), hsl(0 0% 70% / 0.5))",
-                          }}
-                        />
-                      </motion.div>
-                    );
-                  })}
-
-                  {/* Shelf surface */}
                   <div
-                    aria-hidden
-                    className="absolute left-1/2 -translate-x-1/2"
+                    className="relative"
                     style={{
-                      top: 105,
-                      width: (24 + 3) * BOOK_COUNT + 40,
-                      height: 5,
-                      background: "linear-gradient(180deg, hsl(0 0% 12%), hsl(0 0% 4%))",
-                      boxShadow: "0 6px 16px hsl(0 0% 0% / 0.5)",
-                      borderRadius: 2,
+                      transformStyle: "preserve-3d",
+                      transform: "rotateX(5deg) rotateY(-12deg)",
                     }}
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Project details — open book style */}
-        <section className="relative z-10 px-6 md:px-12 pb-40">
-          <div className="max-w-5xl mx-auto space-y-20 md:space-y-28">
-            {projects.map((p, i) => {
-              const isExternal = p.link.startsWith("http");
-              const isGithub = p.link.includes("github.com");
-              const isEven = i % 2 === 0;
-
-              return (
-                <motion.div
-                  key={p.title}
-                  initial={{ opacity: 0, y: 60 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.9, ease }}
-                  className={`grid grid-cols-1 md:grid-cols-12 gap-0 items-stretch ${
-                    isEven ? "" : "md:direction-rtl"
-                  }`}
-                >
-                  {/* Book spine / visual side */}
-                  <div
-                    className={`hidden md:flex col-span-1 items-stretch ${
-                      isEven ? "order-1" : "order-2"
-                    }`}
                   >
+                    {SHELF_BOOKS.map((book, i) => {
+                      const spineW = 48;
+                      const gap = 4;
+                      const totalW = SHELF_BOOKS.length * (spineW + gap);
+                      const offset = i * (spineW + gap) - totalW / 2;
+                      const hVar = [0, 8, -4, 12, 4, -2, 6, -6][i] ?? 0;
+                      const h = 210 + hVar;
+                      const color = spineColors[i % spineColors.length];
+
+                      return (
+                        <motion.div
+                          key={i}
+                          className="absolute rounded-[3px]"
+                          style={{
+                            width: spineW,
+                            height: h,
+                            left: offset,
+                            top: -h / 2 + 10,
+                            background: `linear-gradient(90deg, hsl(0 0% 0% / 0.3) 0%, ${color} 10%, ${color} 90%, hsl(0 0% 0% / 0.2) 100%)`,
+                            boxShadow:
+                              "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 8px 20px hsl(0 0% 0% / 0.4)",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "bottom center",
+                          }}
+                          animate={{
+                            y: [0, -5, 0, 0, 0],
+                          }}
+                          transition={{
+                            y: {
+                              duration: SHELF_BOOKS.length * 0.5,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: i * 0.2,
+                              times: [0, 0.06, 0.12, 0.5, 1],
+                            },
+                          }}
+                        >
+                          {/* Top cap */}
+                          <div className="absolute left-0 right-0 top-0 h-[3px] rounded-t-[3px]" style={{ background: "linear-gradient(90deg, hsl(0 0% 90%), hsl(0 0% 76%))" }} />
+                          {/* Number */}
+                          <div className="absolute top-2.5 left-1/2 -translate-x-1/2 font-mono text-[8px] font-bold text-white/70">
+                            {book.num}
+                          </div>
+                          {/* Divider */}
+                          <div className="absolute left-2 right-2 top-7" style={{ height: 1, background: "hsl(0 0% 100% / 0.12)" }} />
+                          {/* Vertical title */}
+                          <div
+                            className="absolute left-1/2 -translate-x-1/2 font-mono text-[7px] font-bold text-white/85 tracking-wider"
+                            style={{
+                              top: "16%",
+                              bottom: "26%",
+                              writingMode: "vertical-rl",
+                              textOrientation: "mixed",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                            }}
+                          >
+                            {book.label}
+                          </div>
+                          {/* Bottom divider */}
+                          <div className="absolute left-2 right-2 bottom-[32px]" style={{ height: 1, background: "hsl(0 0% 100% / 0.12)" }} />
+                          {/* Bottom label */}
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 font-mono text-[5px] text-white/50 text-center uppercase tracking-wider whitespace-pre-line leading-tight">
+                            {book.sub}
+                          </div>
+                          {/* Bottom edge */}
+                          <div className="absolute left-0 right-0 bottom-0 h-[2px] rounded-b-[3px]" style={{ background: "hsl(0 0% 5%)" }} />
+                        </motion.div>
+                      );
+                    })}
+
+                    {/* Shelf surface */}
                     <div
-                      className="w-full min-h-full"
+                      aria-hidden
+                      className="absolute left-1/2 -translate-x-1/2"
                       style={{
-                        background: `linear-gradient(180deg, ${spineTones[i * 2] || "hsl(220 25% 45%)"} 0%, ${spineTones[i * 2 + 1] || "hsl(220 30% 35%)"} 100%)`,
-                        boxShadow: isEven
-                          ? "4px 0 12px hsl(0 0% 0% / 0.3)"
-                          : "-4px 0 12px hsl(0 0% 0% / 0.3)",
+                        top: 115,
+                        width: SHELF_BOOKS.length * 52 + 40,
+                        height: 6,
+                        background: "linear-gradient(180deg, hsl(0 0% 14%), hsl(0 0% 4%))",
+                        boxShadow: "0 6px 18px hsl(0 0% 0% / 0.5)",
+                        borderRadius: 2,
                       }}
                     />
                   </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
-                  {/* Content — the "open page" */}
-                  <div
-                    className={`col-span-11 border border-border/40 bg-secondary/20 backdrop-blur-sm ${
-                      isEven ? "order-2" : "order-1"
-                    }`}
-                    style={{ direction: "ltr" }}
-                  >
-                    <div className="p-8 md:p-10 lg:p-12">
-                      {/* Top meta line */}
-                      <div className="flex items-center justify-between mb-8">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                          {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+        {/* ─── Project Entries ─── */}
+        <section className="relative px-6 md:px-12 lg:px-20 pb-32">
+          <div className="max-w-6xl mx-auto">
+            {projects.map((p, i) => {
+              const isEven = i % 2 === 0;
+              const color = spineColors[i % spineColors.length];
+              const isGithub = p.github?.includes("github.com");
+
+              return (
+                <motion.article
+                  key={p.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.8, ease }}
+                  className="border-t border-border/50 py-16 md:py-20"
+                >
+                  <div className={`grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start ${isEven ? "" : "md:[direction:rtl]"}`}>
+                    {/* Number + Book Spine side */}
+                    <div className={`md:col-span-2 flex items-start gap-4 ${isEven ? "" : "[direction:ltr]"}`}>
+                      <div className="flex-shrink-0">
+                        <span className="text-3xl md:text-4xl font-black tracking-tight text-foreground">
+                          {p.num}
                         </span>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                          {p.year}
-                        </span>
+                        <div className="mt-2 w-8 h-[2px] bg-foreground" />
                       </div>
+                    </div>
 
-                      {/* Title */}
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-[1.1] mb-3">
+                    {/* Book spine visual */}
+                    <div className={`hidden md:flex md:col-span-2 ${isEven ? "justify-start" : "justify-end [direction:ltr]"}`}>
+                      <BookSpine
+                        num={p.num}
+                        label={p.spineLabel}
+                        sub={p.spineSub}
+                        color={color}
+                        height={200}
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className={`md:col-span-8 ${isEven ? "" : "[direction:ltr]"}`}>
+                      <span className="text-[11px] uppercase tracking-[0.2em] text-accent-blue font-semibold">
+                        {p.category}
+                      </span>
+                      <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">
                         {p.title}
                       </h2>
-
-                      {/* Role tag */}
-                      <span className="inline-block font-mono text-[10px] uppercase tracking-[0.25em] text-accent-blue border border-accent-blue/30 px-3 py-1 mb-6">
-                        {p.role}
-                      </span>
-
-                      {/* Description */}
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                      <p className="mt-4 text-sm sm:text-[15px] text-muted-foreground leading-relaxed max-w-lg">
                         {p.description}
                       </p>
 
-                      {/* Stack pills — mini book spines */}
-                      <div className="flex items-end gap-1.5 mb-8">
-                        {p.stack.map((tech, ti) => {
-                          const tone = spineTones[(i * 3 + ti) % spineTones.length];
-                          const h = 36 + (ti % 3) * 4;
-                          return (
-                            <div
-                              key={tech}
-                              className="relative group cursor-default"
-                              style={{ height: h, width: 22 }}
-                            >
-                              <div
-                                className="w-full h-full rounded-[2px]"
-                                style={{
-                                  background: `linear-gradient(90deg, hsl(0 0% 0% / 0.3) 0%, ${tone} 14%, ${tone} 86%, hsl(0 0% 0% / 0.3) 100%)`,
-                                  boxShadow: "0 1px 0 hsl(0 0% 100% / 0.08) inset, 0 4px 8px hsl(0 0% 0% / 0.3)",
-                                }}
-                              >
-                                <div className="absolute left-0 right-0 top-0 h-[2px]" style={{ background: "linear-gradient(90deg, hsl(0 0% 92%), hsl(0 0% 78%))" }} />
-                                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-[1px]" style={{ background: "hsl(0 0% 95% / 0.5)" }} />
-                              </div>
-                              {/* Tooltip label */}
-                              <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.15em] text-foreground/80 bg-background/90 border border-border/50 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                                {tech}
-                              </span>
-                            </div>
-                          );
-                        })}
+                      {/* Tech stack pills */}
+                      <div className="mt-6 flex flex-wrap items-center gap-2">
+                        {p.stack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/60 text-[11px] font-medium text-foreground/80 bg-secondary/40"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent-blue/60" />
+                            {tech}
+                          </span>
+                        ))}
                       </div>
 
-                      {/* Link */}
-                      <a
-                        href={p.link}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                        className="group inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-blue hover:text-foreground transition-colors duration-300"
-                      >
-                        {isGithub ? (
-                          <Github className="h-4 w-4" />
-                        ) : (
-                          <ExternalLink className="h-4 w-4" />
+                      {/* Links */}
+                      <div className="mt-6 flex flex-wrap items-center gap-6">
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-accent-blue transition-colors"
+                        >
+                          View Case Study
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                        </a>
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          Live Demo
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                        {isGithub && (
+                          <a
+                            href={p.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            GitHub
+                            <Github className="h-3.5 w-3.5" />
+                          </a>
                         )}
-                        {p.linkLabel}
-                        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      </a>
+                      </div>
                     </div>
                   </div>
-                </motion.div>
+                </motion.article>
               );
             })}
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="relative z-10 border-t border-border/60 px-8 md:px-12 py-20">
+        {/* ─── Footer ─── */}
+        <footer className="relative border-t border-border/50 px-8 md:px-12 py-20">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:items-end justify-between">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4">
@@ -385,8 +493,7 @@ const Projects = () => {
               </p>
               <p className="text-2xl md:text-3xl font-light tracking-tight max-w-md">
                 More work in progress. Currently building at{" "}
-                <span className="text-accent-blue">CourtClick</span> & exploring
-                applied ML.
+                <span className="text-accent-blue">CourtClick</span> & exploring applied ML.
               </p>
             </div>
             <Link
