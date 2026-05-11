@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import SmoothScroll from "@/components/SmoothScroll";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const projects = [
   {
@@ -259,6 +261,12 @@ const SHELF_BOOKS = [
 ];
 
 const Projects = () => {
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   return (
     <SmoothScroll>
       <main className="relative min-h-screen bg-background text-foreground">
@@ -326,7 +334,7 @@ const Projects = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2, ease }}
-                className="flex items-center justify-end gap-10 mb-10"
+                className="flex flex-wrap items-center justify-start lg:justify-end gap-x-6 gap-y-3 sm:gap-10 mb-10"
               >
                 {[
                   { icon: "📁", value: "11", label: "Projects" },
@@ -349,14 +357,16 @@ const Projects = () => {
                 className="flex justify-center"
               >
                 <div
-                  className="relative h-[300px] w-full flex items-center justify-center"
+                  className="relative h-[220px] sm:h-[280px] lg:h-[300px] w-full flex items-center justify-center overflow-hidden"
                   style={{ perspective: "1200px" }}
                 >
                   <div
                     className="relative"
                     style={{
                       transformStyle: "preserve-3d",
-                      transform: "rotateX(5deg) rotateY(-12deg)",
+                      transform: `rotateX(5deg) rotateY(-12deg) scale(${isMobile ? 0.55 : 1})`,
+                      transformOrigin: "center center",
+                      willChange: "transform",
                     }}
                   >
                     {SHELF_BOOKS.map((book, i) => {
