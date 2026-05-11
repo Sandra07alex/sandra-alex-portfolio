@@ -357,14 +357,16 @@ const Projects = () => {
                 className="flex justify-center"
               >
                 <div
-                  className="relative h-[300px] w-full flex items-center justify-center"
+                  className="relative h-[220px] sm:h-[280px] lg:h-[300px] w-full flex items-center justify-center overflow-hidden"
                   style={{ perspective: "1200px" }}
                 >
                   <div
                     className="relative"
                     style={{
                       transformStyle: "preserve-3d",
-                      transform: "rotateX(5deg) rotateY(-12deg)",
+                      transform: `rotateX(5deg) rotateY(-12deg) scale(${isMobile ? 0.55 : 1})`,
+                      transformOrigin: "center center",
+                      willChange: "transform",
                     }}
                   >
                     {SHELF_BOOKS.map((book, i) => {
