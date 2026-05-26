@@ -71,17 +71,21 @@ const FloatingSpark = () => {
           style={{ y: smoothY, x }}
           className="pointer-events-none fixed right-6 top-0 z-40 hidden sm:block"
         >
-          {/* Spark */}
+          {/* Cute floating butterfly */}
           <motion.button
             onClick={handleClick}
             aria-label="A little something about Sandra"
-            animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ scale: 1.6 }}
-            className="pointer-events-auto relative h-2.5 w-2.5 rounded-full bg-accent-blue shadow-[0_0_20px_hsl(var(--accent-blue)/0.7)] cursor-pointer"
+            animate={{
+              rotate: [-8, 8, -8],
+              scale: [1, 1.08, 1],
+            }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.35, rotate: 0 }}
+            className="pointer-events-auto relative text-2xl leading-none cursor-pointer select-none drop-shadow-[0_0_12px_hsl(var(--accent-blue)/0.5)]"
           >
-            <span className="absolute inset-0 -m-3 rounded-full" />
+            🦋
           </motion.button>
+
 
           {/* Fact bubble */}
           <AnimatePresence>
