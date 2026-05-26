@@ -1,188 +1,111 @@
-import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-
-const SECRET = "think";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const FACTS = [
-  {
-    title: "Listens more than she talks.",
-    body: "Conversations teach more than monologues ever could.",
-  },
-  {
-    title: "Impact > crowd size.",
-    body: "One mind changed matters more than a thousand watching.",
-  },
-  {
-    title: "Strong, independent, soft-spoken feminist.",
-    body: "Quietly building a world where women don't have to ask twice.",
-  },
-  {
-    title: "Eldest sister energy.",
-    body: "Half mentor, half safety net — always the first to show up.",
-  },
+  "Listens more than she talks.",
+  "Impact matters more than crowd size.",
+  "Strong, independent — quietly feminist.",
+  "Eldest sister. Always the safety net.",
+  "Believes curiosity is a superpower.",
 ];
 
-type Spark = { id: number; x: number; y: number; dx: number; dy: number };
-
-const EasterEgg = () => {
+const FloatingSpark = () => {
   const [open, setOpen] = useState(false);
-  const [buffer, setBuffer] = useState("");
-  const [found, setFound] = useState<number[]>([]);
-  const [activeFact, setActiveFact] = useState<number | null>(null);
+  const [idx, setIdx] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
-  // Console hint
+  // Subtle console hint for the curious
   useEffect(() => {
-    const a = "color:#5b8def;font:600 13px/1.4 Inter,sans-serif";
-    const b = "color:#888;font:400 11px/1.4 Inter,sans-serif";
     // eslint-disable-next-line no-console
-    console.log("%cHi, curious one.", a);
-    // eslint-disable-next-line no-console
-    console.log("%cType %cthink%c anywhere — then chase the sparks.", b, "color:#5b8def;font-weight:600", b);
+    console.log(
+      "%cPsst — look for the little blue spark drifting on the side. Click it.",
+      "color:#5b8def;font:600 12px/1.4 Inter,sans-serif",
+    );
   }, []);
 
-  // Key listener for secret + escape
+  // Track scroll for vertical drift
+  const y = useMotionValue(0);
+  const smoothY = useSpring(y, { stiffness: 40, damping: 20, mass: 0.8 });
+  // gentle horizontal sway tied to scroll
+  const x = useTransform(smoothY, (v) => Math.sin(v / 180) * 12);
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        return;
-      }
-      if (e.key.length !== 1) return;
-      const t = e.target as HTMLElement | null;
-      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
-      const next = (buffer + e.key.toLowerCase()).slice(-SECRET.length);
-      setBuffer(next);
-      if (next === SECRET) {
-        setOpen(true);
-        setBuffer("");
-        setFound([]);
-        setActiveFact(null);
-      }
+    const onScroll = () => {
+      const s = window.scrollY;
+      setScrollY(s);
+      // Map scroll to a vertical position within the right rail
+      const vh = window.innerHeight;
+      const docH = document.documentElement.scrollHeight - vh;
+      const progress = docH > 0 ? s / docH : 0;
+      // travel between 20vh and 75vh
+      y.set(vh * 0.2 + progress * vh * 0.55);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [buffer]);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [y]);
 
-  // Sparks initial positions (in %)
-  const sparks = useMemo<Spark[]>(
-    () =>
-      FACTS.map((_, i) => ({
-        id: i,
-        x: 15 + Math.random() * 70,
-        y: 20 + Math.random() * 60,
-        dx: (Math.random() - 0.5) * 8,
-        dy: (Math.random() - 0.5) * 8,
-      })),
-    [open],
-  );
+  // Only show after the user has scrolled a bit, so it doesn't compete with the hero
+  const visible = scrollY > 300;
 
-  const catchSpark = (id: number) => {
-    setActiveFact(id);
-    setFound((f) => (f.includes(id) ? f : [...f, id]));
+  const handleClick = () => {
+    setIdx((i) => (i + 1) % FACTS.length);
+    setOpen(true);
   };
 
-  const allFound = found.length === FACTS.length;
+  // Auto-dismiss the bubble
+  useEffect(() => {
+    if (!open) return;
+    const t = setTimeout(() => setOpen(false), 4200);
+    return () => clearTimeout(t);
+  }, [open, idx]);
 
   return (
     <AnimatePresence>
-      {open && (
+      {visible && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          className="fixed inset-0 z-[100] bg-background/92 backdrop-blur-md overflow-hidden"
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{ y: smoothY, x }}
+          className="pointer-events-none fixed right-6 top-0 z-40 hidden sm:block"
         >
-          {/* Header */}
-          <div className="absolute top-8 left-0 right-0 text-center pointer-events-none px-6">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-accent-blue font-medium">
-              A quiet secret
-            </p>
-            <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tight">
-              Catch the sparks. Meet the maker.
-            </h2>
-            <p className="mt-2 text-xs sm:text-sm text-muted-foreground font-light">
-              {found.length} / {FACTS.length} found
-            </p>
-          </div>
-
-          {/* Sparks */}
-          {sparks.map((s) => {
-            const caught = found.includes(s.id);
-            return (
-              <motion.button
-                key={s.id}
-                onClick={() => catchSpark(s.id)}
-                initial={{ left: `${s.x}%`, top: `${s.y}%` }}
-                animate={
-                  caught
-                    ? { opacity: 0.25, scale: 0.8 }
-                    : {
-                        x: [0, s.dx * 12, -s.dx * 8, 0],
-                        y: [0, s.dy * 12, -s.dy * 8, 0],
-                        scale: [1, 1.15, 0.95, 1],
-                      }
-                }
-                transition={
-                  caught
-                    ? { duration: 0.4 }
-                    : { duration: 7 + s.id, repeat: Infinity, ease: "easeInOut" }
-                }
-                whileHover={{ scale: 1.4 }}
-                className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-blue shadow-[0_0_24px_hsl(var(--accent-blue))] cursor-pointer"
-                aria-label={`Spark ${s.id + 1}`}
-              />
-            );
-          })}
-
-          {/* Fact card */}
-          <AnimatePresence mode="wait">
-            {activeFact !== null && (
-              <motion.div
-                key={activeFact}
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-md text-center px-8"
-              >
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                  {FACTS[activeFact].title}
-                </h3>
-                <p className="mt-4 text-sm sm:text-base text-muted-foreground font-light italic">
-                  {FACTS[activeFact].body}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Completion */}
-          <AnimatePresence>
-            {allFound && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute bottom-20 left-0 right-0 text-center px-6"
-              >
-                <p className="text-base sm:text-lg text-accent-blue font-medium tracking-wide">
-                  That's me — in four sparks. ✨
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Close */}
-          <button
-            onClick={() => setOpen(false)}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+          {/* Spark */}
+          <motion.button
+            onClick={handleClick}
+            aria-label="A little something about Sandra"
+            animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.6 }}
+            className="pointer-events-auto relative h-2.5 w-2.5 rounded-full bg-accent-blue shadow-[0_0_20px_hsl(var(--accent-blue)/0.7)] cursor-pointer"
           >
-            Press Esc to close
-          </button>
+            <span className="absolute inset-0 -m-3 rounded-full" />
+          </motion.button>
+
+          {/* Fact bubble */}
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ opacity: 0, x: 10, y: -4 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: 8 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 w-56 text-right"
+              >
+                <p className="text-[10px] tracking-[0.25em] uppercase text-accent-blue mb-1.5 font-medium">
+                  About me
+                </p>
+                <p className="text-sm font-light text-foreground italic leading-snug">
+                  {FACTS[idx]}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
 
-export default EasterEgg;
+export default FloatingSpark;
