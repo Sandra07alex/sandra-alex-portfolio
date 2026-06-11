@@ -1,5 +1,36 @@
 import RevealSection from "./RevealSection";
-import { Mail, Github, Linkedin, Phone, ExternalLink } from "lucide-react";
+import { Mail, Github, Linkedin, Phone, ArrowUpRight } from "lucide-react";
+
+const contactLinks = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "sandraalexoffical@gmail.com",
+    href: "mailto:sandraalexoffical@gmail.com",
+    external: false,
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "9037846438",
+    href: "tel:+919037846438",
+    external: false,
+  },
+  {
+    icon: Github,
+    label: "GitHub",
+    value: "github.com/sandra07alex",
+    href: "https://github.com/sandra07alex",
+    external: true,
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    value: "linkedin.com/in/sandra07alex",
+    href: "https://linkedin.com/in/sandra07alex",
+    external: true,
+  },
+];
 
 const ContactSection = () => {
   return (
@@ -13,53 +44,28 @@ const ContactSection = () => {
         </RevealSection>
 
         <RevealSection delay={0.15}>
-          <div className="mx-auto max-w-md space-y-4 text-left">
-            {/* Email */}
-            <a
-              href="mailto:sandraalexoffical@gmail.com"
-              className="flex items-center gap-3 rounded-xl border border-border/60 bg-card/40 p-4 text-sm text-muted-foreground transition-colors hover:bg-card/60 hover:text-foreground"
-            >
-              <Mail className="h-4 w-4 shrink-0 text-accent-blue" />
-              <span className="font-medium text-foreground">sandraalexoffical@gmail.com</span>
-            </a>
-
-            {/* Phone */}
-            <a
-              href="tel:+919037846438"
-              className="flex items-center gap-3 rounded-xl border border-border/60 bg-card/40 p-4 text-sm text-muted-foreground transition-colors hover:bg-card/60 hover:text-foreground"
-            >
-              <Phone className="h-4 w-4 shrink-0 text-accent-blue" />
-              <span className="font-medium text-foreground">9037846438</span>
-            </a>
-
-            {/* GitHub */}
-            <a
-              href="https://github.com/sandra07alex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-xl border border-border/60 bg-card/40 p-4 text-sm text-muted-foreground transition-colors hover:bg-card/60 hover:text-foreground"
-            >
-              <Github className="h-4 w-4 shrink-0 text-accent-blue" />
-              <span className="min-w-0 flex-1 truncate font-medium text-foreground">
-                github.com/sandra07alex
-              </span>
-              <ExternalLink className="h-3 w-3 shrink-0 opacity-50" />
-            </a>
-
-            {/* LinkedIn */}
-            <a
-              href="https://linkedin.com/in/sandra07alex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-xl border border-border/60 bg-card/40 p-4 text-sm text-muted-foreground transition-colors hover:bg-card/60 hover:text-foreground"
-            >
-              <Linkedin className="h-4 w-4 shrink-0 text-accent-blue" />
-              <span className="min-w-0 flex-1 truncate font-medium text-foreground">
-                linkedin.com/in/sandra07alex
-              </span>
-              <ExternalLink className="h-3 w-3 shrink-0 opacity-50" />
-            </a>
-          </div>
+          <ul className="mx-auto max-w-md divide-y divide-border/40 text-left">
+            {contactLinks.map(({ icon: Icon, label, value, href, external }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="group flex items-center gap-4 py-4 transition-colors"
+                >
+                  <Icon className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-blue" />
+                  <span className="w-20 shrink-0 text-xs uppercase tracking-widest text-muted-foreground/70">
+                    {label}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate font-medium text-foreground transition-colors group-hover:text-accent-blue">
+                    {value}
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 -translate-x-1 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 text-accent-blue" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </RevealSection>
 
         <RevealSection delay={0.3}>
