@@ -5,61 +5,102 @@ import {
   Github,
   Linkedin,
   Phone,
-  ArrowUpRight,
+  Heart,
+  Star,
   Copy,
   Check,
 } from "lucide-react";
 import { useState } from "react";
 
-const contactLinks = [
+const contactNotes = [
   {
     icon: Mail,
     title: "Email Me",
     value: "sandraalexofficial@gmail.com",
     copyValue: "sandraalexofficial@gmail.com",
-    subtitle: "Let's discuss opportunities",
     href: "mailto:sandraalexofficial@gmail.com",
     external: false,
     copyable: true,
+    corner: Heart,
+    // warm yellow note
+    note: "bg-[#fbf0a8]",
+    ink: "text-[#b8860b]",
+    rule: "border-[#d6b733]",
+    rotate: "-rotate-2",
+    pin: "tape",
   },
   {
     icon: Phone,
     title: "Call Me",
     value: "+91 90378 46438",
     copyValue: "+919037846438",
-    subtitle: "Available for conversations",
     href: "tel:+919037846438",
     external: false,
     copyable: true,
+    corner: Heart,
+    // soft pink note
+    note: "bg-[#f7c9d4]",
+    ink: "text-[#d6336c]",
+    rule: "border-[#e07a96]",
+    rotate: "rotate-1",
+    pin: "pin-pink",
   },
   {
     icon: Github,
-    title: "View My Code",
+    title: "Explore My Code",
     value: "github.com/sandra07alex",
-    subtitle: "Explore my projects",
     href: "https://github.com/sandra07alex",
     external: true,
     copyable: false,
+    corner: Star,
+    // mint green note
+    note: "bg-[#cfe6b6]",
+    ink: "text-[#3f7d20]",
+    rule: "border-[#6fa843]",
+    rotate: "-rotate-1",
+    pin: "tape-green",
   },
   {
     icon: Linkedin,
-    title: "Connect Professionally",
+    title: "Let's Connect",
     value: "linkedin.com/in/sandra07alex",
-    subtitle: "Let's grow our network",
     href: "https://linkedin.com/in/sandra07alex",
     external: true,
     copyable: false,
+    corner: Heart,
+    // calm blue note
+    note: "bg-[#bcd4f2]",
+    ink: "text-[#1e6fd6]",
+    rule: "border-[#5a92dd]",
+    rotate: "rotate-2",
+    pin: "pin-blue",
   },
 ];
+
+const Pin = ({ kind }: { kind: string }) => {
+  if (kind === "tape" || kind === "tape-green") {
+    return (
+      <span
+        aria-hidden
+        className={`absolute left-1/2 -top-3 h-6 w-16 -translate-x-1/2 -rotate-3 rounded-[2px] ${
+          kind === "tape-green" ? "bg-[#b7cda0]/80" : "bg-[#d8c79a]/80"
+        } shadow-sm`}
+      />
+    );
+  }
+  const color = kind === "pin-pink" ? "bg-[#d6336c]" : "bg-[#1e6fd6]";
+  return (
+    <span aria-hidden className="absolute left-1/2 -top-3 -translate-x-1/2">
+      <span className={`block h-4 w-4 rounded-full ${color} shadow-md`} />
+      <span className="mx-auto block h-2 w-[2px] bg-foreground/30" />
+    </span>
+  );
+};
 
 const ContactSection = () => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const handleCopy = async (
-    e: React.MouseEvent,
-    text: string,
-    key: string
-  ) => {
+  const handleCopy = async (e: React.MouseEvent, text: string, key: string) => {
     e.preventDefault();
     e.stopPropagation();
     try {
@@ -73,18 +114,38 @@ const ContactSection = () => {
 
   return (
     <section className="px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <RevealSection>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground text-center mb-4">
             Let&apos;s build something meaningful{" "}
             <span className="text-accent-blue">together</span>
           </h2>
         </RevealSection>
+        <RevealSection delay={0.1}>
+          <p className="mx-auto mb-20 max-w-xl text-center text-base text-muted-foreground leading-relaxed">
+            I&apos;m always excited to connect with amazing people, collaborate on
+            ideas, or build impactful solutions together. Feel free to reach out!
+          </p>
+        </RevealSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-          {contactLinks.map(
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {contactNotes.map(
             (
-              { icon: Icon, title, value, copyValue, subtitle, href, external, copyable },
+              {
+                icon: Icon,
+                title,
+                value,
+                copyValue,
+                href,
+                external,
+                copyable,
+                corner: Corner,
+                note,
+                ink,
+                rule,
+                rotate,
+                pin,
+              },
               i
             ) => (
               <RevealSection key={title} delay={i * 0.1}>
@@ -93,55 +154,53 @@ const ContactSection = () => {
                   {...(external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileHover={{ y: -8, rotate: 0, scale: 1.03 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className={`group relative block h-full overflow-hidden rounded-sm bg-secondary/80 p-6 md:p-7 shadow-xl shadow-black/10 transition-colors duration-500 hover:bg-secondary ${
-                    i % 2 === 0 ? "rotate-1" : "-rotate-1"
-                  }`}
+                  className={`group relative flex aspect-[4/5] flex-col items-center px-6 pt-12 pb-7 ${note} ${rotate} shadow-[0_14px_30px_-12px_rgba(0,0,0,0.35)]`}
                 >
-                  {/* Tape strip */}
+                  <Pin kind={pin} />
+
+                  <Icon className={`h-9 w-9 ${ink}`} strokeWidth={1.6} />
+
+                  <h3
+                    className={`mt-5 text-3xl font-semibold ${ink}`}
+                    style={{ fontFamily: "'Caveat', cursive" }}
+                  >
+                    {title}
+                  </h3>
+
                   <span
+                    className={`mt-2 h-0 w-20 border-b-2 ${rule}`}
                     aria-hidden
-                    className="absolute left-1/2 -top-2.5 -translate-x-1/2 h-5 w-14 rounded-sm bg-accent-blue/25 backdrop-blur-sm"
+                  />
+                  <span
+                    className={`mt-3 h-0 w-28 border-b border-dashed ${rule} opacity-60`}
+                    aria-hidden
                   />
 
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-blue/10 text-accent-blue transition-colors duration-500 group-hover:bg-accent-blue/20">
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <h3 className="text-sm font-semibold text-accent-blue tracking-tight">
-                        {title}
-                      </h3>
-                    </div>
-                    {external && (
-                      <ArrowUpRight className="h-4 w-4 text-muted-foreground/40 shrink-0 transition-all duration-500 group-hover:text-accent-blue group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    )}
-                  </div>
-
-                  <div className="mt-4 flex items-center gap-2">
-                    <p className="text-sm font-medium text-foreground/90 truncate">
+                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-6">
+                    <p className="break-all text-center text-sm font-medium text-foreground/80">
                       {value}
                     </p>
                     {copyable && (
                       <button
-                        onClick={(e) =>
-                          handleCopy(e, copyValue || value, title)
-                        }
-                        className="ml-auto inline-flex items-center justify-center rounded-md p-1.5 text-muted-foreground/60 transition-colors hover:bg-accent-blue/10 hover:text-accent-blue"
+                        onClick={(e) => handleCopy(e, copyValue || value, title)}
+                        className={`shrink-0 rounded-md p-1 text-foreground/40 transition-colors hover:bg-black/5 hover:${ink}`}
                         aria-label={`Copy ${title}`}
                       >
                         {copiedKey === title ? (
-                          <Check className="h-3.5 w-3.5 text-green-500" />
+                          <Check className="h-3.5 w-3.5 text-green-600" />
                         ) : (
                           <Copy className="h-3.5 w-3.5" />
                         )}
                       </button>
                     )}
                   </div>
-                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    {subtitle}
-                  </p>
+
+                  <Corner
+                    className={`absolute bottom-4 right-4 h-4 w-4 ${ink} opacity-70`}
+                    strokeWidth={1.6}
+                  />
                 </motion.a>
               </RevealSection>
             )
@@ -149,7 +208,16 @@ const ContactSection = () => {
         </div>
 
         <RevealSection delay={0.45}>
-          <footer className="group mt-20 border-t border-border/50 pt-8 sm:pt-10 text-center">
+          <p
+            className="mt-16 text-center text-2xl text-accent-blue"
+            style={{ fontFamily: "'Caveat', cursive" }}
+          >
+            Open to opportunities, collaborations, and meaningful conversations.
+          </p>
+        </RevealSection>
+
+        <RevealSection delay={0.55}>
+          <footer className="group mt-16 border-t border-border/50 pt-8 sm:pt-10 text-center">
             <p className="translate-y-2 opacity-0 text-sm font-serif italic tracking-wide text-muted-foreground/75 leading-relaxed transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
               Looking for footer? It’s 2026.
             </p>
