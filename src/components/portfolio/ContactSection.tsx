@@ -74,20 +74,23 @@ const contactNotes = [
 ];
 
 const Pin = ({ kind }: { kind: string }) => {
-  if (kind === "tape" || kind === "tape-green") {
+  if (kind.startsWith("tape")) {
     return (
       <span
         aria-hidden
-        className={`absolute left-1/2 -top-3 h-6 w-16 -translate-x-1/2 -rotate-3 rounded-[2px] ${
-          kind === "tape-green" ? "bg-[#b7cda0]/80" : "bg-[#d8c79a]/80"
+        className={`absolute left-1/2 -top-2.5 h-5 w-14 -translate-x-1/2 -rotate-3 rounded-[2px] ${
+          kind === "tape-blue"
+            ? "bg-[#3b82f6]/40"
+            : kind === "tape-dark"
+            ? "bg-[#1e40af]/50"
+            : "bg-[#60a5fa]/30"
         } shadow-sm`}
       />
     );
   }
-  const color = kind === "pin-pink" ? "bg-[#d6336c]" : "bg-[#1e6fd6]";
   return (
-    <span aria-hidden className="absolute left-1/2 -top-3 -translate-x-1/2">
-      <span className={`block h-4 w-4 rounded-full ${color} shadow-md`} />
+    <span aria-hidden className="absolute left-1/2 -top-2.5 -translate-x-1/2">
+      <span className="block h-3.5 w-3.5 rounded-full bg-[#3b82f6] shadow-md" />
       <span className="mx-auto block h-2 w-[2px] bg-foreground/30" />
     </span>
   );
