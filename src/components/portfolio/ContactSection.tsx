@@ -22,10 +22,9 @@ const contactNotes = [
     external: false,
     copyable: true,
     corner: Heart,
-    // warm yellow note
-    note: "bg-[#fbf0a8]",
-    ink: "text-[#b8860b]",
-    rule: "border-[#d6b733]",
+    note: "bg-[#162544]",
+    ink: "text-[#93c5fd]",
+    rule: "border-[#3b82f6]",
     rotate: "-rotate-2",
     pin: "tape",
   },
@@ -38,12 +37,11 @@ const contactNotes = [
     external: false,
     copyable: true,
     corner: Heart,
-    // soft pink note
-    note: "bg-[#f7c9d4]",
-    ink: "text-[#d6336c]",
-    rule: "border-[#e07a96]",
+    note: "bg-[#1a2f55]",
+    ink: "text-[#a5d8ff]",
+    rule: "border-[#60a5fa]",
     rotate: "rotate-1",
-    pin: "pin-pink",
+    pin: "tape-blue",
   },
   {
     icon: Github,
@@ -53,12 +51,11 @@ const contactNotes = [
     external: true,
     copyable: false,
     corner: Star,
-    // mint green note
-    note: "bg-[#cfe6b6]",
-    ink: "text-[#3f7d20]",
-    rule: "border-[#6fa843]",
+    note: "bg-[#122040]",
+    ink: "text-[#bfdbfe]",
+    rule: "border-[#4f8ef7]",
     rotate: "-rotate-1",
-    pin: "tape-green",
+    pin: "tape-dark",
   },
   {
     icon: Linkedin,
@@ -68,30 +65,32 @@ const contactNotes = [
     external: true,
     copyable: false,
     corner: Heart,
-    // calm blue note
-    note: "bg-[#bcd4f2]",
-    ink: "text-[#1e6fd6]",
-    rule: "border-[#5a92dd]",
+    note: "bg-[#0f1e3a]",
+    ink: "text-[#7dd3fc]",
+    rule: "border-[#3b82f6]",
     rotate: "rotate-2",
     pin: "pin-blue",
   },
 ];
 
 const Pin = ({ kind }: { kind: string }) => {
-  if (kind === "tape" || kind === "tape-green") {
+  if (kind.startsWith("tape")) {
     return (
       <span
         aria-hidden
-        className={`absolute left-1/2 -top-3 h-6 w-16 -translate-x-1/2 -rotate-3 rounded-[2px] ${
-          kind === "tape-green" ? "bg-[#b7cda0]/80" : "bg-[#d8c79a]/80"
+        className={`absolute left-1/2 -top-2.5 h-5 w-14 -translate-x-1/2 -rotate-3 rounded-[2px] ${
+          kind === "tape-blue"
+            ? "bg-[#3b82f6]/40"
+            : kind === "tape-dark"
+            ? "bg-[#1e40af]/50"
+            : "bg-[#60a5fa]/30"
         } shadow-sm`}
       />
     );
   }
-  const color = kind === "pin-pink" ? "bg-[#d6336c]" : "bg-[#1e6fd6]";
   return (
-    <span aria-hidden className="absolute left-1/2 -top-3 -translate-x-1/2">
-      <span className={`block h-4 w-4 rounded-full ${color} shadow-md`} />
+    <span aria-hidden className="absolute left-1/2 -top-2.5 -translate-x-1/2">
+      <span className="block h-3.5 w-3.5 rounded-full bg-[#3b82f6] shadow-md" />
       <span className="mx-auto block h-2 w-[2px] bg-foreground/30" />
     </span>
   );
@@ -128,7 +127,7 @@ const ContactSection = () => {
           </p>
         </RevealSection>
 
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-5 sm:gap-6 lg:grid-cols-4 max-w-4xl mx-auto">
           {contactNotes.map(
             (
               {
@@ -154,51 +153,51 @@ const ContactSection = () => {
                   {...(external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  whileHover={{ y: -8, rotate: 0, scale: 1.03 }}
+                  whileHover={{ y: -6, rotate: 0, scale: 1.03 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className={`group relative flex aspect-[4/5] flex-col items-center px-6 pt-12 pb-7 ${note} ${rotate} shadow-[0_14px_30px_-12px_rgba(0,0,0,0.35)]`}
+                  className={`group relative flex aspect-[3/4] flex-col items-center px-4 pt-9 pb-5 ${note} ${rotate} shadow-[0_10px_24px_-10px_rgba(0,0,0,0.5)] rounded-sm`}
                 >
                   <Pin kind={pin} />
 
-                  <Icon className={`h-9 w-9 ${ink}`} strokeWidth={1.6} />
+                  <Icon className={`h-7 w-7 ${ink}`} strokeWidth={1.6} />
 
                   <h3
-                    className={`mt-5 text-3xl font-semibold ${ink}`}
+                    className={`mt-3 text-2xl font-semibold ${ink}`}
                     style={{ fontFamily: "'Caveat', cursive" }}
                   >
                     {title}
                   </h3>
 
                   <span
-                    className={`mt-2 h-0 w-20 border-b-2 ${rule}`}
+                    className={`mt-1.5 h-0 w-16 border-b-2 ${rule}`}
                     aria-hidden
                   />
                   <span
-                    className={`mt-3 h-0 w-28 border-b border-dashed ${rule} opacity-60`}
+                    className={`mt-2 h-0 w-20 border-b border-dashed ${rule} opacity-60`}
                     aria-hidden
                   />
 
-                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-6">
-                    <p className="break-all text-center text-sm font-medium text-foreground/80">
+                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-4">
+                    <p className="break-all text-center text-xs font-medium text-foreground/80">
                       {value}
                     </p>
                     {copyable && (
                       <button
                         onClick={(e) => handleCopy(e, copyValue || value, title)}
-                        className={`shrink-0 rounded-md p-1 text-foreground/40 transition-colors hover:bg-black/5 hover:${ink}`}
+                        className={`shrink-0 rounded-md p-1 text-foreground/40 transition-colors hover:bg-white/5 hover:${ink}`}
                         aria-label={`Copy ${title}`}
                       >
                         {copiedKey === title ? (
-                          <Check className="h-3.5 w-3.5 text-green-600" />
+                          <Check className="h-3 w-3 text-green-400" />
                         ) : (
-                          <Copy className="h-3.5 w-3.5" />
+                          <Copy className="h-3 w-3" />
                         )}
                       </button>
                     )}
                   </div>
 
                   <Corner
-                    className={`absolute bottom-4 right-4 h-4 w-4 ${ink} opacity-70`}
+                    className={`absolute bottom-3 right-3 h-3.5 w-3.5 ${ink} opacity-70`}
                     strokeWidth={1.6}
                   />
                 </motion.a>
