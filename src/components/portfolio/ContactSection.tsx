@@ -127,7 +127,7 @@ const ContactSection = () => {
           </p>
         </RevealSection>
 
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-5 sm:gap-6 lg:grid-cols-4 max-w-4xl mx-auto">
           {contactNotes.map(
             (
               {
@@ -153,9 +153,9 @@ const ContactSection = () => {
                   {...(external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  whileHover={{ y: -8, rotate: 0, scale: 1.03 }}
+                  whileHover={{ y: -6, rotate: 0, scale: 1.03 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className={`group relative flex aspect-[4/5] flex-col items-center px-6 pt-12 pb-7 ${note} ${rotate} shadow-[0_14px_30px_-12px_rgba(0,0,0,0.35)]`}
+                  className={`group relative flex aspect-[3/4] flex-col items-center px-4 pt-9 pb-5 ${note} ${rotate} shadow-[0_10px_24px_-10px_rgba(0,0,0,0.5)] rounded-sm`}
                 >
                   <Pin kind={pin} />
 
