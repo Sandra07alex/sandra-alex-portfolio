@@ -159,45 +159,45 @@ const ContactSection = () => {
                 >
                   <Pin kind={pin} />
 
-                  <Icon className={`h-9 w-9 ${ink}`} strokeWidth={1.6} />
+                  <Icon className={`h-7 w-7 ${ink}`} strokeWidth={1.6} />
 
                   <h3
-                    className={`mt-5 text-3xl font-semibold ${ink}`}
+                    className={`mt-3 text-2xl font-semibold ${ink}`}
                     style={{ fontFamily: "'Caveat', cursive" }}
                   >
                     {title}
                   </h3>
 
                   <span
-                    className={`mt-2 h-0 w-20 border-b-2 ${rule}`}
+                    className={`mt-1.5 h-0 w-16 border-b-2 ${rule}`}
                     aria-hidden
                   />
                   <span
-                    className={`mt-3 h-0 w-28 border-b border-dashed ${rule} opacity-60`}
+                    className={`mt-2 h-0 w-20 border-b border-dashed ${rule} opacity-60`}
                     aria-hidden
                   />
 
-                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-6">
-                    <p className="break-all text-center text-sm font-medium text-foreground/80">
+                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-4">
+                    <p className="break-all text-center text-xs font-medium text-foreground/80">
                       {value}
                     </p>
                     {copyable && (
                       <button
                         onClick={(e) => handleCopy(e, copyValue || value, title)}
-                        className={`shrink-0 rounded-md p-1 text-foreground/40 transition-colors hover:bg-black/5 hover:${ink}`}
+                        className={`shrink-0 rounded-md p-1 text-foreground/40 transition-colors hover:bg-white/5 hover:${ink}`}
                         aria-label={`Copy ${title}`}
                       >
                         {copiedKey === title ? (
-                          <Check className="h-3.5 w-3.5 text-green-600" />
+                          <Check className="h-3 w-3 text-green-400" />
                         ) : (
-                          <Copy className="h-3.5 w-3.5" />
+                          <Copy className="h-3 w-3" />
                         )}
                       </button>
                     )}
                   </div>
 
                   <Corner
-                    className={`absolute bottom-4 right-4 h-4 w-4 ${ink} opacity-70`}
+                    className={`absolute bottom-3 right-3 h-3.5 w-3.5 ${ink} opacity-70`}
                     strokeWidth={1.6}
                   />
                 </motion.a>
