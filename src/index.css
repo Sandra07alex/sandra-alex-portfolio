@@ -100,4 +100,30 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .font-hand {
+    font-family: 'Caveat', cursive;
+  }
+
+  /* paper grain for sticky notes / scrapbook */
+  .paper-shadow {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04), 0 10px 24px -12px rgba(0, 0, 0, 0.25);
+  }
+  .paper-shadow-lg {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 22px 40px -18px rgba(0, 0, 0, 0.35);
+  }
+
+  /* washi tape strip */
+  .washi {
+    position: absolute;
+    top: -0.9rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 4.5rem;
+    height: 1.6rem;
+    background: hsl(220 60% 60% / 0.35);
+    border-left: 1px dashed hsl(220 60% 60% / 0.5);
+    border-right: 1px dashed hsl(220 60% 60% / 0.5);
+    backdrop-filter: blur(1px);
+  }
 }
