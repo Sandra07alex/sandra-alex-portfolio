@@ -1,82 +1,107 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Users, Calendar, Heart } from "lucide-react";
+import { ArrowUpRight, Users, Calendar, Heart, User } from "lucide-react";
 import RevealSection from "./RevealSection";
 import { motion } from "framer-motion";
 
 const stats = [
-  { label: "Years of Leadership", value: "4+", icon: Calendar },
+  { label: "Years of Leadership", value: "4+", icon: User },
   { label: "Communities", value: "7+", icon: Users },
-  { label: "Events Organized", value: "30+", icon: Heart },
+  { label: "Events Organized", value: "30+", icon: Calendar },
+  { label: "Classmates Represented", value: "72", icon: Heart },
 ];
 
 const VolunteeringSection = () => {
   return (
-    <section className="px-6 py-32 md:py-40 bg-background">
+    <section className="px-6 py-24 md:py-32 bg-background">
       <div className="mx-auto max-w-6xl">
         <RevealSection>
-          {/* Section header */}
-          <div className="mb-16 md:mb-24">
-            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
-              ( Beyond Code )
-            </span>
-            <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
-              Building Communities,<br />
-              <span className="text-accent-blue">Leading People.</span>
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
-              Stories, people, and purpose.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Text content */}
+            <div>
+              {/* Label */}
+              <div className="mb-6">
+                <span className="text-[11px] uppercase tracking-[0.25em] text-accent-blue font-semibold">
+                  Beyond Code
+                </span>
+                <div className="mt-2 w-8 h-0.5 bg-accent-blue/30" />
+              </div>
 
-          {/* Stats row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 mb-20 md:mb-28">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                className="group"
-              >
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-accent-blue/10 text-accent-blue">
-                    <stat.icon className="h-5 w-5" />
+              {/* Heading */}
+              <h2 className="text-4xl sm:text-5xl md:text-[3.5rem] font-black tracking-tight leading-[1.1]">
+                Building Communities,<br />
+                <span className="text-accent-blue">Leading People.</span>
+              </h2>
+
+              {/* Description */}
+              <p className="mt-6 text-base sm:text-lg text-muted-foreground font-light leading-relaxed max-w-lg">
+                From representing 72 classmates to organizing impactful events and leading student communities, these experiences shaped me as a leader and taught me the power of people.
+              </p>
+
+              {/* CTA Button + Arrow */}
+              <div className="mt-8 flex items-center gap-4">
+                <Link
+                  to="/leadership"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent-blue text-white font-medium text-sm rounded-lg hover:bg-accent-blue/90 transition-colors duration-300 shadow-sm"
+                >
+                  Explore My Leadership Journey
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+
+                {/* Dashed arrow SVG */}
+                <svg
+                  className="hidden sm:block w-20 h-10 text-accent-blue/50"
+                  viewBox="0 0 80 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 35 C 20 35, 25 10, 45 10 C 60 10, 65 20, 70 20"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 3"
+                    fill="none"
+                  />
+                  <path
+                    d="M65 14 L70 20 L62 22"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {/* Right: Stats Grid */}
+            <div className="grid grid-cols-2 gap-0">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className={`flex flex-col items-start p-6 ${
+                    index < 2 ? "border-b border-border/60" : ""
+                  } ${index % 2 === 0 ? "border-r border-border/60" : ""}`}
+                >
+                  {/* Icon in light blue circle */}
+                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-accent-blue/10 text-accent-blue mb-4">
+                    <stat.icon className="h-5 w-5" strokeWidth={1.5} />
                   </div>
+
+                  {/* Value */}
                   <span className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
                     {stat.value}
                   </span>
-                </div>
-                <p className="text-sm uppercase tracking-[0.15em] text-muted-foreground font-medium ml-14">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
+
+                  {/* Label */}
+                  <p className="mt-2 text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-
-          {/* Quote + CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <blockquote className="text-xl sm:text-2xl md:text-3xl font-light leading-relaxed text-foreground/90 max-w-3xl mb-12">
-              “If engineering taught me how to build systems,{' '}
-              <span className="text-accent-blue font-medium">volunteering taught me how to understand people.</span>”
-            </blockquote>
-
-            <Link
-              to="/leadership"
-              className="group inline-flex items-center gap-3 text-base font-medium text-foreground hover:text-accent-blue transition-colors duration-300"
-            >
-              <span className="relative">
-                Explore my leadership journey
-                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              </span>
-              <ArrowUpRight className="h-5 w-5 transition-all duration-300 group-hover:text-accent-blue group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </motion.div>
         </RevealSection>
       </div>
     </section>
