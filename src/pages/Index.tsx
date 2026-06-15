@@ -4,8 +4,7 @@ import IntroSection from "@/components/portfolio/IntroSection";
 import ProjectsSection from "@/components/portfolio/ProjectsSection";
 import ExperienceSection from "@/components/portfolio/ExperienceSection";
 import CertificationsSection from "@/components/portfolio/CertificationsSection";
-import EducationSection from "@/components/portfolio/EducationSection";
-import LeadershipTeaser from "@/components/portfolio/LeadershipTeaser";
+import VolunteeringSection from "@/components/portfolio/VolunteeringSection";
 import ContactSection from "@/components/portfolio/ContactSection";
 
 const Index = () => {
@@ -17,8 +16,7 @@ const Index = () => {
         <ProjectsSection />
         <ExperienceSection />
         <CertificationsSection />
-        <EducationSection />
-        <LeadershipTeaser />
+        <VolunteeringSection />
         <ContactSection />
       </main>
     </SmoothScroll>
