@@ -126,8 +126,6 @@ const ContactSection = () => {
                   className={`group relative flex flex-col items-center px-4 pt-10 pb-6 bg-[#fafafa] ${rotate} paper-shadow rounded-sm`}
                 >
                   <PushPin />
-                  <PaperCurl side="left" />
-                  <PaperCurl side="right" />
 
                   <Icon className="h-6 w-6 text-foreground/80" strokeWidth={1.5} />
 
