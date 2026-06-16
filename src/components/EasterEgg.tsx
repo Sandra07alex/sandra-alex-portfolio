@@ -83,7 +83,12 @@ const FloatingSpark = () => {
             whileHover={{ scale: 1.35, rotate: 0 }}
             className="pointer-events-auto relative text-2xl leading-none cursor-pointer select-none drop-shadow-[0_0_12px_hsl(var(--accent-blue)/0.5)]"
           >
-            🦋
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent-blue">
+              <path d="M12 3v18" />
+              <path d="M12 8c-3-3-6.5-2.5-8 0s-1 5.5 1.5 7.5S12 19 12 19s3.5-1.5 6.5-3.5 3.5-5.5 1.5-7.5-5-3-8 0Z" />
+              <path d="M12 5c-2.5-2.5-5-2-6.5 0s-.5 4 1.5 5.5S12 14 12 14s3.5-1.5 5.5-3.5 3-4 1.5-5.5-4-2.5-6.5 0Z" />
+              <path d="M12 8c-1.5-1.5-3-1.5-4 0s0 3 2 4 2 1 2 1" />
+            </svg>
           </motion.button>
 
 
