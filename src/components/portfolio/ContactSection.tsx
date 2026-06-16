@@ -6,7 +6,6 @@ import {
   Linkedin,
   Phone,
   Heart,
-  Star,
   Copy,
   Check,
 } from "lucide-react";
@@ -21,12 +20,7 @@ const contactNotes = [
     href: "mailto:sandraalexofficial@gmail.com",
     external: false,
     copyable: true,
-    corner: Heart,
-    note: "bg-[#162544]",
-    ink: "text-[#93c5fd]",
-    rule: "border-[#3b82f6]",
     rotate: "-rotate-2",
-    pin: "tape",
   },
   {
     icon: Phone,
@@ -36,12 +30,7 @@ const contactNotes = [
     href: "tel:+919037846438",
     external: false,
     copyable: true,
-    corner: Heart,
-    note: "bg-[#1a2f55]",
-    ink: "text-[#a5d8ff]",
-    rule: "border-[#60a5fa]",
     rotate: "rotate-1",
-    pin: "tape-blue",
   },
   {
     icon: Github,
@@ -50,12 +39,7 @@ const contactNotes = [
     href: "https://github.com/sandra07alex",
     external: true,
     copyable: false,
-    corner: Star,
-    note: "bg-[#122040]",
-    ink: "text-[#bfdbfe]",
-    rule: "border-[#4f8ef7]",
     rotate: "-rotate-1",
-    pin: "tape-dark",
   },
   {
     icon: Linkedin,
@@ -64,37 +48,38 @@ const contactNotes = [
     href: "https://linkedin.com/in/sandra07alex",
     external: true,
     copyable: false,
-    corner: Heart,
-    note: "bg-[#0f1e3a]",
-    ink: "text-[#7dd3fc]",
-    rule: "border-[#3b82f6]",
     rotate: "rotate-2",
-    pin: "pin-blue",
   },
 ];
 
-const Pin = ({ kind }: { kind: string }) => {
-  if (kind.startsWith("tape")) {
-    return (
-      <span
-        aria-hidden
-        className={`absolute left-1/2 -top-2.5 h-5 w-14 -translate-x-1/2 -rotate-3 rounded-[2px] ${
-          kind === "tape-blue"
-            ? "bg-[#3b82f6]/40"
-            : kind === "tape-dark"
-            ? "bg-[#1e40af]/50"
-            : "bg-[#60a5fa]/30"
-        } shadow-sm`}
-      />
-    );
-  }
-  return (
-    <span aria-hidden className="absolute left-1/2 -top-2.5 -translate-x-1/2">
-      <span className="block h-3.5 w-3.5 rounded-full bg-[#3b82f6] shadow-md" />
-      <span className="mx-auto block h-2 w-[2px] bg-foreground/30" />
+const PushPin = () => (
+  <span aria-hidden className="absolute left-1/2 -top-3 -translate-x-1/2 z-10">
+    <span className="relative flex items-center justify-center">
+      {/* Pin head shadow */}
+      <span className="absolute top-1 left-1 h-5 w-5 rounded-full bg-black/10" />
+      {/* Pin head */}
+      <span className="relative block h-5 w-5 rounded-full bg-gradient-to-br from-[#60a5fa] to-[#2563eb] shadow-md" />
+      {/* Pin highlight */}
+      <span className="absolute top-0.5 left-1 h-1.5 w-1.5 rounded-full bg-white/40" />
+      {/* Pin needle */}
+      <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-2 w-[2px] bg-neutral-400" />
     </span>
-  );
-};
+  </span>
+);
+
+const PaperCurl = ({ side }: { side: "left" | "right" }) => (
+  <span
+    aria-hidden
+    className={`absolute bottom-0 ${side === "left" ? "left-0" : "right-0"} h-6 w-8 overflow-hidden`}
+  >
+    <span
+      className={`absolute bottom-0 ${side === "left" ? "-left-2" : "-right-2"} h-10 w-10 rounded-full bg-neutral-100 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.06)]`}
+      style={{
+        transform: side === "left" ? "rotate(15deg)" : "rotate(-15deg)",
+      }}
+    />
+  </span>
+);
 
 const ContactSection = () => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -123,11 +108,12 @@ const ContactSection = () => {
         <RevealSection delay={0.1}>
           <p className="mx-auto mb-20 max-w-xl text-center text-base text-muted-foreground leading-relaxed">
             I&apos;m always excited to connect with amazing people, collaborate on
-            ideas, or build impactful solutions together. Feel free to reach out!
+            ideas, or build impactful solutions together. Feel free to reach out!{" "}
+            <Heart className="inline h-4 w-4 text-accent-blue fill-accent-blue" />
           </p>
         </RevealSection>
 
-        <div className="grid grid-cols-2 gap-5 sm:gap-6 lg:grid-cols-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 gap-5 sm:gap-8 lg:grid-cols-4 max-w-4xl mx-auto">
           {contactNotes.map(
             (
               {
@@ -138,12 +124,7 @@ const ContactSection = () => {
                 href,
                 external,
                 copyable,
-                corner: Corner,
-                note,
-                ink,
-                rule,
                 rotate,
-                pin,
               },
               i
             ) => (
@@ -155,51 +136,45 @@ const ContactSection = () => {
                     : {})}
                   whileHover={{ y: -6, rotate: 0, scale: 1.03 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className={`group relative flex aspect-[3/4] flex-col items-center px-4 pt-9 pb-5 ${note} ${rotate} shadow-[0_10px_24px_-10px_rgba(0,0,0,0.5)] rounded-sm`}
+                  className={`group relative flex flex-col items-center px-4 pt-10 pb-6 bg-[#fafafa] ${rotate} paper-shadow rounded-sm`}
                 >
-                  <Pin kind={pin} />
+                  <PushPin />
+                  <PaperCurl side="left" />
+                  <PaperCurl side="right" />
 
-                  <Icon className={`h-7 w-7 ${ink}`} strokeWidth={1.6} />
+                  <Icon className="h-6 w-6 text-foreground/80" strokeWidth={1.5} />
 
                   <h3
-                    className={`mt-3 text-2xl font-semibold ${ink}`}
+                    className="mt-3 text-xl font-semibold text-foreground/90"
                     style={{ fontFamily: "'Caveat', cursive" }}
                   >
                     {title}
                   </h3>
 
-                  <span
-                    className={`mt-1.5 h-0 w-16 border-b-2 ${rule}`}
-                    aria-hidden
-                  />
-                  <span
-                    className={`mt-2 h-0 w-20 border-b border-dashed ${rule} opacity-60`}
-                    aria-hidden
-                  />
+                  {/* Two blue underlines like the reference */}
+                  <div className="mt-1.5 flex flex-col items-center gap-1">
+                    <span className="h-0 w-14 border-b-2 border-accent-blue/70" />
+                    <span className="h-0 w-10 border-b border-dashed border-accent-blue/50" />
+                  </div>
 
-                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-4">
-                    <p className="break-all text-center text-xs font-medium text-foreground/80">
+                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-5">
+                    <p className="break-all text-center text-[11px] font-medium text-muted-foreground">
                       {value}
                     </p>
                     {copyable && (
                       <button
                         onClick={(e) => handleCopy(e, copyValue || value, title)}
-                        className={`shrink-0 rounded-md p-1 text-foreground/40 transition-colors hover:bg-white/5 hover:${ink}`}
+                        className="shrink-0 rounded-md p-1 text-muted-foreground/60 transition-colors hover:bg-black/5 hover:text-accent-blue"
                         aria-label={`Copy ${title}`}
                       >
                         {copiedKey === title ? (
-                          <Check className="h-3 w-3 text-green-400" />
+                          <Check className="h-3 w-3 text-green-500" />
                         ) : (
                           <Copy className="h-3 w-3" />
                         )}
                       </button>
                     )}
                   </div>
-
-                  <Corner
-                    className={`absolute bottom-3 right-3 h-3.5 w-3.5 ${ink} opacity-70`}
-                    strokeWidth={1.6}
-                  />
                 </motion.a>
               </RevealSection>
             )
@@ -218,7 +193,7 @@ const ContactSection = () => {
         <RevealSection delay={0.55}>
           <footer className="group mt-16 border-t border-border/50 pt-8 sm:pt-10 text-center">
             <p className="translate-y-2 opacity-0 text-sm font-serif italic tracking-wide text-muted-foreground/75 leading-relaxed transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-              Looking for footer? It’s 2026.
+              Looking for footer? It&apos;s 2026.
             </p>
           </footer>
         </RevealSection>
