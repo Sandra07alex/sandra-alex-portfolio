@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 
 const stats = [
   { label: "Years of Leadership", value: "4+", icon: User },
-  { label: "Communities", value: "7+", icon: Users },
-  { label: "Events Organized", value: "30+", icon: Calendar },
+  { label: "Communities", value: "10+", icon: Users },
+  { label: "Events Organized", value: "50+", icon: Calendar },
   { label: "Classmates Represented", value: "72", icon: Heart },
 ];
 
@@ -20,9 +20,9 @@ const VolunteeringSection = () => {
             <div>
               {/* Label */}
               <div className="mb-6">
-                <span className="text-[11px] uppercase tracking-[0.25em] text-accent-blue font-semibold">
-                  Beyond Code
-                </span>
+                <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
+              ( 03 — Leadership )
+            </span>
                 <div className="mt-2 w-8 h-0.5 bg-accent-blue/30" />
               </div>
 

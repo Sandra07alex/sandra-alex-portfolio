@@ -25,9 +25,11 @@ const IntroSection = () => {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="mt-8 text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground font-light"
         >
-          I'm a Computer Science student passionate about{" "}
-          <span className="font-medium text-accent-blue">artificial intelligence</span> and building
-          impactful solutions.
+        
+          I'm a Computer Science & Design undergraduate at
+          Government Engineering College Kozhikode,
+          maintaining a CGPA of 8.66, with a{" "}
+          <span className="font-medium text-accent-blue">Maker Mindset</span> 
         </motion.p>
 
         <motion.p

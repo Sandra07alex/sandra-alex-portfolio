@@ -5,24 +5,28 @@ import RevealSection from "./RevealSection";
 const certifications = [
   {
     title: "AI Python for Beginners",
-    issuer: "DeepLearning.AI",
+    issuer: "Coursera",
     issued: "Feb 2026",
     credentialId: "I2LD9G469KQD",
+    certificateUrl: "https://www.coursera.org/account/accomplishments/verify/I2LD9G469KQD",
     skills: ["Artificial Intelligence", "Python", "Prompt Engineering"],
   },
-  {
-    title: "Introduction to AI",
-    issuer: "Google",
-    issued: "Feb 2026",
-    credentialId: "680KKO83CHRX",
-    skills: ["Artificial Intelligence"],
-  },
+  
   {
     title: "Full Stack Web Development",
-    issuer: "Amazon",
+    issuer: "Coursera",
     issued: "Feb 2026",
     credentialId: "HP2WC0U1DNSS",
+    certificateUrl: "https://www.coursera.org/account/accomplishments/verify/HP2WC0U1DNSS",
     skills: ["Web Development", "Full-Stack", "React", "APIs"],
+  },
+  {
+    title: "Foundations of Project Management",
+    issuer: "Coursera",
+    issued: "Jun 2026",
+    credentialId: "DLXBVE6I64A7",
+    certificateUrl: "https://www.coursera.org/account/accomplishments/verify/DLXBVE6I64A7",
+    skills: ["Project Management", "Planning", "Organization"],
   },
 ];
 
@@ -96,7 +100,13 @@ const CertificationsSection = () => {
 
           {/* RIGHT — Detail panel */}
           <RevealSection className="lg:col-span-7" delay={0.15}>
-            <div className="lg:sticky lg:top-32 rounded-3xl border border-border/60 bg-secondary/20 p-6 md:p-8 shadow-[0_1px_0_rgba(255,255,255,0.02)]">
+            <a
+              href={certifications[active].certificateUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open Coursera certificate for ${certifications[active].title}`}
+              className="block lg:sticky lg:top-32 rounded-3xl border border-border/60 bg-secondary/20 p-6 md:p-8 shadow-[0_1px_0_rgba(255,255,255,0.02)] cursor-pointer transition-all hover:bg-secondary/30 hover:border-accent-blue/50"
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -174,7 +184,7 @@ const CertificationsSection = () => {
                   </span>
                 </motion.div>
               </AnimatePresence>
-            </div>
+            </a>
           </RevealSection>
         </div>
       </div>
