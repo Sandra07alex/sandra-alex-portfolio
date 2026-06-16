@@ -67,19 +67,6 @@ const PushPin = () => (
   </span>
 );
 
-const PaperCurl = ({ side }: { side: "left" | "right" }) => (
-  <span
-    aria-hidden
-    className={`absolute bottom-0 ${side === "left" ? "left-0" : "right-0"} h-6 w-8 overflow-hidden`}
-  >
-    <span
-      className={`absolute bottom-0 ${side === "left" ? "-left-2" : "-right-2"} h-10 w-10 rounded-full bg-neutral-100 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.06)]`}
-      style={{
-        transform: side === "left" ? "rotate(15deg)" : "rotate(-15deg)",
-      }}
-    />
-  </span>
-);
 
 const ContactSection = () => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
