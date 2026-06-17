@@ -33,7 +33,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.08 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            THINK.
+            MATTER.
           </motion.span>
         </motion.h1>
         <motion.p
@@ -42,7 +42,8 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="mt-8 text-base sm:text-lg text-muted-foreground font-light tracking-wide"
         >
-          Sandra Alex — AI/ML Enthusiast • Web Developer • Problem Solver
+          Sandra Alex — Curious Maker • lifelong learner
+         
         </motion.p>
       </div>
 
@@ -53,7 +54,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.8 }}
         className="absolute bottom-12 flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
       >
-        <span className="text-xs tracking-widest uppercase font-medium">Scroll</span>
+       
         <ChevronDown className="h-4 w-4 animate-scroll-hint" />
       </motion.a>
     </motion.section>

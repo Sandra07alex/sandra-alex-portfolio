@@ -286,14 +286,7 @@ const Projects = () => {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-start">
             {/* Left — Text */}
             <div className="pt-4">
-              <motion.span
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease }}
-                className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium"
-              >
-                ( 01 — Project Archive )
-              </motion.span>
+             
 
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
@@ -322,8 +315,7 @@ const Projects = () => {
                 transition={{ duration: 0.8, delay: 0.4, ease }}
                 className="mt-10 flex items-center gap-2 text-xs text-muted-foreground"
               >
-                <span className="inline-block w-4 h-4 border border-border rounded-sm flex items-center justify-center text-[8px]">↓</span>
-                Scroll to explore each project chapter.
+               
               </motion.div>
             </div>
 
@@ -575,8 +567,8 @@ const Projects = () => {
                 End of Archive
               </p>
               <p className="text-2xl md:text-3xl font-light tracking-tight max-w-md">
-                More work in progress. Currently building at{" "}
-                <span className="text-accent-blue">CourtClick</span> & exploring applied ML.
+                {" "}The journey continues;
+                <span className="text-accent-blue">Building, learning, and looking </span> for opportunities where technology can create meaningful impact.
               </p>
             </div>
             <Link
