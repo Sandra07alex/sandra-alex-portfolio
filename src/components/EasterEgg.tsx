@@ -85,20 +85,18 @@ const FloatingSpark = () => {
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent-blue">
               {/* Body */}
-              <line x1="12" y1="7" x2="12" y2="18" />
+              <line x1="12" y1="8" x2="12" y2="17" />
               {/* Antennae */}
-              <path d="M12 7c-1.5-2-3-3-4-3" />
-              <path d="M12 7c1.5-2 3-3 4-3" />
+              <path d="M12 8c-1.2-1.8-2.2-2.5-3.2-2.5" />
+              <path d="M12 8c1.2-1.8 2.2-2.5 3.2-2.5" />
               {/* Left upper wing */}
-              <path d="M12 8C8 4 4 5 3 8c-1 3 1 6 4 7 2 1 4 0 5-1" />
+              <path d="M12 9c-3.5-0.5-6.5 0.5-7.5 3.5-1 3 0.5 5.5 3 6 2 0.5 4-0.5 4.5-2" />
               {/* Right upper wing */}
-              <path d="M12 8c4-4 8-3 9 0 1 3-1 6-4 7-2 1-4 0-5-1" />
+              <path d="M12 9c3.5-0.5 6.5 0.5 7.5 3.5 1 3-0.5 5.5-3 6-2 0.5-4-0.5-4.5-2" />
               {/* Left lower wing */}
-              <path d="M12 13c-2 2-4 3-5 2-2-1-2-4-1-5 1-1 3-1 5 0" />
-              <path d="M12 13c-2 3-3 5-2 6 1 1 3 0 4-1" />
+              <path d="M12 14c-2.5 1-4 2.5-4 4.5 0 2 2 2.5 3.5 1.5 1.2-0.8 1.5-2.5 0.5-4.5" />
               {/* Right lower wing */}
-              <path d="M12 13c2 2 4 3 5 2 2-1 2-4 1-5-1-1-3-1-5 0" />
-              <path d="M12 13c2 3 3 5 2 6-1 1-3 0-4-1" />
+              <path d="M12 14c2.5 1 4 2.5 4 4.5 0 2-2 2.5-3.5 1.5-1.2-0.8-1.5-2.5-0.5-4.5" />
             </svg>
           </motion.button>
 
