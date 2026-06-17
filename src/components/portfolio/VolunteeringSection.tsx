@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Users, Calendar, Heart, User } from "lucide-react";
 import RevealSection from "./RevealSection";
 import { motion } from "framer-motion";
@@ -35,6 +36,14 @@ const VolunteeringSection = () => {
               <p className="mt-6 text-base sm:text-lg text-muted-foreground font-light leading-relaxed max-w-lg">
                 From representing classmates to organizing community events and supporting student groups, these experiences taught me the value of service, coordination, and care.
               </p>
+
+              <Link
+  to="/leadership"
+  onClick={() => window.scrollTo(0, 0)}
+  className="mt-8 inline-flex items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+>
+  Explore My Journey
+</Link>
             </div>
 
             {/* Right: Stats Grid */}
