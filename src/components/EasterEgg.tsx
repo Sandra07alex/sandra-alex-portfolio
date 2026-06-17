@@ -85,18 +85,18 @@ const FloatingSpark = () => {
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent-blue">
               {/* Body */}
-              <line x1="12" y1="8" x2="12" y2="17" />
+              <line x1="12" y1="7" x2="12" y2="16" />
               {/* Antennae */}
-              <path d="M12 8C11 6.5 10 5.8 9.2 5.8" />
-              <path d="M12 8C13 6.5 14 5.8 14.8 5.8" />
-              {/* Left upper wing */}
-              <path d="M12 9C10.5 8.5 7 8 5 10C3 12 3 15 5 17C7 18.5 10 18 12 16.5" />
+              <path d="M12 7C11 5.5 10 4.5 9 4.5" />
+              <path d="M12 7C13 5.5 14 4.5 15 4.5" />
+              {/* Left upper wing — very broad, rounded */}
+              <path d="M12 8C10 7.5 5 7 2.5 9.5C0.5 11.5 0.5 14 2.5 16C4.5 17.5 9 17.5 12 15" />
               {/* Right upper wing */}
-              <path d="M12 9C13.5 8.5 17 8 19 10C21 12 21 15 19 17C17 18.5 14 18 12 16.5" />
-              {/* Left lower wing */}
-              <path d="M12 15C10 15.5 8 16.5 8 18.5C8 20.5 10 21 11.5 20C12.5 19.5 12.5 17.5 12 15.5" />
+              <path d="M12 8C14 7.5 19 7 21.5 9.5C23.5 11.5 23.5 14 21.5 16C19.5 17.5 15 17.5 12 15" />
+              {/* Left lower wing — small, rounded */}
+              <path d="M12 14.5C9.5 14.5 7 15.5 7 17.5C7 19.5 9 20.5 10.5 19.5C11.5 19 12 17.5 12 16" />
               {/* Right lower wing */}
-              <path d="M12 15C14 15.5 16 16.5 16 18.5C16 20.5 14 21 12.5 20C11.5 19.5 11.5 17.5 12 15.5" />
+              <path d="M12 14.5C14.5 14.5 17 15.5 17 17.5C17 19.5 15 20.5 13.5 19.5C12.5 19 12 17.5 12 16" />
             </svg>
           </motion.button>
 
