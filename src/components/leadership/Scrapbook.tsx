@@ -8,6 +8,8 @@ import akcsscGroup from "@/assets/photos/akcssc-group.jpg";
 import classOf2024 from "@/assets/photos/class-of-2024.jpg";
 import tinkherhack from "@/assets/photos/tinkherhack.jpg";
 import ieeePresent from "@/assets/photos/ieee-present.jpg";
+import leads from "@/assets/photos/team (1).jpeg"
+import present from "@/assets/photos/pres.jpeg"
 
 /* ---------- shared atoms ---------- */
 
@@ -534,7 +536,7 @@ export function Scrapbook() {
               className="mt-2 text-2xl"
               style={{ fontFamily: "var(--font-marker)", color: "var(--color-accent-red)" }}
             >
-              2022 — 2025 · 72 students · 3 years
+              2022 — 2025 · 72 students · 4 years
             </p>
 
             <NotebookCard rotate={1} className="mt-8">
@@ -570,8 +572,8 @@ export function Scrapbook() {
               <Polaroid
                 caption="hosting, mic check 1-2"
                 rotate={4}
-                src={mic2}
-                alt="Hosting a session with a mic"
+                src={present}
+                alt="project presentation"
               />
             </ParallaxLayer>
             <ParallaxLayer speed={0.12} className="md:absolute md:right-0 md:top-[240px]">
@@ -649,9 +651,9 @@ export function Scrapbook() {
             </ParallaxLayer>
             <ParallaxLayer speed={0.04} className="md:absolute md:right-2 md:top-32">
               <Polaroid
-                caption="receiving Class of 2024"
+                caption=" 36 leads together"
                 rotate={-6}
-                src={classOf2024}
+                src={leads}
                 alt="On stage receiving recognition"
               />
             </ParallaxLayer>
