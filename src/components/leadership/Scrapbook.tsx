@@ -518,7 +518,7 @@ export function Scrapbook() {
 
       {/* ============ CLASS REP — favorite ============ */}
       <div aria-hidden className="scrap-divider mx-auto max-w-6xl" />
-      <section className="scrap-section relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-20">
+      <section className="scrap-section relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-20 mb-32">
         <div className="grid items-start gap-10 md:grid-cols-[1.1fr_1fr]">
           <div className="relative">
             <p className="text-2xl" style={{ fontFamily: "var(--font-type)" }}>
@@ -570,7 +570,7 @@ export function Scrapbook() {
             </ParallaxLayer>
             <ParallaxLayer speed={0.04} className="md:absolute md:left-2 md:top-[380px]">
               <Polaroid
-                caption="hosting, mic check 1-2"
+                caption="project exhibt"
                 rotate={4}
                 src={present}
                 alt="project presentation"
@@ -590,8 +590,8 @@ export function Scrapbook() {
 
       {/* ============ COMMUNITIES — scattered scrapbook ============ */}
       <div aria-hidden className="scrap-divider mx-auto max-w-7xl" />
-      <section className="scrap-section relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-20">
-        <div className="mb-16 flex items-end justify-between">
+      <section className="scrap-section relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-20 mb-40">
+        <div className="mb-32 flex items-end justify-between">
           <h2
             className="text-[clamp(2.5rem,7vw,6rem)] leading-none"
             style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
@@ -606,7 +606,7 @@ export function Scrapbook() {
         </div>
 
         {/* TinkerHub */}
-        <div className="relative mb-32 grid gap-8 md:grid-cols-[1fr_1.2fr]">
+        <div className="relative mb-40 grid gap-8 md:grid-cols-[1fr_1.2fr]">
           <ParallaxLayer speed={-0.05}>
             <NotebookCard rotate={-2}>
               <p
