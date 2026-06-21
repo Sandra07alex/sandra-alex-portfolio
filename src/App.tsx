@@ -8,6 +8,8 @@ import Projects from "./pages/Projects.tsx";
 import Leadership from "./pages/Leadership.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import EasterEgg from "./components/EasterEgg.tsx";
+import GoatCounterTracker from "./components/analytics/GoatCounterTracker";
+
 
 const queryClient = new QueryClient();
 
@@ -18,6 +20,7 @@ const App = () => (
       <Sonner />
       <EasterEgg />
       <BrowserRouter>
+        <GoatCounterTracker />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/projects" element={<Projects />} />
