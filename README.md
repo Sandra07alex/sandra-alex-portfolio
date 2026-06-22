@@ -1,12 +1,12 @@
-# Sandra Alex
+# Sandra Alex Portfolio 
 
-I build things that matter.
+My personal portfolio website showcasing my journey as a Computer Science and Design student, featuring projects, leadership experiences, achievements, and technical skills developed throughout my academic and professional career.
 
-A personal portfolio featuring my projects, experiences, leadership journey, and continuous learning in technology.
+🌐 Live Site: https://sandraalex.site
 
 ### Tech Stack
-React • TypeScript • Vite • Tailwind CSS
 
----
+React • JavaScript • HTML • CSS • Vite
 
-Many builds. One purpose.
+
+*"A reflection of my 4 years of learning, building, leading, and growing."*
