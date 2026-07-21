@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import RevealSection from "./RevealSection";
 
 const experiences = [
@@ -8,11 +9,10 @@ const experiences = [
     location: "Thrissur, Kerala",
     period: "Jul 2026 — Present",
     status: "4-Month Internship",
-    label: "PRESENT",
     points: [
-      "Contributed to the end-to-end development of client-focused SaaS products, taking ownership of features from requirement analysis and design to development, testing, deployment, and maintenance.",
-      "Designed and developed scalable, secure, and high-performance web and mobile applications while integrating APIs, databases, and authentication systems to deliver production-ready solutions.",
-    
+      "Developing a React Native (Expo) mobile application for sales executives to browse, search, and manage product information",
+      "Designed and implemented scalable frontend architecture with reusable components, role-based authentication, and responsive UI",
+      "Integrated Supabase as the backend for authentication, database operations, and real-time data management",
     ],
   },
   {
@@ -21,7 +21,6 @@ const experiences = [
     location: "Kochi",
     period: "Jun 2025",
     status: null,
-    label: "COMPLETED",
     points: [
       "Developed real-world web applications using Next.js and MongoDB",
       "Improved responsive UI and deployment workflows",
@@ -34,7 +33,6 @@ const experiences = [
     location: "Remote",
     period: "Jun 2024 — Apr 2025",
     status: null,
-    label: "LEGACY",
     points: [
       "Led the Artificial Intelligence Interest Group across 100+ campuses",
       "Conducted AI Think Tank sessions and office hours",
@@ -45,81 +43,63 @@ const experiences = [
 
 const ExperienceSection = () => {
   return (
-    <section className="experience-archive px-6 py-32 md:py-40 bg-background">
-      <div className="mx-auto max-w-6xl w-full text-foreground flex flex-col md:flex-row">
-
-        {/* Sidebar: Fixed Header Section */}
-        <div className="w-full md:w-1/3 p-8 md:p-12 border-b md:border-b-0 md:border-r border-[var(--exp-border)] flex flex-col justify-between">
-          <RevealSection>
-            <div>
-              <span className="text-[11px] uppercase tracking-[0.25em] text-[var(--exp-muted)] font-medium">
-                ( 02 — Experience )
-              </span>
-              <h2 className="mt-5 text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[0.9]">
-                WORK
-                <br />
-                LOG
-              </h2>
-              <p className="mt-4 text-sm uppercase tracking-[0.2em] font-bold text-[var(--exp-muted)] italic">
-                Archive Vol. 01
-              </p>
-            </div>
-          </RevealSection>
-          <div className="mt-12 hidden md:block">
-            <p className="text-xs font-mono-archive leading-relaxed text-[var(--exp-muted)]">
-              SYSTEM_STATUS: ACTIVE
-              <br />
-              BUILD_VERSION: 2.0.4
-              <br />
-              SANDRA_ALEX // 2026
-            </p>
+    <section className="px-6 py-32 md:py-40">
+      <div className="mx-auto max-w-6xl">
+        <RevealSection>
+          <div className="mb-16">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
+              ( 02 — Experience )
+            </span>
+            <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
+              Where I’ve <span className="text-accent-blue">worked.</span>
+            </h2>
           </div>
-        </div>
+        </RevealSection>
 
-        {/* Main Content: Archive Entries */}
-        <div className="w-full md:w-2/3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {experiences.map((exp, i) => (
-            <RevealSection key={exp.company} delay={i * 0.12}>
+            <RevealSection key={exp.role} delay={i * 0.15}>
               <motion.article
-                whileHover={{ backgroundColor: "var(--exp-hover)" }}
-                transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                className="group border-b border-[var(--exp-border)] last:border-b-0 p-8 md:p-12 transition-colors"
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                className="group relative h-full overflow-hidden rounded-2xl bg-secondary/40 ring-1 ring-border/40 p-8 md:p-10 transition-colors duration-500 hover:ring-accent-blue/40"
               >
-                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
-                  {exp.label === "PRESENT" ? (
-                    <span className="font-mono-archive text-xs font-bold px-2 py-1 border border-[var(--exp-ink)] rounded flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-60 animate-ping" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-blue" />
+                {/* Top accent rail */}
+                <span
+                  aria-hidden
+                  className="absolute left-8 right-8 top-0 h-px bg-border/60 group-hover:bg-accent-blue/60 transition-colors duration-500"
+                />
+
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs tracking-wider uppercase text-muted-foreground font-medium">
+                      {exp.period}
+                    </span>
+                    {exp.status && (
+                      <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-accent-blue">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-60 animate-ping" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent-blue" />
+                        </span>
+                        {exp.status}
                       </span>
-                      PRESENT
-                    </span>
-                  ) : (
-                    <span className="font-mono-archive text-xs font-bold text-[var(--exp-muted)] uppercase tracking-wider">
-                      {exp.label}
-                    </span>
-                  )}
-                  <span className="font-mono-archive text-sm text-[var(--exp-muted)]">
-                    {exp.period}
-                  </span>
+                    )}
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 text-muted-foreground/40 shrink-0 transition-all duration-500 group-hover:text-accent-blue group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-2">
-                  {exp.company.toUpperCase()}
-                </h3>
-                <p className="text-lg md:text-xl font-bold text-[var(--exp-muted)] mb-6">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground tracking-tight leading-tight">
                   {exp.role}
-                  <span className="font-normal text-[var(--exp-muted)]/70">
-                    {" "}
-                    · {exp.location}
-                  </span>
+                </h3>
+                <p className="mt-1.5 text-sm text-accent-blue font-medium">
+                  {exp.company} <span className="text-muted-foreground/60">· {exp.location}</span>
                 </p>
 
-                <ul className="space-y-2.5">
+                <ul className="mt-6 space-y-2.5">
                   {exp.points.map((point) => (
                     <li
                       key={point}
-                      className="text-sm md:text-base leading-relaxed text-[var(--exp-muted)] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.65em] before:w-2 before:h-px before:bg-[var(--exp-muted)]/40"
+                      className="text-sm text-muted-foreground leading-relaxed pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.65em] before:w-2 before:h-px before:bg-muted-foreground/40"
                     >
                       {point}
                     </li>

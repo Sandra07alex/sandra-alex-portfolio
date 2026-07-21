@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&family=Patrick+Hand&family=Shadows+Into+Light&family=Special+Elite&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&family=Patrick+Hand&family=Shadows+Into+Light&family=Special+Elite&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -114,17 +114,6 @@
   }
 }
 
-@layer components {
-  .experience-archive {
-    --exp-bg: hsl(var(--background));
-    --exp-surface: hsl(var(--background));
-    --exp-border: hsl(var(--border));
-    --exp-ink: hsl(var(--foreground));
-    --exp-muted: hsl(var(--muted-foreground));
-    --exp-hover: hsl(var(--muted) / 0.4);
-  }
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -132,10 +121,6 @@
 
   .font-hand {
     font-family: 'Caveat', cursive;
-  }
-
-  .font-mono-archive {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
 
   /* paper grain for sticky notes / scrapbook */
