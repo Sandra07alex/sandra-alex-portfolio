@@ -114,6 +114,17 @@
   }
 }
 
+@layer components {
+  .experience-archive {
+    --exp-bg: #e5e2dd;
+    --exp-surface: #f5f2ed;
+    --exp-border: #d9d6d0;
+    --exp-ink: #1a1a1a;
+    --exp-muted: rgba(26, 26, 26, 0.6);
+    --exp-hover: #efece6;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -121,6 +132,10 @@
 
   .font-hand {
     font-family: 'Caveat', cursive;
+  }
+
+  .font-mono-archive {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
 
   /* paper grain for sticky notes / scrapbook */
