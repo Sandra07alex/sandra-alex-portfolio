@@ -116,12 +116,12 @@
 
 @layer components {
   .experience-archive {
-    --exp-bg: #e5e2dd;
-    --exp-surface: #f5f2ed;
-    --exp-border: #d9d6d0;
-    --exp-ink: #1a1a1a;
-    --exp-muted: rgba(26, 26, 26, 0.6);
-    --exp-hover: #efece6;
+    --exp-bg: hsl(var(--background));
+    --exp-surface: hsl(var(--background));
+    --exp-border: hsl(var(--border));
+    --exp-ink: hsl(var(--foreground));
+    --exp-muted: hsl(var(--muted-foreground));
+    --exp-hover: hsl(var(--muted) / 0.4);
   }
 }
 
