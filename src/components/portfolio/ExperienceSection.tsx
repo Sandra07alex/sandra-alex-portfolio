@@ -4,6 +4,18 @@ import RevealSection from "./RevealSection";
 
 const experiences = [
   {
+    role: "Full-Stack Developer Intern",
+    company: "Velvetek Systems",
+    location: "Thrissur, Kerala",
+    period: "Jul 2026 — Present",
+    status: "4-Month Internship",
+    points: [
+      "Developing a React Native (Expo) mobile application for sales executives to browse, search, and manage product information",
+      "Designed and implemented scalable frontend architecture with reusable components, role-based authentication, and responsive UI",
+      "Integrated Supabase as the backend for authentication, database operations, and real-time data management",
+    ],
+  },
+  {
     role: "Full Stack Web Developer Intern",
     company: "CourtClick",
     location: "Kochi",
