@@ -10,9 +10,9 @@ const experiences = [
     status: "4-Month Internship",
     label: "PRESENT",
     points: [
-      "Developing a React Native (Expo) mobile application for sales executives to browse, search, and manage product information",
-      "Designed and implemented scalable frontend architecture with reusable components, role-based authentication, and responsive UI",
-      "Integrated Supabase as the backend for authentication, database operations, and real-time data management",
+      "Contributed to the end-to-end development of client-focused SaaS products, taking ownership of features from requirement analysis and design to development, testing, deployment, and maintenance.",
+      "Designed and developed scalable, secure, and high-performance web and mobile applications while integrating APIs, databases, and authentication systems to deliver production-ready solutions.",
+    
     ],
   },
   {
