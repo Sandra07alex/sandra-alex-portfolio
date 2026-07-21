@@ -45,8 +45,9 @@ const experiences = [
 
 const ExperienceSection = () => {
   return (
-    <section className="experience-archive px-6 py-32 md:py-40 bg-[var(--exp-bg)]">
-      <div className="mx-auto max-w-6xl w-full bg-[var(--exp-surface)] text-[var(--exp-ink)] border border-[var(--exp-border)] shadow-2xl flex flex-col md:flex-row">
+    <section className="experience-archive px-6 py-32 md:py-40 bg-background">
+      <div className="mx-auto max-w-6xl w-full text-foreground flex flex-col md:flex-row">
+
         {/* Sidebar: Fixed Header Section */}
         <div className="w-full md:w-1/3 p-8 md:p-12 border-b md:border-b-0 md:border-r border-[var(--exp-border)] flex flex-col justify-between">
           <RevealSection>
