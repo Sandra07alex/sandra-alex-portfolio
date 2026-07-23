@@ -1,25 +1,21 @@
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
 
 const experiences = [
   {
-    index: "01",
-    status: "Present",
     company: "Velvetek Systems",
     role: "Full-Stack Developer Intern",
     location: "Thrissur, Kerala",
     period: "Jul 2026 — Present",
     points: [
-      "Developing a React Native (Expo) mobile application for sales executives to browse, search, and manage product information.",
-      "Designed and implemented scalable frontend architecture with reusable components, role-based authentication, and responsive UI.",
-      "Integrated Supabase as the backend for authentication, database operations, and real-time data management.",
+      "Building a React Native (Expo) mobile app for sales executives to browse, search, and manage product information.",
+      "Designed a scalable frontend architecture with reusable components, role-based auth, and responsive UI.",
+      "Integrated Supabase for authentication, database, and real-time data operations.",
     ],
     stack: ["React Native", "Expo", "Supabase", "TypeScript"],
   },
   {
-    index: "02",
-    status: "Completed",
     company: "CourtClick",
     role: "Full Stack Web Developer Intern",
     location: "Kochi",
@@ -32,8 +28,6 @@ const experiences = [
     stack: ["Next.js", "MongoDB", "Tailwind", "Vercel"],
   },
   {
-    index: "03",
-    status: "Legacy",
     company: "GTech MuLearn",
     role: "Interest Group Management Intern",
     location: "Remote",
@@ -47,80 +41,54 @@ const experiences = [
   },
 ];
 
-const ExperienceItem = ({ exp, i }: { exp: typeof experiences[number]; i: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-40% 0px -40% 0px" });
-
+const ExperienceItem = ({ exp }: { exp: typeof experiences[number] }) => {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60 }}
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-      className="group relative pt-14 md:pt-20 pb-16 md:pb-24"
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      className="group relative pt-12 md:pt-16 pb-14 md:pb-20"
     >
-      {/* Divider — expands L→R */}
-      <motion.span
-        aria-hidden
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute top-0 left-0 right-0 h-px origin-left bg-foreground/15 group-hover:bg-accent-blue/60 transition-colors duration-700"
-      />
-
-      {/* Ghost number */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -top-2 md:-top-6 right-0 select-none font-black leading-none tracking-tighter text-[8rem] md:text-[12rem] text-foreground/[0.04] transition-colors duration-700 group-hover:text-accent-blue/[0.07]"
-      >
-        {exp.index}
-      </span>
-
-      {/* Top row: status + date */}
-      <div className="relative flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2.5">
-          <motion.span
-            className="relative flex h-1.5 w-1.5"
-            animate={inView ? { scale: [1, 1.6, 1] } : { scale: 1 }}
-            transition={{ duration: 1.8, repeat: inView ? Infinity : 0, ease: "easeInOut" }}
+      {/* Top row: role/location left, date right */}
+      <div className="flex items-start justify-between gap-6">
+        <div className="min-w-0">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.05] text-foreground/85 group-hover:text-foreground transition-colors duration-500"
           >
-            <span className="absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-50" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent-blue" />
-          </motion.span>
-          <span className="text-[10px] uppercase tracking-[0.28em] text-accent-blue font-medium">
-            {exp.status}
-          </span>
+            {exp.company}
+          </motion.h3>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.13, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mt-3 text-sm md:text-base text-muted-foreground"
+          >
+            <span className="text-foreground/80 font-medium">{exp.role}</span>
+            <span className="mx-2 text-muted-foreground/40">•</span>
+            <span>{exp.location}</span>
+          </motion.p>
         </div>
-        <span className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground font-medium">
-          {exp.period}
-        </span>
-      </div>
 
-      {/* Company — mask reveal */}
-      <div className="relative mt-6 overflow-hidden">
-        <motion.h3
-          initial={{ y: "100%" }}
-          whileInView={{ y: "0%" }}
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1] text-foreground/85 group-hover:text-foreground transition-colors duration-500"
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="shrink-0 text-[11px] uppercase tracking-[0.22em] text-muted-foreground font-medium pt-2"
         >
-          {exp.company}
-        </motion.h3>
+          {exp.period}
+        </motion.span>
       </div>
 
-      {/* Role + location */}
-      <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <p className="text-base md:text-lg text-foreground/80 font-medium">{exp.role}</p>
-        <span className="text-muted-foreground/50">·</span>
-        <p className="text-sm text-muted-foreground">{exp.location}</p>
-        <ArrowUpRight className="ml-1 h-4 w-4 text-muted-foreground/50 transition-all duration-500 group-hover:text-accent-blue group-hover:rotate-45" />
-      </div>
-
-      {/* Content: bullets + stack */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-16">
+      {/* Content: bullets left, stack right */}
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-16 items-start">
         <ul className="space-y-3 max-w-xl">
           {exp.points.map((p, idx) => (
             <motion.li
@@ -128,7 +96,7 @@ const ExperienceItem = ({ exp, i }: { exp: typeof experiences[number]; i: number
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.15 + idx * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.55, delay: 0.2 + idx * 0.09, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative pl-5 text-sm md:text-[15px] text-muted-foreground leading-relaxed before:content-[''] before:absolute before:left-0 before:top-[0.7em] before:w-2.5 before:h-px before:bg-accent-blue/70"
             >
               {p}
@@ -143,7 +111,7 @@ const ExperienceItem = ({ exp, i }: { exp: typeof experiences[number]; i: number
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: 0.25 + idx * 0.07, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.5, delay: 0.3 + idx * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -3 }}
               className="inline-flex items-center px-3 py-1 text-[11px] tracking-wide text-foreground/70 border border-foreground/15 rounded-full transition-colors duration-300 hover:border-accent-blue hover:text-accent-blue"
             >
@@ -152,7 +120,17 @@ const ExperienceItem = ({ exp, i }: { exp: typeof experiences[number]; i: number
           ))}
         </div>
       </div>
-    </motion.div>
+
+      {/* Divider — expands L→R on hover */}
+      <span
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-px bg-foreground/10"
+      />
+      <span
+        aria-hidden
+        className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-accent-blue/60 transition-transform duration-700 ease-out group-hover:scale-x-100"
+      />
+    </motion.article>
   );
 };
 
@@ -162,7 +140,7 @@ const ExperienceSection = () => {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const leftY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const leftY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
     <section ref={sectionRef} className="relative px-6 py-32 md:py-40">
@@ -170,10 +148,7 @@ const ExperienceSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] gap-16 lg:gap-24">
           {/* LEFT — sticky */}
           <div className="relative">
-            <motion.div
-              style={{ y: leftY }}
-              className="lg:sticky lg:top-32"
-            >
+            <motion.div style={{ y: leftY }} className="lg:sticky lg:top-32">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -221,20 +196,13 @@ const ExperienceSection = () => {
             </motion.div>
           </div>
 
-          {/* RIGHT — scrollable stack */}
+          {/* RIGHT — editorial blocks */}
           <div className="relative">
-            {experiences.map((exp, i) => (
-              <ExperienceItem key={exp.company} exp={exp} i={i} />
+            {/* top hairline */}
+            <span aria-hidden className="block h-px w-full bg-foreground/10" />
+            {experiences.map((exp) => (
+              <ExperienceItem key={exp.company} exp={exp} />
             ))}
-            {/* closing line */}
-            <motion.span
-              aria-hidden
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="block h-px origin-left bg-foreground/15"
-            />
           </div>
         </div>
       </div>
