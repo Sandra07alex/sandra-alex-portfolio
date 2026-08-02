@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 
 const experiences = [
   {
@@ -134,64 +135,76 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[number] }) => {
 };
 
 const ExperienceSection = () => {
-  return (
-    <section className="relative px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-5xl">
-        {/* Header — same rhythm as the rest of the page */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <div>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium"
-            >
-              ( 02 — Experience )
-            </motion.span>
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const leftY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]"
-            >
-              Where I've <span className="text-accent-blue">worked.</span>
-            </motion.h2>
+  return (
+    <section ref={sectionRef} className="relative px-6 py-32 md:py-40">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] gap-16 lg:gap-24">
+          {/* LEFT — sticky */}
+          <div className="relative">
+            <motion.div style={{ y: leftY }} className="lg:sticky lg:top-32">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium"
+              >
+                ( 02 — Experience )
+              </motion.span>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]"
+              >
+                Where I've
+                <br />
+                <span className="text-accent-blue">worked.</span>
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                className="mt-8 text-base sm:text-lg text-muted-foreground font-light leading-relaxed max-w-sm"
+              >
+                A short professional journey — internships, teams, and rooms
+                where I got to build with people much smarter than me.
+              </motion.p>
+
+              <motion.a
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                href="#contact"
+                className="group mt-10 inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-accent-blue transition-colors duration-500"
+              >
+                View full journey
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" />
+              </motion.a>
+            </motion.div>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-base text-muted-foreground font-light leading-relaxed max-w-sm md:text-right"
-          >
-            A short professional journey — internships, teams, and rooms where I
-            got to build with people much smarter than me.
-          </motion.p>
+          {/* RIGHT — editorial blocks */}
+          <div className="relative">
+            {/* top hairline */}
+            <span aria-hidden className="block h-px w-full bg-foreground/10" />
+            {experiences.map((exp) => (
+              <ExperienceItem key={exp.company} exp={exp} />
+            ))}
+          </div>
         </div>
-
-        {/* Entries — single continuous flow */}
-        <div className="relative mt-20 md:mt-28">
-          <span aria-hidden className="block h-px w-full bg-foreground/10" />
-          {experiences.map((exp) => (
-            <ExperienceItem key={exp.company} exp={exp} />
-          ))}
-        </div>
-
-        <motion.a
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          href="#contact"
-          className="group mt-14 inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-accent-blue transition-colors duration-500"
-        >
-          View full journey
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" />
-        </motion.a>
       </div>
     </section>
   );
