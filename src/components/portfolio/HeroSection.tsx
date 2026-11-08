@@ -20,6 +20,15 @@ const HeroSection = () => {
       style={{ opacity, y }}
       className="relative flex min-h-screen flex-col items-center justify-center px-6"
     >
+      <motion.img
+        src={careerIllustration}
+        alt=""
+        aria-hidden="true"
+        width={1536}
+        height={1536}
+        style={{ y: illustrationY }}
+        className="pointer-events-none absolute right-[max(1rem,6vw)] top-[12%] z-0 w-[min(46vw,560px)] select-none opacity-[0.11] sm:top-[9%] max-sm:right-[-22vw] max-sm:top-[17%] max-sm:w-[88vw] max-sm:opacity-[0.08]"
+      />
 
       <div className="relative z-10 max-w-5xl text-center">
         <motion.h1
