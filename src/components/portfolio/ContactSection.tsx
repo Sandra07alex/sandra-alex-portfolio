@@ -10,7 +10,6 @@ import {
   Check,
 } from "lucide-react";
 import { useState } from "react";
-import dreamingWoman from "@/assets/dreaming-strong-woman.png";
 
 const contactNotes = [
   {
@@ -184,23 +183,6 @@ const ContactSection = () => {
           </footer>
         </RevealSection>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-        className="pointer-events-none mt-8 flex justify-center overflow-hidden"
-      >
-        <img
-          src={dreamingWoman}
-          alt="A strong woman looking toward her dreams"
-          width={1536}
-          height={1024}
-          loading="lazy"
-          className="h-auto w-[min(78vw,560px)] select-none object-contain opacity-90"
-        />
-      </motion.div>
     </section>
   );
 };
