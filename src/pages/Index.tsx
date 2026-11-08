@@ -1,4 +1,5 @@
 import SmoothScroll from "@/components/SmoothScroll";
+import strongWoman from "@/assets/strong-woman-line-art.png";
 import HeroSection from "@/components/portfolio/HeroSection";
 import IntroSection from "@/components/portfolio/IntroSection";
 import ProjectsSection from "@/components/portfolio/ProjectsSection";
@@ -18,6 +19,16 @@ const Index = () => {
         <CertificationsSection />
         <VolunteeringSection />
         <ContactSection />
+        <div className="flex justify-center px-6 pb-16">
+          <img
+            src={strongWoman}
+            alt="Line illustration of a strong woman coding, speaking, volunteering and growing her career"
+            loading="lazy"
+            width={1536}
+            height={1024}
+            className="w-full max-w-4xl select-none opacity-80"
+          />
+        </div>
       </main>
     </SmoothScroll>
   );
