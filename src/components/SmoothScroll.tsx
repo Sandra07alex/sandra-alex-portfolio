@@ -3,7 +3,11 @@ import Lenis from "lenis";
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
+    // Keep native scrolling for visitors who ask for reduced motion.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis({
+      anchors: true,
       duration: 1.4,
       easing: (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
       smoothWheel: true,

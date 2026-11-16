@@ -67,7 +67,7 @@ const HeroSection = () => {
         className="absolute bottom-12 flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
       >
        
-        <ChevronDown className="h-4 w-4 animate-scroll-hint" />
+        <ChevronDown className="h-4 w-4 motion-safe:animate-scroll-hint" />
       </motion.a>
     </motion.section>
   );

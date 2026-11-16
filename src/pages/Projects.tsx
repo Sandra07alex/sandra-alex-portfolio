@@ -230,7 +230,11 @@ const Projects = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    const previousTitle = document.title;
+    document.title = "Projects | Sandra Alex";
+    return () => {
+      document.title = previousTitle;
+    };
   }, []);
 
   return (

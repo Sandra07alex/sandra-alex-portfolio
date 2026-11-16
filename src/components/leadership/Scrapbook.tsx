@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import mic1 from "@/assets/photos/mic1.webp";
 import teamNight from "@/assets/photos/team-night.webp";
 import ksum from "@/assets/photos/ksum.webp";
@@ -420,8 +421,8 @@ export function Scrapbook() {
 
       {/* ============ BACK TO PORTFOLIO ============ */}
       <div className="fixed left-4 top-4 z-50 sm:left-6 sm:top-6">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="group relative inline-flex items-center gap-2 px-4 py-2 transition-transform duration-300 hover:-translate-y-0.5 hover:rotate-0"
           style={{
             transform: "rotate(-2deg)",
@@ -435,7 +436,7 @@ export function Scrapbook() {
           <Tape color="blue" rotate={-12} className="-top-2 left-1/2 h-3 w-12 -translate-x-1/2" />
           <span className="text-xl transition-transform group-hover:-translate-x-1">←</span>
           <span className="text-lg">back to portfolio</span>
-        </a>
+        </Link>
       </div>
 
       {/* subtle watercolor spot */}

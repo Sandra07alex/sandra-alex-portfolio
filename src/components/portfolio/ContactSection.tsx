@@ -123,26 +123,33 @@ const ContactSection = () => {
               i
             ) => (
               <RevealSection key={title} delay={i * 0.1}>
-                <motion.a
-                  href={href}
-                  onClick={() => trackEvent(event, title)}
-                  {...(external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
+                {/* The card is a plain container; the link stretches over it via ::after,
+                    and the copy button sits above that overlay, so they are siblings
+                    rather than a button nested inside a link. */}
+                <motion.div
                   whileHover={{ y: -6, rotate: 0, scale: 1.03 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className={`group relative flex flex-col items-center px-4 pt-10 pb-6 bg-[#fafafa] ${rotate} paper-shadow rounded-sm`}
+                  className={`group relative flex flex-col items-center px-4 pt-10 pb-6 bg-[#fafafa] ${rotate} paper-shadow rounded-sm focus-within:ring-2 focus-within:ring-accent-blue/60`}
                 >
                   <PushPin />
 
-                  <Icon className="h-6 w-6 text-foreground/80" strokeWidth={1.5} />
-
-                  <h3
-                    className="mt-3 text-xl font-semibold text-foreground/90"
-                    style={{ fontFamily: "'Caveat', cursive" }}
+                  <a
+                    href={href}
+                    onClick={() => trackEvent(event, title)}
+                    {...(external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="flex flex-col items-center outline-none after:absolute after:inset-0 after:content-['']"
                   >
-                    {title}
-                  </h3>
+                    <Icon className="h-6 w-6 text-foreground/80" strokeWidth={1.5} />
+
+                    <h3
+                      className="mt-3 text-xl font-semibold text-foreground/90"
+                      style={{ fontFamily: "'Caveat', cursive" }}
+                    >
+                      {title}
+                    </h3>
+                  </a>
 
                   {/* Two blue underlines like the reference */}
                   <div className="mt-1.5 flex flex-col items-center gap-1">
@@ -150,14 +157,15 @@ const ContactSection = () => {
                     <span className="h-0 w-10 border-b border-dashed border-accent-blue/50" />
                   </div>
 
-                  <div className="mt-auto flex w-full items-center justify-center gap-1.5 pt-5">
+                  <div className="pointer-events-none relative z-10 mt-auto flex w-full items-center justify-center gap-1.5 pt-5">
                     <p className="break-all text-center text-[11px] font-medium text-muted-foreground">
                       {value}
                     </p>
                     {copyable && (
                       <button
+                        type="button"
                         onClick={(e) => handleCopy(e, copyValue || value, title, event)}
-                        className="shrink-0 rounded-md p-1 text-muted-foreground/60 transition-colors hover:bg-black/5 hover:text-accent-blue"
+                        className="pointer-events-auto shrink-0 rounded-md p-1 text-muted-foreground/60 transition-colors hover:bg-black/5 hover:text-accent-blue"
                         aria-label={`Copy ${title}`}
                       >
                         {copiedKey === title ? (
@@ -168,7 +176,7 @@ const ContactSection = () => {
                       </button>
                     )}
                   </div>
-                </motion.a>
+                </motion.div>
               </RevealSection>
             )
           )}

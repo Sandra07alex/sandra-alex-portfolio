@@ -39,7 +39,6 @@ const VolunteeringSection = () => {
 
               <Link
   to="/leadership"
-  onClick={() => window.scrollTo(0, 0)}
   className="mt-8 inline-flex items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 >
   Explore My Journey
