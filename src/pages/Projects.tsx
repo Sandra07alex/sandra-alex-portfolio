@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, Github, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import SmoothScroll from "@/components/SmoothScroll";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -15,10 +15,8 @@ const projects = [
     stack: ["React", "Node.js", "MongoDB", "Express.js"],
     link: "https://techsortium25.ieee-link.org/",
     github: "#",
-    icon: "⚖️",
     spineLabel: "IEEE Techsortium",
     spineSub: "MERN\nSTACK",
-    spineIcon: "👥",
   },
   {
     num: "02",
@@ -29,10 +27,8 @@ const projects = [
     stack: ["Python", "PyTorch", "OpenCV", "Scikit-learn"],
     link: "#",
     github: "#",
-    icon: "🧠",
     spineLabel: "Glaucoma Detection",
     spineSub: "AI /\nPYTHON",
-    spineIcon: "🔬",
   },
   {
     num: "03",
@@ -43,10 +39,8 @@ const projects = [
     stack: ["React", "Node.js", "MongoDB", "Express.js"],
     link: "https://yess.ieee-link.org",
     github: "#",
-    icon: "🌐",
     spineLabel: "IEEE YESS Website",
     spineSub: "MERN\nSTACK",
-    spineIcon: "👥",
   },
   {
     num: "04",
@@ -57,10 +51,8 @@ const projects = [
     stack: ["React", "Tailwind CSS", "Node.js", "MongoDB"],
     link: "https://court-click-web.vercel.app",
     github: "#",
-    icon: "⚖️",
     spineLabel: "CourtClick",
     spineSub: "LEGAL\nTECH",
-    spineIcon: "⚖️",
   },
   {
     num: "05",
@@ -71,10 +63,8 @@ const projects = [
     stack: ["React", "Node.js", "MongoDB", "Express.js"],
     link: "https://stridedesignathon.ieee-link.org",
     github: "#",
-    icon: "🏛",
     spineLabel: "Stride Designathon",
     spineSub: "REACT /\nNODE",
-    spineIcon: "📊",
   },
   {
     num: "06",
@@ -85,10 +75,8 @@ const projects = [
     stack: ["Python", "CNN", "Jupyter Notebook"],
     link: "https://github.com/sandra07alex/is-it-a-bird",
     github: "https://github.com/sandra07alex/is-it-a-bird",
-    icon: "🐦",
     spineLabel: "Is It a Bird",
     spineSub: "ML /\nPYTHON",
-    spineIcon: "🧪",
   },
   {
     num: "07",
@@ -99,10 +87,8 @@ const projects = [
     stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
     link: "https://ai-for-everyone-two.vercel.app/",
     github: "https://github.com/Sandra07alex/ai-for-everyone-two",
-    icon: "🌐",
     spineLabel: "AI Kerala Stories",
     spineSub: "REACT /\nTS",
-    spineIcon: "🗺️",
   },
   {
     num: "08",
@@ -113,10 +99,8 @@ const projects = [
     stack: ["HTML", "CSS", "JavaScript"],
     link: "https://sandra07alex.github.io/LINK-CAMP-TASK-BY-SANDRA-ALEX/",
     github: "https://github.com/Sandra07alex/LINK-CAMP-TASK-BY-SANDRA-ALEX",
-    icon: "🎨",
     spineLabel: "IEEE LINK Redesign",
     spineSub: "HTML /\nCSS",
-    spineIcon: "🎨",
   },
   {
     num: "09",
@@ -127,10 +111,8 @@ const projects = [
     stack: ["HTML", "CSS", "JavaScript", "TensorFlow.js", "OpenCV.js"],
     link: "https://sandra07alex.github.io/usless_project2/",
     github: "https://github.com/Sandra07alex/usless_project2",
-    icon: "🔮",
     spineLabel: "Online Kanniyan",
     spineSub: "JS /\nML",
-    spineIcon: "🔮",
   },
   {
     num: "10",
@@ -141,10 +123,8 @@ const projects = [
     stack: ["React", "Tailwind CSS", "Framer Motion"],
     link: "#",
     github: "https://github.com/Sandra07alex/Lunar-Observatory",
-    icon: "🌙",
     spineLabel: "Lunar Observatory",
     spineSub: "REACT /\nTAILWIND",
-    spineIcon: "🌙",
   },
   {
     num: "11",
@@ -155,10 +135,8 @@ const projects = [
     stack: ["Python", "OpenCV", "YOLO", "Haar Cascade"],
     link: "#",
     github: "https://github.com/Sandra07alex/smart-signal-ferok-bridge",
-    icon: "🚦",
     spineLabel: "Ferok Bridge AI",
     spineSub: "PYTHON /\nCV",
-    spineIcon: "🚦",
   },
 ];
 
@@ -246,19 +224,7 @@ const BookSpine = ({
 );
 
 // Shelf bookshelf with all project spines
-const SHELF_BOOKS = [
-  { label: "IEEE Techsortium", sub: "MERN\nSTACK", num: "01" },
-  { label: "Glaucoma Detection", sub: "AI /\nPYTHON", num: "02" },
-  { label: "IEEE YESS Website", sub: "MERN\nSTACK", num: "03" },
-  { label: "CourtClick", sub: "LEGAL\nTECH", num: "04" },
-  { label: "Stride Designathon", sub: "REACT /\nNODE", num: "05" },
-  { label: "Is It a Bird", sub: "ML /\nPYTHON", num: "06" },
-  { label: "AI Kerala Stories", sub: "REACT /\nTS", num: "07" },
-  { label: "IEEE LINK Redesign", sub: "HTML /\nCSS", num: "08" },
-  { label: "Online Kanniyan", sub: "JS /\nML", num: "09" },
-  { label: "Lunar Observatory", sub: "REACT /\nTAILWIND", num: "10" },
-  { label: "Ferok Bridge AI", sub: "PYTHON /\nCV", num: "11" },
-];
+const SHELF_BOOKS = projects.map((p) => ({ label: p.spineLabel, sub: p.spineSub, num: p.num }));
 
 const Projects = () => {
   const isMobile = useIsMobile();
@@ -329,7 +295,7 @@ const Projects = () => {
                 className="flex flex-wrap items-center justify-start lg:justify-end gap-x-6 gap-y-3 sm:gap-10 mb-10"
               >
                 {[
-                  { icon: "📁", value: "11", label: "Projects" },
+                  { icon: "📁", value: String(projects.length), label: "Projects" },
                   { icon: "</>", value: "10+", label: "Technologies" },
                   { icon: "📅", value: "4", label: "Years of building" },
                 ].map((s) => (

@@ -16,7 +16,6 @@ const FloatingSpark = () => {
 
   // Subtle console hint for the curious
   useEffect(() => {
-    // eslint-disable-next-line no-console
     console.log(
       "%cPsst — look for the little blue spark drifting on the side. Click it.",
       "color:#5b8def;font:600 12px/1.4 Inter,sans-serif",

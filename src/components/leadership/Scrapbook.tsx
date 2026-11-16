@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import mic1 from "@/assets/photos/mic1.jpg";
-import mic2 from "@/assets/photos/mic2.jpg";
 import teamNight from "@/assets/photos/team-night.jpg";
 import ksum from "@/assets/photos/ksum.jpg";
 import akcsscSmall from "@/assets/photos/akcssc-small.jpg";
