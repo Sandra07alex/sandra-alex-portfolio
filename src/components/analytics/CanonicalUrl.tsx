@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-export const SITE_URL = "https://www.sandraalex.site";
+export const SITE_URL = "https://sandra-alex-portfolio.vercel.app";
 
 /**
  * Keeps <link rel="canonical"> in sync with the current route, so /projects and

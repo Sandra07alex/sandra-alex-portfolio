@@ -54,7 +54,7 @@ describe("analytics", () => {
     );
     expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://www.sandraalex.site/projects",
+      "https://sandra-alex-portfolio.vercel.app/projects",
     );
   });
 });

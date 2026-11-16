@@ -2,7 +2,7 @@
 
 My personal portfolio website showcasing my journey as a Computer Science and Design student, featuring projects, leadership experiences, achievements, and technical skills developed throughout my academic and professional career.
 
-🌐 Live Site: https://sandraalex.site
+🌐 Live Site: https://sandra-alex-portfolio.vercel.app
 
 ### Tech Stack
 
