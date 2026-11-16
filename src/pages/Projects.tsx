@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, Github, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import SmoothScroll from "@/components/SmoothScroll";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -427,7 +427,9 @@ const Projects = () => {
             {projects.map((p, i) => {
               const isEven = i % 2 === 0;
               const color = spineColors[i % spineColors.length];
-              const isGithub = p.github?.includes("github.com");
+              const isGithub = p.github.includes("github.com");
+              // A "demo" that is missing or just the repo again isn't worth a separate link.
+              const hasDemo = p.link !== "#" && p.link !== p.github;
 
               return (
                 <motion.article
@@ -486,25 +488,19 @@ const Projects = () => {
                       </div>
 
                       {/* Links */}
+                      {(hasDemo || isGithub) && (
                       <div className="mt-6 flex flex-wrap items-center gap-6">
-                        <a
-                          href={p.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-accent-blue transition-colors"
-                        >
-                          View Case Study
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                        </a>
-                        <a
-                          href={p.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          Live Demo
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
+                        {hasDemo && (
+                          <a
+                            href={p.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-accent-blue transition-colors"
+                          >
+                            Live Demo
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+                        )}
                         {isGithub && (
                           <a
                             href={p.github}
@@ -517,6 +513,7 @@ const Projects = () => {
                           </a>
                         )}
                       </div>
+                      )}
                     </div>
                   </div>
                 </motion.article>

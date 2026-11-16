@@ -23,6 +23,18 @@ describe("pages", () => {
     expect(screen.getByText("Projects").previousSibling).toHaveTextContent(String(titles.length));
   });
 
+  it("has no placeholder '#' links on the home or projects pages", () => {
+    for (const page of [<Index />, <Projects />]) {
+      const { container, unmount } = renderAt(page);
+      const dead = Array.from(container.querySelectorAll("a")).filter((a) => {
+        const href = a.getAttribute("href") ?? "";
+        return href === "#" || (href.startsWith("#") && !document.getElementById(href.slice(1)));
+      });
+      expect(dead.map((a) => a.textContent)).toEqual([]);
+      unmount();
+    }
+  });
+
   it("leadership page renders", () => {
     renderAt(<Leadership />);
     expect(screen.getByRole("link", { name: /back to portfolio/i })).toBeInTheDocument();

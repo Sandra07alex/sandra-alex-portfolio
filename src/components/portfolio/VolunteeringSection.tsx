@@ -21,7 +21,7 @@ const VolunteeringSection = () => {
               {/* Label */}
               <div className="mb-6">
                 <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
-                  ( 03 — Volunteering )
+                  ( 04 — Volunteering )
                 </span>
                 <div className="mt-2 w-8 h-0.5 bg-accent-blue/30" />
               </div>

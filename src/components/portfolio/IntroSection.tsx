@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import avatarImg from "@/assets/avatar.jpg";
+import avatarImg from "@/assets/avatar.webp";
 
 const IntroSection = () => {
   return (

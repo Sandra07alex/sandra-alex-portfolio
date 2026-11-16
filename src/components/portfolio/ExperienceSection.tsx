@@ -187,7 +187,9 @@ const ExperienceSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                href="#contact"
+                href="https://linkedin.com/in/sandra07alex"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group mt-10 inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-accent-blue transition-colors duration-500"
               >
                 View full journey

@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import careerIllustration from "@/assets/sandra-career-line-art.png";
+import careerIllustration from "@/assets/sandra-career-line-art.webp";
 
 const HeroSection = () => {
   const ref = useRef<HTMLElement>(null);
@@ -24,8 +24,8 @@ const HeroSection = () => {
         src={careerIllustration}
         alt=""
         aria-hidden="true"
-        width={1536}
-        height={1536}
+        width={1120}
+        height={1120}
         style={{ y: illustrationY }}
         className="pointer-events-none absolute right-[max(1rem,6vw)] top-[12%] z-0 w-[min(46vw,560px)] select-none opacity-[0.11] sm:top-[9%] max-sm:right-[-22vw] max-sm:top-[17%] max-sm:w-[88vw] max-sm:opacity-[0.08]"
       />

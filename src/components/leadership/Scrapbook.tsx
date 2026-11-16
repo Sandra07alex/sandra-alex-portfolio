@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
-import mic1 from "@/assets/photos/mic1.jpg";
-import teamNight from "@/assets/photos/team-night.jpg";
-import ksum from "@/assets/photos/ksum.jpg";
-import akcsscSmall from "@/assets/photos/akcssc-small.jpg";
-import akcsscGroup from "@/assets/photos/akcssc-group.jpg";
-import classOf2024 from "@/assets/photos/class-of-2024.jpg";
-import tinkherhack from "@/assets/photos/tinkherhack.jpg";
-import ieeePresent from "@/assets/photos/ieee-present.jpg";
-import leads from "@/assets/photos/team (1).jpeg"
-import present from "@/assets/photos/pres.jpeg"
+import mic1 from "@/assets/photos/mic1.webp";
+import teamNight from "@/assets/photos/team-night.webp";
+import ksum from "@/assets/photos/ksum.webp";
+import akcsscSmall from "@/assets/photos/akcssc-small.webp";
+import akcsscGroup from "@/assets/photos/akcssc-group.webp";
+import classOf2024 from "@/assets/photos/class-of-2024.webp";
+import tinkherhack from "@/assets/photos/tinkherhack.webp";
+import ieeePresent from "@/assets/photos/ieee-present.webp";
+import leads from "@/assets/photos/leads-team.webp";
+import present from "@/assets/photos/project-presentation.webp";
 
 /* ---------- shared atoms ---------- */
 
