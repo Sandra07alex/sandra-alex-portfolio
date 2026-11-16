@@ -236,44 +236,106 @@ function CurvedArrow({
 
 /* ---------- parallax hook ---------- */
 
-const parallaxRegistry = new Set<{
+/*
+ * All parallax layers share one scroll listener and one animation loop.
+ * Element positions are measured only on mount, resize and after fonts/images
+ * load (never during scroll), and the loop stops as soon as every visible
+ * layer has reached its target.
+ */
+type ParallaxItem = {
   el: HTMLElement;
   speed: number;
+  /** element's vertical centre in document coordinates, without our transform */
+  docCenter: number;
   current: number;
   target: number;
   visible: boolean;
-}>();
-let parallaxTicking = false;
+};
+
+const parallaxItems = new Map<Element, ParallaxItem>();
+let parallaxFrame: number | null = null;
 let parallaxIO: IntersectionObserver | null = null;
 
-function ensureParallaxLoop() {
-  if (parallaxTicking) return;
-  parallaxTicking = true;
-  const tick = () => {
-    let active = false;
-    parallaxRegistry.forEach((item) => {
-      if (!item.visible) return;
-      // ease toward target for smoother feel
-      const next = item.current + (item.target - item.current) * 0.12;
-      if (Math.abs(next - item.current) > 0.05) active = true;
-      item.current = next;
-      item.el.style.transform = `translate3d(0, ${next.toFixed(2)}px, 0)`;
-    });
-    if (active || parallaxRegistry.size > 0) {
-      requestAnimationFrame(tick);
-    } else {
-      parallaxTicking = false;
-    }
-  };
-  requestAnimationFrame(tick);
+function applyTransform(item: ParallaxItem) {
+  item.el.style.transform = `translate3d(0, ${item.current.toFixed(2)}px, 0)`;
 }
 
-function recomputeTargets() {
-  const vh = window.innerHeight;
-  parallaxRegistry.forEach((item) => {
-    const rect = item.el.getBoundingClientRect();
-    item.target = (rect.top + rect.height / 2 - vh / 2) * item.speed;
+function measure(item: ParallaxItem) {
+  const rect = item.el.getBoundingClientRect();
+  // rect includes the translate we applied, so take it back out
+  item.docCenter = rect.top + window.scrollY - item.current + rect.height / 2;
+}
+
+function computeTarget(item: ParallaxItem) {
+  item.target = (item.docCenter - window.scrollY - window.innerHeight / 2) * item.speed;
+}
+
+function parallaxTick() {
+  parallaxFrame = null;
+  let moving = false;
+  parallaxItems.forEach((item) => {
+    if (!item.visible) return;
+    const diff = item.target - item.current;
+    if (Math.abs(diff) < 0.05) {
+      if (item.current !== item.target) {
+        item.current = item.target;
+        applyTransform(item);
+      }
+      return;
+    }
+    // ease toward target for a smoother feel
+    item.current += diff * 0.12;
+    applyTransform(item);
+    moving = true;
   });
+  if (moving) parallaxFrame = requestAnimationFrame(parallaxTick);
+}
+
+function scheduleParallax() {
+  if (parallaxFrame === null) parallaxFrame = requestAnimationFrame(parallaxTick);
+}
+
+function onParallaxScroll() {
+  parallaxItems.forEach(computeTarget);
+  scheduleParallax();
+}
+
+function onParallaxLayoutChange() {
+  parallaxItems.forEach((item) => {
+    measure(item);
+    computeTarget(item);
+  });
+  scheduleParallax();
+}
+
+function startParallax() {
+  window.addEventListener("scroll", onParallaxScroll, { passive: true });
+  window.addEventListener("resize", onParallaxLayoutChange);
+  window.addEventListener("load", onParallaxLayoutChange);
+  document.fonts?.ready.then(onParallaxLayoutChange);
+  parallaxIO = new IntersectionObserver(
+    (entries) => {
+      let becameVisible = false;
+      entries.forEach((entry) => {
+        const item = parallaxItems.get(entry.target);
+        if (!item) return;
+        item.visible = entry.isIntersecting;
+        if (entry.isIntersecting) becameVisible = true;
+      });
+      if (becameVisible) scheduleParallax();
+    },
+    { rootMargin: "200px 0px" },
+  );
+}
+
+function stopParallax() {
+  window.removeEventListener("scroll", onParallaxScroll);
+  window.removeEventListener("resize", onParallaxLayoutChange);
+  window.removeEventListener("load", onParallaxLayoutChange);
+  parallaxIO?.disconnect();
+  parallaxIO = null;
+  if (parallaxFrame !== null) cancelAnimationFrame(parallaxFrame);
+  parallaxFrame = null;
 }
 
 function useParallax<T extends HTMLElement>(speed: number) {
@@ -282,57 +344,29 @@ function useParallax<T extends HTMLElement>(speed: number) {
     const el = ref.current;
     if (!el) return;
 
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
+    if (parallaxItems.size === 0) startParallax();
+
+    const item: ParallaxItem = { el, speed, docCenter: 0, current: 0, target: 0, visible: true };
+    parallaxItems.set(el, item);
     el.style.willChange = "transform";
     el.style.backfaceVisibility = "hidden";
 
-    const item = { el, speed, current: 0, target: 0, visible: true };
-    parallaxRegistry.add(item);
-
-    if (!parallaxIO) {
-      parallaxIO = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            parallaxRegistry.forEach((it) => {
-              if (it.el === entry.target) it.visible = entry.isIntersecting;
-            });
-          });
-          if (entries.some((e) => e.isIntersecting)) ensureParallaxLoop();
-        },
-        { rootMargin: "200px 0px" },
-      );
-    }
-    parallaxIO.observe(el);
-
-    const onScroll = () => {
-      recomputeTargets();
-      ensureParallaxLoop();
-    };
-    const onResize = () => {
-      recomputeTargets();
-      ensureParallaxLoop();
-    };
-
-    // initialize without easing on first paint
-    const rect = el.getBoundingClientRect();
-    item.target = (rect.top + rect.height / 2 - window.innerHeight / 2) * speed;
+    // place it immediately, without easing, on first paint
+    measure(item);
+    computeTarget(item);
     item.current = item.target;
-    el.style.transform = `translate3d(0, ${item.target.toFixed(2)}px, 0)`;
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-    ensureParallaxLoop();
+    applyTransform(item);
+    parallaxIO?.observe(el);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
       parallaxIO?.unobserve(el);
-      parallaxRegistry.delete(item);
+      parallaxItems.delete(el);
       el.style.willChange = "";
+      el.style.transform = "";
+      if (parallaxItems.size === 0) stopParallax();
     };
   }, [speed]);
   return ref;
