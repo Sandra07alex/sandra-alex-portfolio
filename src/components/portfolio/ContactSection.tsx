@@ -10,11 +10,13 @@ import {
   Check,
 } from "lucide-react";
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const contactNotes = [
   {
     icon: Mail,
     title: "Email Me",
+    event: "contact-email",
     value: "sandraalexofficial@gmail.com",
     copyValue: "sandraalexofficial@gmail.com",
     href: "mailto:sandraalexofficial@gmail.com",
@@ -25,6 +27,7 @@ const contactNotes = [
   {
     icon: Phone,
     title: "Call Me",
+    event: "contact-phone",
     value: "+91 90378 46438",
     copyValue: "+919037846438",
     href: "tel:+919037846438",
@@ -35,6 +38,7 @@ const contactNotes = [
   {
     icon: Github,
     title: "Explore My Code",
+    event: "contact-github",
     value: "github.com/sandra07alex",
     href: "https://github.com/sandra07alex",
     external: true,
@@ -44,6 +48,7 @@ const contactNotes = [
   {
     icon: Linkedin,
     title: "Let's Connect",
+    event: "contact-linkedin",
     value: "linkedin.com/in/sandra07alex",
     href: "https://linkedin.com/in/sandra07alex",
     external: true,
@@ -71,9 +76,10 @@ const PushPin = () => (
 const ContactSection = () => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const handleCopy = async (e: React.MouseEvent, text: string, key: string) => {
+  const handleCopy = async (e: React.MouseEvent, text: string, key: string, event: string) => {
     e.preventDefault();
     e.stopPropagation();
+    trackEvent(`${event}-copy`, `Copied: ${key}`);
     try {
       await navigator.clipboard.writeText(text);
       setCopiedKey(key);
@@ -106,6 +112,7 @@ const ContactSection = () => {
               {
                 icon: Icon,
                 title,
+                event,
                 value,
                 copyValue,
                 href,
@@ -118,6 +125,7 @@ const ContactSection = () => {
               <RevealSection key={title} delay={i * 0.1}>
                 <motion.a
                   href={href}
+                  onClick={() => trackEvent(event, title)}
                   {...(external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
@@ -148,7 +156,7 @@ const ContactSection = () => {
                     </p>
                     {copyable && (
                       <button
-                        onClick={(e) => handleCopy(e, copyValue || value, title)}
+                        onClick={(e) => handleCopy(e, copyValue || value, title, event)}
                         className="shrink-0 rounded-md p-1 text-muted-foreground/60 transition-colors hover:bg-black/5 hover:text-accent-blue"
                         aria-label={`Copy ${title}`}
                       >

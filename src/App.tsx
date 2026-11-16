@@ -5,12 +5,14 @@ import Leadership from "./pages/Leadership.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import EasterEgg from "./components/EasterEgg.tsx";
 import GoatCounterTracker from "./components/analytics/GoatCounterTracker";
+import CanonicalUrl from "./components/analytics/CanonicalUrl";
 
 const App = () => (
   <>
     <EasterEgg />
     <BrowserRouter>
       <GoatCounterTracker />
+      <CanonicalUrl />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/projects" element={<Projects />} />

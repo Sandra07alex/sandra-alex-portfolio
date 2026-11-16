@@ -3,10 +3,9 @@
 declare global {
   interface Window {
     goatcounter?: {
-      count: (url: string) => void;
+      count: (vars?: { path?: string; title?: string; referrer?: string; event?: boolean }) => void;
     };
   }
 }
 
 export {};
-
